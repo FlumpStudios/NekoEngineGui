@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NekoEngine", "NekoEngine\NekoEngine.csproj", "{A48A69A1-3192-4955-964D-7AA0D6C3BF93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A48A69A1-3192-4955-964D-7AA0D6C3BF93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A48A69A1-3192-4955-964D-7AA0D6C3BF93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A48A69A1-3192-4955-964D-7AA0D6C3BF93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A48A69A1-3192-4955-964D-7AA0D6C3BF93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04E18040-E83E-43D2-A201-23268745B55D}
+	EndGlobalSection
+EndGlobal
