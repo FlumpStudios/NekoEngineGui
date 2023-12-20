@@ -346,22 +346,30 @@ namespace NekoEngine
 
         private void DrawOnGrid(GridPosition position)
         {
-            switch (currentEditState)
+            if (_currentLevel != null)
             {
-                case EditState.Walls:
-                    RecordMapArrayClick(position);
-                    break;
-                case EditState.Elements:
-                    RecoredElementClicked(position);
-                    break;
-            }
+                switch (currentEditState)
+                {
+                    case EditState.Walls:
+                        RecordMapArrayClick(position);
+                        break;
+                    case EditState.Elements:
+                        RecoredElementClicked(position);
+                        break;
+                }
 
-            using (Graphics g = Graphics.FromImage(gridImage))
+                using (Graphics g = Graphics.FromImage(gridImage))
+                {
+                    ClearGrid(g, position);
+                    DrawMapArrayBlock(g, position);
+                    DrawElementBLock(g, _currentLevel.GetElementAtPosition(position));                    
+                    DrawGrid(g);
+                    pictureBox.Invalidate();
+                }
+            }
+            else
             {
-                RedrawMapArray(g);
-                RedrawElements(g);
-                DrawGrid(g);
-                pictureBox.Invalidate();
+                throw new Exception("Level object is null for some reason");
             }
         }
 
@@ -376,18 +384,30 @@ namespace NekoEngine
             int row = position.Row;
 
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-            {              
-                var index = (row * 64) + col;
+            {
+                var index = position.MapArrayIndex();
+
                 _currentLevel.HeightArray[index] = _selectedHeight;
                     
                 if (_currentLevel != null) 
                 {
-                    _currentLevel.MapArray[index] = (byte)(GetTextureIndexFromColour(selectedMapColour) + (7 * _currentLevel.HeightArray[index]));
+                    _currentLevel.MapArray[index] = GetMapArrayTextureIdFromPosition(position);
                 }
             }
         }
 
-        private int GetHeightFromIndex(int index)
+
+        private byte GetMapArrayTextureIdFromPosition(in GridPosition pos)
+        {   
+            if (_currentLevel != null)
+            {
+                return (byte)(GetTextureIndexFromColour(selectedMapColour) + (7 * _currentLevel.HeightArray[pos.MapArrayIndex()]));
+            }
+            throw new Exception("Level is null for some reason");
+        }
+
+
+        private int GetMapArrayDrawHeightFromIndex(int index)
         {
             if (index < 15 || index > 63) { return cellSize; }
 
@@ -426,16 +446,18 @@ namespace NekoEngine
                 {
                     using (Graphics g = Graphics.FromImage(gridImage))
                     {
-                        // Set the cell color to white
-                        g.FillRectangle(Brushes.White, col * cellSize, row * cellSize, cellSize, cellSize);
-
-                        // Redraw grid lines
+                        ClearGrid(g, position);
                         DrawGrid(g);
                     }
 
                     pictureBox.Invalidate(); // Force redraw
                 }
             }
+        }
+
+        private void ClearGrid(in Graphics g, GridPosition pos)
+        {
+            g.FillRectangle(Brushes.White, pos.Column * cellSize, pos.Row * cellSize, cellSize, cellSize);
         }
 
         private static void DrawGrid(Graphics g)
@@ -1137,11 +1159,11 @@ namespace NekoEngine
        
             using (Graphics g = Graphics.FromImage(gridImage))
             {
-                RedrawMapArray(g);
+                RedrawWholeMapArray(g);
 
                 // Draw Elements
                 var originalType = currentElementNumber;
-                RedrawElements(g);
+                RedrawAllElements(g);
 
                 // Draw player position
                 currentElementNumber = PLAYER_POSITION_TYPE;
@@ -1160,11 +1182,11 @@ namespace NekoEngine
             }
         }
 
-        private void RedrawMapArray(Graphics g)
+        private void RedrawWholeMapArray(Graphics g)
         {
             int row = 0;
             int col = 0;
-            // Draw map elements
+ 
             for (int i = 0; i < _currentLevel.MapArray.Length; i++)
             {
                 if (i > 0 && i % gridSize == 0)
@@ -1173,63 +1195,76 @@ namespace NekoEngine
                     col = 0;
                 }
 
-                var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[i]);
-
-                if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-                {
-                    var brushHeight = GetHeightFromIndex(_currentLevel.MapArray[i]);
-                    Brush brush = new SolidBrush(mapColour);
-
-                    int startY = ((row + 1) * cellSize) - (brushHeight);
-
-                    g.FillRectangle(brush, col * cellSize, startY, cellSize, brushHeight);
-                }
+                DrawMapArrayBlock(g, new GridPosition(col, row));
                 col++;
             }
         }
 
-        private void RedrawElements(Graphics g)
+        private void DrawMapArrayBlock(in Graphics g, GridPosition position)
+        {
+            var index = position.MapArrayIndex();
+
+            var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[index]);
+
+            if (position.Column >= 0 && position.Column < gridSize && position.Row >= 0 && position.Row < gridSize)
+            {
+                var brushHeight = GetMapArrayDrawHeightFromIndex(_currentLevel.MapArray[index]);
+                Brush brush = new SolidBrush(mapColour);
+
+                int startY = ((position.Row + 1) * cellSize) - (brushHeight);
+
+                g.FillRectangle(brush, position.Column * cellSize, startY, cellSize, brushHeight);
+            }
+        }
+
+
+        private void RedrawAllElements(Graphics g)
         {
             foreach (var element in _currentLevel.elements)
             {
-                if (element.Type > 0)
+                DrawElementBLock(g, element);
+            }
+        }
+
+        private void DrawElementBLock(in Graphics g, Elements element)
+        {
+            if (element.Type > 0)
+            {
+                currentElementNumber = element.Type;
+
+                Color textColor = Color.Black;
+
+                // If enemy, draw as red
+                if (currentElementNumber >= 20)
                 {
-                    currentElementNumber = element.Type;
-           
-                    Color textColor = Color.Black;
+                    textColor = Color.Red;
+                }
 
-                    // If enemy, draw as red
-                    if (currentElementNumber >= 20)
+                if (currentElementNumber == PLAYER_POSITION_TYPE)
+                {
+                    if (_currentLevel?.PlayerStart != null)
                     {
-                        textColor = Color.Red;
+                        RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                     }
-
-                    if (currentElementNumber == PLAYER_POSITION_TYPE)
+                    if (_currentLevel != null)
                     {
-                        if (_currentLevel?.PlayerStart != null)
-                        {
-                            RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
-                        }
-                        if (_currentLevel != null)
-                        {
-                            _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
-                        }
-
-                        textColor = Color.Blue;
+                        _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
                     }
 
-                    Brush textBrush = new SolidBrush(textColor);
-                    // Draw the number in the cell
+                    textColor = Color.Blue;
+                }
 
-                    PointF textLocation = new PointF((element.Coords[0] * cellSize) + cellSize / 30, (element.Coords[1] * cellSize) + cellSize / 30);
-                    if (currentElementNumber == PLAYER_POSITION_TYPE)
-                    {
-                        g.DrawString("P", DefaultFont, textBrush, textLocation);
-                    }
-                    else
-                    { 
-                        g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
-                    }
+                Brush textBrush = new SolidBrush(textColor);
+                // Draw the number in the cell
+
+                PointF textLocation = new PointF((element.Coords[0] * cellSize) + cellSize / 30, (element.Coords[1] * cellSize) + cellSize / 30);
+                if (currentElementNumber == PLAYER_POSITION_TYPE)
+                {
+                    g.DrawString("P", DefaultFont, textBrush, textLocation);
+                }
+                else
+                {
+                    g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
                 }
             }
         }
@@ -1245,5 +1280,12 @@ namespace NekoEngine
         }
     }
 
-    internal record GridPosition(int Column, int Row);
+    internal record GridPosition(int Column, int Row)
+    { 
+        internal int MapArrayIndex()
+        {
+            var index = (Row * 64) + Column;
+            return index;
+        }
+    };
 }

@@ -144,6 +144,16 @@ namespace NekoEngine
             bw.Write(floorHeight);
         }
 
+        internal Elements GetElementAtPosition(GridPosition position)
+        {
+            var response = new Elements();
+            if (elements != null && position != null)
+            { 
+                response = elements.FirstOrDefault(x => x.Coords[0] == position.Column && x.Coords[1] == position.Row) ?? new Elements();
+            }
+            return response;
+        }
+
         private void GenerateTileDictionary()
         { 
             this.TileDictionary = new ushort[64]
