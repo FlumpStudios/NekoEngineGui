@@ -1,9 +1,4 @@
-using System.Diagnostics;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
+using System.Diagnostics;using System.Text;
 using System.Text.RegularExpressions;
 using ScintillaNET;
 
@@ -19,15 +14,19 @@ namespace NekoEngine
     {
         private Level _currentLevel = new Level();
         private EditState currentEditState = EditState.Walls;
-        const string GAME_FILE_LOCATION = @"..\game.h";
+#if DEBUG
+        const string GAME_FILE_LOCATION = @"c:\projects\Neko";
+#else
+        const string GAME_FILE_LOCATION = @"..\";
+#endif
         private const int gridSize = 64;
         private const int cellSize = 15; // Adjust the cell size as needed
         private Bitmap gridImage;
         private bool isMousePressed = false;
         private byte currentElementNumber = 0;
 
-
         Color selectedMapColour = Color.FromArgb(255, 255, 20, 147);
+        private byte _selectedHeight = 0;
     
 
         public Form1()
@@ -46,7 +45,7 @@ namespace NekoEngine
             codeEditor.Styles[ScintillaNET.Style.Default].Size = 10;
             //codeEditor.LexerName = "C++";
             codeEditor.Lexer = Lexer.Cpp; // Set the lexer for C++ syntax highlighting
-            codeEditor.Text = System.IO.File.ReadAllText(GAME_FILE_LOCATION);
+            codeEditor.Text = System.IO.File.ReadAllText(GAME_FILE_LOCATION + @"\game.h");
         }
 
         private string _imagePath = string.Empty;
@@ -93,10 +92,10 @@ namespace NekoEngine
             {
                 // Specify the path to the Python executable and the script
                 // string pythonPath = "path_to_your_python_executable";
-                string scriptPath = @"..\assets\img2array.py";
+                string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\img2array.py";
 
                 // Construct the command with the provided arguments
-                string command = $"python {scriptPath} -t -c -x32 -y32 -p..\\assets\\palette565.png {_imagePath}";
+                string command = $"python {scriptPath} -t -c -x32 -y32 -p{GAME_FILE_LOCATION}\\assets\\palette565.png {_imagePath}";
 
                 // Set up process start info
                 ProcessStartInfo startInfo = new ProcessStartInfo
@@ -153,7 +152,7 @@ namespace NekoEngine
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Process.Start(@"..\anarch.exe");
+            Process.Start($"{GAME_FILE_LOCATION}\\anarch.exe");
         }
 
         private void VsCode_Click(object sender, EventArgs e)
@@ -173,7 +172,7 @@ namespace NekoEngine
                 process.Start();
 
                 // Pass the command to the cmd.exe process
-                process.StandardInput.WriteLine(@"code ../../anarch");
+                process.StandardInput.WriteLine($"code {GAME_FILE_LOCATION}");
                 process.StandardInput.Flush();
                 process.StandardInput.Close();
 
@@ -218,7 +217,7 @@ namespace NekoEngine
             {
                 // Specify the path to the Python executable and the script
                 // string pythonPath = "path_to_your_python_executable";
-                string scriptPath = @"..\assets\snd2array.py";
+                string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\snd2array.py";
 
                 // Construct the command with the provided arguments
                 string command = $"python {scriptPath} {_audioPath}";
@@ -277,7 +276,7 @@ namespace NekoEngine
 
         private void SaveCode_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText(GAME_FILE_LOCATION, codeEditor.Text);
+            System.IO.File.WriteAllText(GAME_FILE_LOCATION + @"\game.h", codeEditor.Text);
         }
 
         private void CodeSaveAs_Click(object sender, EventArgs e)
@@ -323,15 +322,16 @@ namespace NekoEngine
 
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
+            var position = ToGridPosition(e.X, e.Y);
             if (e.Button == MouseButtons.Left)
             {
                 isMousePressed = true;
-                DrawOnGrid(e.X, e.Y);
+                DrawOnGrid(position);
             }
             else if (e.Button == MouseButtons.Right)
             {
-                RemoveColorFromGrid(e.X, e.Y);
-                RemoveELementClickedCell(e.X, e.Y);
+                RemoveColorFromGrid(position);
+                RemoveELementClickedCell(position);
             }
         }
 
@@ -339,19 +339,19 @@ namespace NekoEngine
         {
             if (isMousePressed)
             {
-                DrawOnGrid(e.X, e.Y);
+                DrawOnGrid(ToGridPosition(e.X, e.Y));
             }
         }
 
-        private void DrawOnGrid(int x, int y)
+        private void DrawOnGrid(GridPosition position)
         {
             switch (currentEditState)
             {
                 case EditState.Walls:
-                    DrawColoursOnGrid(x, y);
+                    DrawColoursOnGrid(position);
                     break;
                 case EditState.Elements:
-                    DrawNumbersOnGrid(x, y);
+                    DrawNumbersOnGrid(position);
                     break;
             }
         }
@@ -361,30 +361,43 @@ namespace NekoEngine
             isMousePressed = false;
         }
 
-        private void DrawColoursOnGrid(int x, int y)
+        private void DrawColoursOnGrid(GridPosition position)
         {
-            int col = x / cellSize;
-            int row = y / cellSize;
+            int col = position.Column;
+            int row = position.Row;
 
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
             {
                 using (Graphics g = Graphics.FromImage(gridImage))
                 {
+                    var index = (row * 64) + col;
+                    _currentLevel.HeightArray[index] = _selectedHeight;
+                    var brushHeight = GetBrushHeight();
                     Brush brush = new SolidBrush(GetMapColour());
-                    g.FillRectangle(brush, col * cellSize, row * cellSize, cellSize, cellSize);
+
+                    // Calculate the Y-coordinate to start from the bottom and fill to the center
+                    int startY = ((row + 1) * cellSize) - (brushHeight);
+
+                    g.FillRectangle(brush, col * cellSize, startY, cellSize, brushHeight);
                     DrawGrid(g);
                 }
 
                 pictureBox.Invalidate(); // Force redraw
-                RemoveELementClickedCell(x, y);
+                RemoveELementClickedCell(position);
             }
         }
 
-        private void DrawNumbersOnGrid(int x, int y)
+        private int GetBrushHeight()
         {
-            int col = x / cellSize;
-            int row = y / cellSize;
-            if (!RecordELementClickedCell(x, y))
+            if (_selectedHeight == 0) { return cellSize; }
+            return _selectedHeight + 2;
+         }
+
+        private void DrawNumbersOnGrid(GridPosition position)
+        {
+            int col = position.Column;
+            int row = position.Row;
+            if (!RecordELementClickedCell(position))
             {
                 isMousePressed = false;
                 return;
@@ -410,11 +423,11 @@ namespace NekoEngine
                     {
                         if (_currentLevel?.PlayerStart != null)
                         {
-                            RemoveColorFromGridViaRowDetails(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]);
+                            RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                         }
                         if (_currentLevel != null)
                         {
-                            _currentLevel.PlayerStart = new byte[3] { (byte)col, (byte)row, _currentLevel.playerRotation };
+                            _currentLevel.PlayerStart = new byte[3] { (byte)col, (byte)row, _currentLevel.PlayerStart[2] };
                         }
 
                         textColor = Color.Blue;
@@ -427,32 +440,15 @@ namespace NekoEngine
                     g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
                 }
 
-                pictureBox.Invalidate(); // Force redraw
+                pictureBox.Invalidate(); // Force redraws
             }
         }
 
-        private void RemoveColorFromGrid(int x, int y)
+        private void RemoveColorFromGrid(GridPosition position)
         {
-            int col = x / cellSize;
-            int row = y / cellSize;
+            int col = position.Column;
+            int row = position.Row;
 
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-            {
-                using (Graphics g = Graphics.FromImage(gridImage))
-                {
-                    // Set the cell color to white
-                    g.FillRectangle(Brushes.White, col * cellSize, row * cellSize, cellSize, cellSize);
-
-                    // Redraw grid lines
-                    DrawGrid(g);
-                }
-
-                pictureBox.Invalidate(); // Force redraw
-            }
-        }
-
-        private void RemoveColorFromGridViaRowDetails(int col, int row)
-        {
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
             {
                 using (Graphics g = Graphics.FromImage(gridImage))
@@ -481,7 +477,7 @@ namespace NekoEngine
 
         private Color GetMapColour()
         {
-            return selectedMapColour;            
+            return selectedMapColour;
         }
         private byte[] GetColoredCellsArray()
         {
@@ -491,9 +487,9 @@ namespace NekoEngine
             {
                 for (int j = 0; j < gridSize; j++)
                 {
-                    Color cellColor = gridImage.GetPixel((j * cellSize) + 3, (i * cellSize) + 3);
+                    Color cellColor = gridImage.GetPixel((j * cellSize) + (cellSize / 2), (i * cellSize) + (cellSize - 2));
                     
-                    coloredCellsArray[i * gridSize + j] = GetTextureIndexFrom(cellColor);
+                    coloredCellsArray[i * gridSize + j] = (byte)(GetTextureIndexFromColour(cellColor) + (7 * _currentLevel.HeightArray[i * gridSize + j]));
                 }
             }
 
@@ -577,17 +573,6 @@ namespace NekoEngine
             {
 
                 
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_indoors_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-               
                 selectedMapColour = button.BackColor;
             }
             currentEditState = EditState.Walls;
@@ -699,91 +684,182 @@ namespace NekoEngine
             _currentLevel = new Level();
         }
 
-
-
-        private void label3_Click(object sender, EventArgs e)
+        const int DOOR_MASK = 0xc0;
+        private byte GetTextureIndexFromColour(Color color)
         {
 
-        }
-
-        private byte GetTextureIndexFrom(Color color)
-        {
-            if (color.Equals(Color.FromArgb(255, 255, 20, 147)))
+            if (color.RgbEquels(Color.FromArgb(255, 26, 26, 26)))
             {
-                return 1;
+                return 1 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 255, 0, 0)))
+            if (color.RgbEquels(Color.FromArgb(255, 77, 77, 77)))
             {
-                return 2;
+                return 2 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 192, 192, 0)))
+            if (color.RgbEquels(Color.FromArgb(255, 128, 128, 128)))
             {
-                return 3;
+                return 3 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 0, 0, 255)))
+            if (color.RgbEquels(Color.FromArgb(255, 153, 153, 153)))
             {
-                return 4;
+                return 4 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 128, 0, 0)))
+            if (color.RgbEquels(Color.FromArgb(255, 179, 179, 179)))
             {
-                return 5;
+                return 5 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 255, 255, 0)))
+            if (color.RgbEquels(Color.FromArgb(255, 204, 204, 204)))
             {
-                return 6;
+                return 6 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 0, 128, 0)))
+            if (color.RgbEquels(Color.FromArgb(255, 230, 230, 230)))
             {
-                return 7;
+                return 7 | DOOR_MASK;
             }
 
-            if (color.Equals(Color.FromArgb(255, 192, 192, 255)))
-            {
-                return 8;
+            if (color.RgbEquels(Color.FromArgb(255, 255, 20, 147)))
+            { 
+                return color.GetIndexFromColour(8);
             }
 
-            if (color.Equals(Color.FromArgb(255, 26, 26, 26)))
+            if (color.RgbEquels(Color.FromArgb(255, 255, 0, 0)))
             {
-                return 9 | 0xc0;
+                return color.GetIndexFromColour(9);
             }
 
-            if (color.Equals(Color.FromArgb(255, 77, 77, 77)))
+            if (color.RgbEquels(Color.FromArgb(255, 192, 192, 0)))
             {
-                return 10 | 0xc0;
+                return color.GetIndexFromColour(10);
             }
 
-            if (color.Equals(Color.FromArgb(255, 128, 128, 128)))
+            if (color.RgbEquels(Color.FromArgb(255, 0, 0, 255)))
             {
-                return 11 | 0xc0;
+                return color.GetIndexFromColour(11);
             }
 
-            if (color.Equals(Color.FromArgb(255, 153, 153, 153)))
+            if (color.RgbEquels(Color.FromArgb(255, 128, 0, 0)))
             {
-                return 12 | 0xc0;
+                return color.GetIndexFromColour(12);
             }
 
-            if (color.Equals(Color.FromArgb(255, 179, 179, 179)))
+            if (color.RgbEquels(Color.FromArgb(255, 255, 255, 0)))
             {
-                return 13 | 0xc0;
+                return color.GetIndexFromColour(13);
             }
 
-            if (color.Equals(Color.FromArgb(255, 204, 204, 204)))
+            if (color.RgbEquels(Color.FromArgb(255, 0, 128, 0)))
             {
-                return 14 | 0xc0;
-            }
-
-            if (color.Equals(Color.FromArgb(255, 230, 230, 230)))
-            {
-                return 15 | 0xc0;
+                return color.GetIndexFromColour(14);
             }
 
             return 0;
+        }
+
+        private Color GetColourFromTextureIndex(int index)
+        {
+            var newColour = Color.FromArgb(255, 255, 255, 255);
+            switch (index)
+            {
+                case 1 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 26, 26, 26);
+                    break;
+                case 2 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 77, 77, 77);
+                    break;
+                case 3 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 128, 128, 128);
+                    break;
+                case 4 | DOOR_MASK:
+                    newColour =  Color.FromArgb(255, 153, 153, 153);
+                    break;
+                case 5 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 179, 179, 179);
+                    break;
+                case 6 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 204, 204, 204);
+                    break;
+                 case 7 | DOOR_MASK:
+                    newColour = Color.FromArgb(255, 230, 230, 230);
+                    break;
+                case 8:
+                case 8 + 7:
+                case 8 + 14:
+                case 8 + 21:
+                case 8 + 28:
+                case 8 + 35:
+                case 8 + 42:
+                case 8 + 49:
+                    newColour =  Color.FromArgb(255, 255, 20, 147);
+                    break;
+                case 9:
+                case 9 + 7:
+                case 9 + 14:
+                case 9 + 21:
+                case 9 + 28:
+                case 9 + 35:
+                case 9 + 42:
+                case 9 + 49:
+                    newColour = Color.FromArgb(255, 255, 0, 0);
+                    break;
+                case 10:
+                case 10 + 7:
+                case 10 + 14:
+                case 10 + 21:
+                case 10 + 28:
+                case 10 + 35:
+                case 10 + 42:
+                case 10 + 49:
+                    newColour = Color.FromArgb(255, 192, 192, 0);
+                    break;
+                case 11:
+                case 11 + 7:
+                case 11 + 14:
+                case 11 + 21:
+                case 11 + 28:
+                case 11 + 35:
+                case 11 + 42:
+                case 11 + 49:
+                    newColour = Color.FromArgb(255, 0, 0, 255);
+                    break;
+                case 12:
+                case 12 + 7:
+                case 12 + 14:
+                case 12 + 21:
+                case 12 + 28:
+                case 12 + 35:
+                case 12 + 42:
+                case 12 + 49:
+                    newColour =Color.FromArgb(255, 128, 0, 0);
+                    break;
+                case 13:
+                case 13 + 7:
+                case 13 + 14:
+                case 13 + 21:
+                case 13 + 28:
+                case 13 + 35:
+                case 13 + 42:
+                case 13 + 49:
+                    newColour = Color.FromArgb(255, 255, 255, 0);
+                    break;
+                case 14:
+                case 14 + 7:
+                case 14 + 14:
+                case 14 + 21:
+                case 14 + 28:
+                case 14 + 35:
+                case 14 + 42:
+                case 14 + 49:
+                    newColour = Color.FromArgb(255, 0, 128, 0);
+                    break;
+            }
+
+            return newColour;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -953,10 +1029,10 @@ namespace NekoEngine
             currentEditState = EditState.Elements;
         }
 
-        private bool RecordELementClickedCell(int x, int y)
+        private bool RecordELementClickedCell(GridPosition position)
         {
-            int col = x / cellSize;
-            int row = y / cellSize;
+            int col = position.Column;
+            int row = position.Row;
 
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
             {
@@ -985,12 +1061,12 @@ namespace NekoEngine
 
             return true;
         }
+        
 
-        private void RemoveELementClickedCell(int x, int y)
+        private void RemoveELementClickedCell(GridPosition position)
         {
-            if (currentEditState != EditState.Elements) { return; }
-            int col = x / cellSize;
-            int row = y / cellSize;
+            int col = position.Column;
+            int row = position.Row;
 
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
             {
@@ -1068,9 +1144,92 @@ namespace NekoEngine
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
             decimal value = numericUpDown.Value;
-            _currentLevel.playerRotation = (byte)value;
+            _currentLevel.PlayerStart[2] = (byte)value;
         }
 
+        private void LoadMap_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
 
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Serialize the class to a binary file
+                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Open))
+                    {
+                        _currentLevel.Deserialise(new BinaryReader(fs));
+                    }
+                }
+            }
+
+            int row = 0;
+            int col = 0;
+       
+            using (Graphics g = Graphics.FromImage(gridImage))
+            {
+                // Draw map elements
+                for (int i = 0; i < _currentLevel.MapArray.Length; i++)
+                {
+                    if (i > 0 && i % gridSize == 0)
+                    {
+                        row++;
+                        col = 0;
+                    }
+
+                    var position = new GridPosition(col, row);
+                    var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[i]);
+
+                    if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+                    {
+                        Brush brush = new SolidBrush(mapColour);
+                        g.FillRectangle(brush, col * cellSize, row * cellSize, cellSize, cellSize);
+                    }
+                    col++;
+                }
+
+                // Draw Elements
+                var originalType = currentElementNumber;
+                RedrawElements();
+                currentElementNumber = originalType;
+
+                // Draw player position
+                DrawNumbersOnGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+
+                // Update GUI values
+                PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
+                FloorHeightUpDown.Value = _currentLevel.floorHeight;
+                CeilingHeightUpDown.Value = _currentLevel.ceilHeight;
+                CeilingColourUpDown.Value = _currentLevel.CeilingColor;
+                FloorColourUpDown4.Value = _currentLevel.FloorColor;
+
+                DrawGrid(g);
+                pictureBox.Invalidate();
+            }
+        }
+
+        private void RedrawElements()
+        {
+            foreach (var element in _currentLevel.elements)
+            {
+                if (element.Type > 0)
+                {
+                    currentElementNumber = element.Type;
+                    DrawNumbersOnGrid(new GridPosition(element.Coords[0], element.Coords[1]));
+                }
+            }
+        }
+
+        private static GridPosition ToGridPosition(int x, int y) => new(x / cellSize, y / cellSize);
+
+        private void CellHeight_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            int value = (int)numericUpDown.Value;
+            _selectedHeight = (byte)value;
+        }
     }
+
+    internal record GridPosition(int Column, int Row);
 }

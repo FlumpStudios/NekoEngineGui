@@ -50,6 +50,7 @@
             this.GenerateAudioArray = new System.Windows.Forms.Button();
             this.loadAudio = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.LoadMap = new System.Windows.Forms.Button();
             this.CeilingColourUpDown = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.FloorColourUpDown4 = new System.Windows.Forms.NumericUpDown();
@@ -65,6 +66,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.Player = new System.Windows.Forms.Button();
+            this.ClearMap = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ElementButton_20 = new System.Windows.Forms.Button();
             this.ElementButton_21 = new System.Windows.Forms.Button();
@@ -103,8 +105,6 @@
             this.MapColour_5 = new System.Windows.Forms.Button();
             this.MapColour_6 = new System.Windows.Forms.Button();
             this.MapColour_7 = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.MapColour_indoors = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.MapColour_door = new System.Windows.Forms.Button();
             this.MapColour_door2 = new System.Windows.Forms.Button();
@@ -113,7 +113,8 @@
             this.MapColour_door5 = new System.Windows.Forms.Button();
             this.MapColour_door6 = new System.Windows.Forms.Button();
             this.MapColour_door7 = new System.Windows.Forms.Button();
-            this.ClearMap = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CellHeight = new System.Windows.Forms.NumericUpDown();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -131,6 +132,7 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -368,6 +370,7 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.LoadMap);
             this.tabPage1.Controls.Add(this.CeilingColourUpDown);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.FloorColourUpDown4);
@@ -383,6 +386,7 @@
             this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.Player);
+            this.tabPage1.Controls.Add(this.ClearMap);
             this.tabPage1.Controls.Add(this.flowLayoutPanel3);
             this.tabPage1.Controls.Add(this.flowLayoutPanel2);
             this.tabPage1.Controls.Add(this.LevelArrayOutput);
@@ -396,6 +400,16 @@
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "LevelEditor";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // LoadMap
+            // 
+            this.LoadMap.Location = new System.Drawing.Point(1682, 660);
+            this.LoadMap.Name = "LoadMap";
+            this.LoadMap.Size = new System.Drawing.Size(233, 23);
+            this.LoadMap.TabIndex = 30;
+            this.LoadMap.Text = "Load";
+            this.LoadMap.UseVisualStyleBackColor = true;
+            this.LoadMap.Click += new System.EventHandler(this.LoadMap_Click);
             // 
             // CeilingColourUpDown
             // 
@@ -528,7 +542,7 @@
             // 
             // GenerateMapBinary
             // 
-            this.GenerateMapBinary.Location = new System.Drawing.Point(1506, 622);
+            this.GenerateMapBinary.Location = new System.Drawing.Point(1508, 651);
             this.GenerateMapBinary.Name = "GenerateMapBinary";
             this.GenerateMapBinary.Size = new System.Drawing.Size(148, 23);
             this.GenerateMapBinary.TabIndex = 17;
@@ -564,6 +578,16 @@
             this.Player.Text = "Player Start";
             this.Player.UseVisualStyleBackColor = true;
             this.Player.Click += new System.EventHandler(this.Player_Click);
+            // 
+            // ClearMap
+            // 
+            this.ClearMap.Location = new System.Drawing.Point(1062, 214);
+            this.ClearMap.Name = "ClearMap";
+            this.ClearMap.Size = new System.Drawing.Size(277, 23);
+            this.ClearMap.TabIndex = 10;
+            this.ClearMap.Text = "Clear Map";
+            this.ClearMap.UseVisualStyleBackColor = true;
+            this.ClearMap.Click += new System.EventHandler(this.ClearMap_Click);
             // 
             // flowLayoutPanel3
             // 
@@ -869,11 +893,11 @@
             // 
             // LevelArrayOutput
             // 
-            this.LevelArrayOutput.Location = new System.Drawing.Point(1062, 219);
+            this.LevelArrayOutput.Location = new System.Drawing.Point(1062, 273);
             this.LevelArrayOutput.Multiline = true;
             this.LevelArrayOutput.Name = "LevelArrayOutput";
             this.LevelArrayOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LevelArrayOutput.Size = new System.Drawing.Size(614, 435);
+            this.LevelArrayOutput.Size = new System.Drawing.Size(614, 464);
             this.LevelArrayOutput.TabIndex = 11;
             // 
             // flowLayoutPanel1
@@ -887,8 +911,6 @@
             this.flowLayoutPanel1.Controls.Add(this.MapColour_5);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_6);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_7);
-            this.flowLayoutPanel1.Controls.Add(this.label3);
-            this.flowLayoutPanel1.Controls.Add(this.MapColour_indoors);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door2);
@@ -897,7 +919,8 @@
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door5);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door6);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door7);
-            this.flowLayoutPanel1.Controls.Add(this.ClearMap);
+            this.flowLayoutPanel1.Controls.Add(this.label3);
+            this.flowLayoutPanel1.Controls.Add(this.CellHeight);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(1062, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(277, 210);
@@ -981,27 +1004,9 @@
             this.MapColour_7.UseVisualStyleBackColor = false;
             this.MapColour_7.Click += new System.EventHandler(this.MapColour_7_Click);
             // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(3, 53);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(260, 15);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Outdoors";
-            // 
-            // MapColour_indoors
-            // 
-            this.MapColour_indoors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.MapColour_indoors.Location = new System.Drawing.Point(3, 71);
-            this.MapColour_indoors.Name = "MapColour_indoors";
-            this.MapColour_indoors.Size = new System.Drawing.Size(32, 32);
-            this.MapColour_indoors.TabIndex = 22;
-            this.MapColour_indoors.UseVisualStyleBackColor = false;
-            this.MapColour_indoors.Click += new System.EventHandler(this.MapColour_indoors_Click);
-            // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(3, 106);
+            this.label1.Location = new System.Drawing.Point(3, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 15);
             this.label1.TabIndex = 18;
@@ -1010,7 +1015,7 @@
             // MapColour_door
             // 
             this.MapColour_door.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.MapColour_door.Location = new System.Drawing.Point(3, 124);
+            this.MapColour_door.Location = new System.Drawing.Point(3, 71);
             this.MapColour_door.Name = "MapColour_door";
             this.MapColour_door.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door.TabIndex = 19;
@@ -1020,7 +1025,7 @@
             // MapColour_door2
             // 
             this.MapColour_door2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
-            this.MapColour_door2.Location = new System.Drawing.Point(41, 124);
+            this.MapColour_door2.Location = new System.Drawing.Point(41, 71);
             this.MapColour_door2.Name = "MapColour_door2";
             this.MapColour_door2.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door2.TabIndex = 23;
@@ -1030,7 +1035,7 @@
             // MapColour_door3
             // 
             this.MapColour_door3.BackColor = System.Drawing.Color.Gray;
-            this.MapColour_door3.Location = new System.Drawing.Point(79, 124);
+            this.MapColour_door3.Location = new System.Drawing.Point(79, 71);
             this.MapColour_door3.Name = "MapColour_door3";
             this.MapColour_door3.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door3.TabIndex = 24;
@@ -1040,7 +1045,7 @@
             // MapColour_door4
             // 
             this.MapColour_door4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.MapColour_door4.Location = new System.Drawing.Point(117, 124);
+            this.MapColour_door4.Location = new System.Drawing.Point(117, 71);
             this.MapColour_door4.Name = "MapColour_door4";
             this.MapColour_door4.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door4.TabIndex = 25;
@@ -1050,7 +1055,7 @@
             // MapColour_door5
             // 
             this.MapColour_door5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(179)))), ((int)(((byte)(179)))));
-            this.MapColour_door5.Location = new System.Drawing.Point(155, 124);
+            this.MapColour_door5.Location = new System.Drawing.Point(155, 71);
             this.MapColour_door5.Name = "MapColour_door5";
             this.MapColour_door5.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door5.TabIndex = 26;
@@ -1060,7 +1065,7 @@
             // MapColour_door6
             // 
             this.MapColour_door6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.MapColour_door6.Location = new System.Drawing.Point(193, 124);
+            this.MapColour_door6.Location = new System.Drawing.Point(193, 71);
             this.MapColour_door6.Name = "MapColour_door6";
             this.MapColour_door6.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door6.TabIndex = 27;
@@ -1070,22 +1075,38 @@
             // MapColour_door7
             // 
             this.MapColour_door7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.MapColour_door7.Location = new System.Drawing.Point(231, 124);
+            this.MapColour_door7.Location = new System.Drawing.Point(231, 71);
             this.MapColour_door7.Name = "MapColour_door7";
             this.MapColour_door7.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door7.TabIndex = 28;
             this.MapColour_door7.UseVisualStyleBackColor = false;
             this.MapColour_door7.Click += new System.EventHandler(this.MapColour_door7_Click);
             // 
-            // ClearMap
+            // label3
             // 
-            this.ClearMap.Location = new System.Drawing.Point(3, 162);
-            this.ClearMap.Name = "ClearMap";
-            this.ClearMap.Size = new System.Drawing.Size(260, 23);
-            this.ClearMap.TabIndex = 10;
-            this.ClearMap.Text = "Clear";
-            this.ClearMap.UseVisualStyleBackColor = true;
-            this.ClearMap.Click += new System.EventHandler(this.ClearMap_Click);
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(130, 29);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Cell Height (0 for walls)";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CellHeight
+            // 
+            this.CellHeight.Location = new System.Drawing.Point(139, 109);
+            this.CellHeight.Maximum = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.CellHeight.Name = "CellHeight";
+            this.CellHeight.Size = new System.Drawing.Size(130, 23);
+            this.CellHeight.TabIndex = 30;
+            this.CellHeight.ValueChanged += new System.EventHandler(this.CellHeight_ValueChanged);
             // 
             // pictureBox
             // 
@@ -1140,6 +1161,8 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -1184,8 +1207,6 @@
         private Label label1;
         private Button MapColour_door;
         private Label label2;
-        private Label label3;
-        private Button MapColour_indoors;
         private FlowLayoutPanel flowLayoutPanel2;
         private Button ElementButton_1;
         private Button ElementButton_2;
@@ -1235,5 +1256,8 @@
         private Button MapColour_door5;
         private Button MapColour_door6;
         private Button MapColour_door7;
+        private Button LoadMap;
+        private Label label3;
+        private NumericUpDown CellHeight;
     }
 }
