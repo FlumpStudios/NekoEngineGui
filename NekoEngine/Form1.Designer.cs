@@ -542,7 +542,7 @@
             // 
             // GenerateMapBinary
             // 
-            this.GenerateMapBinary.Location = new System.Drawing.Point(1508, 651);
+            this.GenerateMapBinary.Location = new System.Drawing.Point(1508, 684);
             this.GenerateMapBinary.Name = "GenerateMapBinary";
             this.GenerateMapBinary.Size = new System.Drawing.Size(148, 23);
             this.GenerateMapBinary.TabIndex = 17;
@@ -893,7 +893,8 @@
             // 
             // LevelArrayOutput
             // 
-            this.LevelArrayOutput.Location = new System.Drawing.Point(1062, 273);
+            this.LevelArrayOutput.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LevelArrayOutput.Location = new System.Drawing.Point(1062, 243);
             this.LevelArrayOutput.Multiline = true;
             this.LevelArrayOutput.Name = "LevelArrayOutput";
             this.LevelArrayOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;

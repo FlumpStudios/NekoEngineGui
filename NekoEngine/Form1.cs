@@ -12,6 +12,7 @@ namespace NekoEngine
 
     public partial class Form1 : Form
     {
+        private const byte PLAYER_POSITION_TYPE = 99; 
         private Level _currentLevel = new Level();
         private EditState currentEditState = EditState.Walls;
 #if DEBUG
@@ -348,11 +349,19 @@ namespace NekoEngine
             switch (currentEditState)
             {
                 case EditState.Walls:
-                    DrawColoursOnGrid(position);
+                    RecordMapArrayClick(position);
                     break;
                 case EditState.Elements:
-                    DrawNumbersOnGrid(position);
+                    RecoredElementClicked(position);
                     break;
+            }
+
+            using (Graphics g = Graphics.FromImage(gridImage))
+            {
+                RedrawMapArray(g);
+                RedrawElements(g);
+                DrawGrid(g);
+                pictureBox.Invalidate();
             }
         }
 
@@ -361,106 +370,71 @@ namespace NekoEngine
             isMousePressed = false;
         }
 
-        private void DrawColoursOnGrid(GridPosition position)
+        private void RecordMapArrayClick(GridPosition position)
         {
             int col = position.Column;
             int row = position.Row;
 
             if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-            {
-                using (Graphics g = Graphics.FromImage(gridImage))
+            {              
+                var index = (row * 64) + col;
+                _currentLevel.HeightArray[index] = _selectedHeight;
+                    
+                if (_currentLevel != null) 
                 {
-                    var index = (row * 64) + col;
-                    _currentLevel.HeightArray[index] = _selectedHeight;
-                    var brushHeight = GetBrushHeight();
-                    Brush brush = new SolidBrush(GetMapColour());
-
-                    // Calculate the Y-coordinate to start from the bottom and fill to the center
-                    int startY = ((row + 1) * cellSize) - (brushHeight);
-
-                    g.FillRectangle(brush, col * cellSize, startY, cellSize, brushHeight);
-                    DrawGrid(g);
+                    _currentLevel.MapArray[index] = (byte)(GetTextureIndexFromColour(selectedMapColour) + (7 * _currentLevel.HeightArray[index]));
                 }
-
-                pictureBox.Invalidate(); // Force redraw
-                RemoveELementClickedCell(position);
             }
         }
 
-        private int GetBrushHeight()
+        private int GetHeightFromIndex(int index)
         {
-            if (_selectedHeight == 0) { return cellSize; }
-            return _selectedHeight + 2;
-         }
+            if (index < 15 || index > 63) { return cellSize; }
 
-        private void DrawNumbersOnGrid(GridPosition position)
+            if (index >= 15 && index < 22) { return 3; }
+            if (index >= 22 && index < 29) { return 4; }
+            if (index >= 29 && index < 36) { return 5; }
+            if (index >= 36 && index < 43) { return 6; }
+            if (index >= 43 && index < 50) { return 7; }
+            if (index >= 50 && index < 57) { return 8; }
+            if (index >= 57 && index < 64) { return 9; }
+
+            return cellSize;
+        }
+            
+
+        private void RecoredElementClicked(GridPosition position)
         {
-            int col = position.Column;
-            int row = position.Row;
             if (!RecordELementClickedCell(position))
             {
                 isMousePressed = false;
                 return;
             };
-
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-            {
-                using (Graphics g = Graphics.FromImage(gridImage))
-                {
-                    // Clear the cell
-                    g.FillRectangle(Brushes.White, col * cellSize, row * cellSize, cellSize, cellSize);
-                    g.DrawRectangle(Pens.Black, col * cellSize, row * cellSize, cellSize, cellSize);
-
-                    Color textColor = Color.Black; 
-
-                    // If enemy, draw as red
-                    if (currentElementNumber >= 20)
-                    {
-                        textColor = Color.Red;
-                    }
-
-                    if (currentElementNumber == 0)
-                    {
-                        if (_currentLevel?.PlayerStart != null)
-                        {
-                            RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
-                        }
-                        if (_currentLevel != null)
-                        {
-                            _currentLevel.PlayerStart = new byte[3] { (byte)col, (byte)row, _currentLevel.PlayerStart[2] };
-                        }
-
-                        textColor = Color.Blue;
-                    }
-
-                    Brush textBrush = new SolidBrush(textColor);
-                    // Draw the number in the cell
-
-                    PointF textLocation = new PointF((col * cellSize) + cellSize / 30, (row * cellSize) + cellSize / 30);
-                    g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
-                }
-
-                pictureBox.Invalidate(); // Force redraws
-            }
         }
 
         private void RemoveColorFromGrid(GridPosition position)
         {
-            int col = position.Column;
-            int row = position.Row;
-
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+            if (_currentLevel != null && _currentLevel.MapArray != null)
             {
-                using (Graphics g = Graphics.FromImage(gridImage))
+                var index = (position.Row * gridSize) + position.Column;
+                _currentLevel.MapArray[index] = 0;
+
+                int col = position.Column;
+                int row = position.Row;
+
+                if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
                 {
-                    // Set the cell color to white
-                    g.FillRectangle(Brushes.White, col * cellSize, row * cellSize, cellSize, cellSize);
+                    using (Graphics g = Graphics.FromImage(gridImage))
+                    {
+                        // Set the cell color to white
+                        g.FillRectangle(Brushes.White, col * cellSize, row * cellSize, cellSize, cellSize);
 
-                    // Redraw grid lines
-                    DrawGrid(g);
+                        // Redraw grid lines
+                        DrawGrid(g);
+                    }
+
+                    pictureBox.Invalidate(); // Force redraw
                 }
-
-                pictureBox.Invalidate(); // Force redraw
             }
         }
 
@@ -475,10 +449,6 @@ namespace NekoEngine
             }
         }
 
-        private Color GetMapColour()
-        {
-            return selectedMapColour;
-        }
         private byte[] GetColoredCellsArray()
         {
             byte[] coloredCellsArray = new byte[gridSize * gridSize];
@@ -1025,7 +995,7 @@ namespace NekoEngine
 
         private void Player_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0;
+            currentElementNumber = PLAYER_POSITION_TYPE;
             currentEditState = EditState.Elements;
         }
 
@@ -1163,38 +1133,20 @@ namespace NekoEngine
                 }
             }
 
-            int row = 0;
-            int col = 0;
+        
        
             using (Graphics g = Graphics.FromImage(gridImage))
             {
-                // Draw map elements
-                for (int i = 0; i < _currentLevel.MapArray.Length; i++)
-                {
-                    if (i > 0 && i % gridSize == 0)
-                    {
-                        row++;
-                        col = 0;
-                    }
-
-                    var position = new GridPosition(col, row);
-                    var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[i]);
-
-                    if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
-                    {
-                        Brush brush = new SolidBrush(mapColour);
-                        g.FillRectangle(brush, col * cellSize, row * cellSize, cellSize, cellSize);
-                    }
-                    col++;
-                }
+                RedrawMapArray(g);
 
                 // Draw Elements
                 var originalType = currentElementNumber;
-                RedrawElements();
-                currentElementNumber = originalType;
+                RedrawElements(g);
 
                 // Draw player position
-                DrawNumbersOnGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                currentElementNumber = PLAYER_POSITION_TYPE;
+                RecoredElementClicked(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                currentElementNumber = originalType;
 
                 // Update GUI values
                 PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
@@ -1208,14 +1160,76 @@ namespace NekoEngine
             }
         }
 
-        private void RedrawElements()
+        private void RedrawMapArray(Graphics g)
+        {
+            int row = 0;
+            int col = 0;
+            // Draw map elements
+            for (int i = 0; i < _currentLevel.MapArray.Length; i++)
+            {
+                if (i > 0 && i % gridSize == 0)
+                {
+                    row++;
+                    col = 0;
+                }
+
+                var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[i]);
+
+                if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+                {
+                    var brushHeight = GetHeightFromIndex(_currentLevel.MapArray[i]);
+                    Brush brush = new SolidBrush(mapColour);
+
+                    int startY = ((row + 1) * cellSize) - (brushHeight);
+
+                    g.FillRectangle(brush, col * cellSize, startY, cellSize, brushHeight);
+                }
+                col++;
+            }
+        }
+
+        private void RedrawElements(Graphics g)
         {
             foreach (var element in _currentLevel.elements)
             {
                 if (element.Type > 0)
                 {
                     currentElementNumber = element.Type;
-                    DrawNumbersOnGrid(new GridPosition(element.Coords[0], element.Coords[1]));
+           
+                    Color textColor = Color.Black;
+
+                    // If enemy, draw as red
+                    if (currentElementNumber >= 20)
+                    {
+                        textColor = Color.Red;
+                    }
+
+                    if (currentElementNumber == PLAYER_POSITION_TYPE)
+                    {
+                        if (_currentLevel?.PlayerStart != null)
+                        {
+                            RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                        }
+                        if (_currentLevel != null)
+                        {
+                            _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
+                        }
+
+                        textColor = Color.Blue;
+                    }
+
+                    Brush textBrush = new SolidBrush(textColor);
+                    // Draw the number in the cell
+
+                    PointF textLocation = new PointF((element.Coords[0] * cellSize) + cellSize / 30, (element.Coords[1] * cellSize) + cellSize / 30);
+                    if (currentElementNumber == PLAYER_POSITION_TYPE)
+                    {
+                        g.DrawString("P", DefaultFont, textBrush, textLocation);
+                    }
+                    else
+                    { 
+                        g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
+                    }
                 }
             }
         }
