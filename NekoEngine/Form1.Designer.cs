@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tabs = new System.Windows.Forms.TabControl();
             this.Images = new System.Windows.Forms.TabPage();
             this.copyToClipboard = new System.Windows.Forms.Button();
@@ -36,7 +37,11 @@
             this.generate = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.FIle = new System.Windows.Forms.MenuStrip();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SaveConstantsAs = new System.Windows.Forms.Button();
+            this.SaveConstants = new System.Windows.Forms.Button();
+            this.scintilla1 = new ScintillaNET.Scintilla();
             this.CodeSaveAs = new System.Windows.Forms.Button();
             this.SaveCode = new System.Windows.Forms.Button();
             this.codeEditor = new ScintillaNET.Scintilla();
@@ -50,22 +55,36 @@
             this.GenerateAudioArray = new System.Windows.Forms.Button();
             this.loadAudio = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.LoadMap = new System.Windows.Forms.Button();
-            this.CeilingColourUpDown = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.FloorColourUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label8 = new System.Windows.Forms.Label();
-            this.PlayerRotationUpDown = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.ElementButton_13 = new System.Windows.Forms.Button();
+            this.ElementButton_14 = new System.Windows.Forms.Button();
+            this.ElementButton_15 = new System.Windows.Forms.Button();
+            this.ElementButton_16 = new System.Windows.Forms.Button();
+            this.ElementButton_17 = new System.Windows.Forms.Button();
+            this.ElementButton_18 = new System.Windows.Forms.Button();
+            this.RemainingElementsLabel = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.SelectedElement = new System.Windows.Forms.Label();
+            this.Ypos = new System.Windows.Forms.Label();
+            this.Xpos = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.YposLabel = new System.Windows.Forms.Label();
+            this.XposLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.Player = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.CeilingHeightUpDown = new System.Windows.Forms.NumericUpDown();
+            this.PlayerRotationUpDown = new System.Windows.Forms.NumericUpDown();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.CeilingHeightUpDown = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.FloorHeightUpDown = new System.Windows.Forms.NumericUpDown();
-            this.GenerateMapBinary = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.CeilingColourUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.FloorColourUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.Player = new System.Windows.Forms.Button();
             this.ClearMap = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ElementButton_20 = new System.Windows.Forms.Button();
@@ -88,14 +107,7 @@
             this.ElementButton_10 = new System.Windows.Forms.Button();
             this.ElementButton_11 = new System.Windows.Forms.Button();
             this.ElementButton_12 = new System.Windows.Forms.Button();
-            this.ElementButton_13 = new System.Windows.Forms.Button();
-            this.ElementButton_14 = new System.Windows.Forms.Button();
-            this.ElementButton_15 = new System.Windows.Forms.Button();
-            this.ElementButton_16 = new System.Windows.Forms.Button();
-            this.ElementButton_17 = new System.Windows.Forms.Button();
-            this.ElementButton_18 = new System.Windows.Forms.Button();
             this.ElementButton_19 = new System.Windows.Forms.Button();
-            this.LevelArrayOutput = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.MapColour_1 = new System.Windows.Forms.Button();
@@ -118,22 +130,31 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Tabs.SuspendLayout();
             this.Images.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CeilingColourUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FloorColourUpDown4)).BeginInit();
+            this.flowLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerRotationUpDown)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CeilingHeightUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FloorHeightUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CeilingColourUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FloorColourUpDown4)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Tabs
@@ -145,10 +166,10 @@
             this.Tabs.Controls.Add(this.tabPage2);
             this.Tabs.Controls.Add(this.Audio);
             this.Tabs.Controls.Add(this.tabPage1);
-            this.Tabs.Location = new System.Drawing.Point(0, 0);
+            this.Tabs.Location = new System.Drawing.Point(1, 27);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(2630, 2257);
+            this.Tabs.Size = new System.Drawing.Size(2201, 2257);
             this.Tabs.TabIndex = 5;
             // 
             // Images
@@ -159,10 +180,11 @@
             this.Images.Controls.Add(this.generate);
             this.Images.Controls.Add(this.pictureBox1);
             this.Images.Controls.Add(this.button1);
+            this.Images.Controls.Add(this.FIle);
             this.Images.Location = new System.Drawing.Point(4, 24);
             this.Images.Name = "Images";
             this.Images.Padding = new System.Windows.Forms.Padding(3);
-            this.Images.Size = new System.Drawing.Size(2622, 2229);
+            this.Images.Size = new System.Drawing.Size(2193, 2229);
             this.Images.TabIndex = 0;
             this.Images.Text = "Images";
             this.Images.UseVisualStyleBackColor = true;
@@ -218,8 +240,19 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // FIle
+            // 
+            this.FIle.Location = new System.Drawing.Point(3, 3);
+            this.FIle.Name = "FIle";
+            this.FIle.Size = new System.Drawing.Size(2187, 24);
+            this.FIle.TabIndex = 8;
+            this.FIle.Text = "File";
+            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.SaveConstantsAs);
+            this.tabPage2.Controls.Add(this.SaveConstants);
+            this.tabPage2.Controls.Add(this.scintilla1);
             this.tabPage2.Controls.Add(this.CodeSaveAs);
             this.tabPage2.Controls.Add(this.SaveCode);
             this.tabPage2.Controls.Add(this.codeEditor);
@@ -229,14 +262,52 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(2622, 2229);
+            this.tabPage2.Size = new System.Drawing.Size(2193, 2229);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Complie";
+            this.tabPage2.Text = "Code";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // SaveConstantsAs
+            // 
+            this.SaveConstantsAs.Location = new System.Drawing.Point(1269, 511);
+            this.SaveConstantsAs.Name = "SaveConstantsAs";
+            this.SaveConstantsAs.Size = new System.Drawing.Size(75, 23);
+            this.SaveConstantsAs.TabIndex = 8;
+            this.SaveConstantsAs.Text = "SaveAs";
+            this.SaveConstantsAs.UseVisualStyleBackColor = true;
+            this.SaveConstantsAs.Click += new System.EventHandler(this.SaveConstantsAs_Click);
+            // 
+            // SaveConstants
+            // 
+            this.SaveConstants.Location = new System.Drawing.Point(1197, 511);
+            this.SaveConstants.Name = "SaveConstants";
+            this.SaveConstants.Size = new System.Drawing.Size(75, 23);
+            this.SaveConstants.TabIndex = 7;
+            this.SaveConstants.Text = "Save";
+            this.SaveConstants.UseVisualStyleBackColor = true;
+            this.SaveConstants.Click += new System.EventHandler(this.SaveConstants_Click);
+            // 
+            // scintilla1
+            // 
+            this.scintilla1.AutoCMaxHeight = 9;
+            this.scintilla1.BiDirectionality = ScintillaNET.BiDirectionalDisplayType.Disabled;
+            this.scintilla1.CaretLineBackColor = System.Drawing.Color.Black;
+            this.scintilla1.CaretLineBackColorAlpha = 0;
+            this.scintilla1.CaretLineLayer = ScintillaNET.Layer.OverText;
+            this.scintilla1.CaretLineVisible = true;
+            this.scintilla1.LexerName = null;
+            this.scintilla1.Location = new System.Drawing.Point(744, 6);
+            this.scintilla1.Name = "scintilla1";
+            this.scintilla1.ScrollWidth = 49;
+            this.scintilla1.Size = new System.Drawing.Size(619, 528);
+            this.scintilla1.TabIndents = true;
+            this.scintilla1.TabIndex = 6;
+            this.scintilla1.UseRightToLeftReadingLayout = false;
+            this.scintilla1.WrapMode = ScintillaNET.WrapMode.None;
             // 
             // CodeSaveAs
             // 
-            this.CodeSaveAs.Location = new System.Drawing.Point(770, 511);
+            this.CodeSaveAs.Location = new System.Drawing.Point(645, 511);
             this.CodeSaveAs.Name = "CodeSaveAs";
             this.CodeSaveAs.Size = new System.Drawing.Size(75, 23);
             this.CodeSaveAs.TabIndex = 5;
@@ -246,7 +317,7 @@
             // 
             // SaveCode
             // 
-            this.SaveCode.Location = new System.Drawing.Point(701, 511);
+            this.SaveCode.Location = new System.Drawing.Point(576, 511);
             this.SaveCode.Name = "SaveCode";
             this.SaveCode.Size = new System.Drawing.Size(75, 23);
             this.SaveCode.TabIndex = 4;
@@ -266,7 +337,7 @@
             this.codeEditor.Location = new System.Drawing.Point(119, 6);
             this.codeEditor.Name = "codeEditor";
             this.codeEditor.ScrollWidth = 49;
-            this.codeEditor.Size = new System.Drawing.Size(754, 528);
+            this.codeEditor.Size = new System.Drawing.Size(619, 528);
             this.codeEditor.TabIndents = true;
             this.codeEditor.TabIndex = 3;
             this.codeEditor.UseRightToLeftReadingLayout = false;
@@ -312,7 +383,7 @@
             this.Audio.Location = new System.Drawing.Point(4, 24);
             this.Audio.Name = "Audio";
             this.Audio.Padding = new System.Windows.Forms.Padding(3);
-            this.Audio.Size = new System.Drawing.Size(2622, 2229);
+            this.Audio.Size = new System.Drawing.Size(2193, 2229);
             this.Audio.TabIndex = 2;
             this.Audio.Text = "Audio";
             this.Audio.UseVisualStyleBackColor = true;
@@ -370,123 +441,266 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tabPage1.Controls.Add(this.LoadMap);
-            this.tabPage1.Controls.Add(this.CeilingColourUpDown);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.FloorColourUpDown4);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.PlayerRotationUpDown);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.CeilingHeightUpDown);
-            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel6);
+            this.tabPage1.Controls.Add(this.RemainingElementsLabel);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.SelectedElement);
+            this.tabPage1.Controls.Add(this.Ypos);
+            this.tabPage1.Controls.Add(this.Xpos);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.YposLabel);
+            this.tabPage1.Controls.Add(this.XposLabel);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel5);
+            this.tabPage1.Controls.Add(this.flowLayoutPanel4);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.FloorHeightUpDown);
-            this.tabPage1.Controls.Add(this.GenerateMapBinary);
-            this.tabPage1.Controls.Add(this.button5);
             this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.Player);
             this.tabPage1.Controls.Add(this.ClearMap);
             this.tabPage1.Controls.Add(this.flowLayoutPanel3);
             this.tabPage1.Controls.Add(this.flowLayoutPanel2);
-            this.tabPage1.Controls.Add(this.LevelArrayOutput);
             this.tabPage1.Controls.Add(this.flowLayoutPanel1);
             this.tabPage1.Controls.Add(this.pictureBox);
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(2622, 2229);
+            this.tabPage1.Size = new System.Drawing.Size(2193, 2229);
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "LevelEditor";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form_MouseMove);
             // 
-            // LoadMap
+            // flowLayoutPanel6
             // 
-            this.LoadMap.Location = new System.Drawing.Point(1682, 660);
-            this.LoadMap.Name = "LoadMap";
-            this.LoadMap.Size = new System.Drawing.Size(233, 23);
-            this.LoadMap.TabIndex = 30;
-            this.LoadMap.Text = "Load";
-            this.LoadMap.UseVisualStyleBackColor = true;
-            this.LoadMap.Click += new System.EventHandler(this.LoadMap_Click);
+            this.flowLayoutPanel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_13);
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_14);
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_15);
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_16);
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_17);
+            this.flowLayoutPanel6.Controls.Add(this.ElementButton_18);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(976, 551);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(233, 194);
+            this.flowLayoutPanel6.TabIndex = 40;
             // 
-            // CeilingColourUpDown
+            // ElementButton_13
             // 
-            this.CeilingColourUpDown.Location = new System.Drawing.Point(1347, 164);
-            this.CeilingColourUpDown.Name = "CeilingColourUpDown";
-            this.CeilingColourUpDown.Size = new System.Drawing.Size(95, 23);
-            this.CeilingColourUpDown.TabIndex = 29;
-            this.CeilingColourUpDown.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.CeilingColourUpDown.ValueChanged += new System.EventHandler(this.CeilingColourUpDown_ValueChanged);
+            this.ElementButton_13.Location = new System.Drawing.Point(3, 3);
+            this.ElementButton_13.Name = "ElementButton_13";
+            this.ElementButton_13.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_13.TabIndex = 18;
+            this.ElementButton_13.Text = "Key 1";
+            this.ElementButton_13.UseVisualStyleBackColor = true;
+            this.ElementButton_13.Click += new System.EventHandler(this.ElementButton_13_Click);
             // 
-            // label9
+            // ElementButton_14
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1345, 146);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 15);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Ceiling Colour";
+            this.ElementButton_14.Location = new System.Drawing.Point(3, 32);
+            this.ElementButton_14.Name = "ElementButton_14";
+            this.ElementButton_14.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_14.TabIndex = 19;
+            this.ElementButton_14.Text = "Key 2";
+            this.ElementButton_14.UseVisualStyleBackColor = true;
+            this.ElementButton_14.Click += new System.EventHandler(this.ElementButton_14_Click);
             // 
-            // FloorColourUpDown4
+            // ElementButton_15
             // 
-            this.FloorColourUpDown4.Location = new System.Drawing.Point(1347, 116);
-            this.FloorColourUpDown4.Name = "FloorColourUpDown4";
-            this.FloorColourUpDown4.Size = new System.Drawing.Size(95, 23);
-            this.FloorColourUpDown4.TabIndex = 27;
-            this.FloorColourUpDown4.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.FloorColourUpDown4.ValueChanged += new System.EventHandler(this.FloorColourUpDown4_ValueChanged);
+            this.ElementButton_15.Location = new System.Drawing.Point(3, 61);
+            this.ElementButton_15.Name = "ElementButton_15";
+            this.ElementButton_15.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_15.TabIndex = 20;
+            this.ElementButton_15.Text = "Key 3";
+            this.ElementButton_15.UseVisualStyleBackColor = true;
+            this.ElementButton_15.Click += new System.EventHandler(this.ElementButton_15_Click);
             // 
-            // label8
+            // ElementButton_16
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1345, 98);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 15);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Floor Colour";
+            this.ElementButton_16.Location = new System.Drawing.Point(3, 90);
+            this.ElementButton_16.Name = "ElementButton_16";
+            this.ElementButton_16.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_16.TabIndex = 21;
+            this.ElementButton_16.Text = "Lock 1";
+            this.ElementButton_16.UseVisualStyleBackColor = true;
+            this.ElementButton_16.Click += new System.EventHandler(this.ElementButton_16_Click);
+            // 
+            // ElementButton_17
+            // 
+            this.ElementButton_17.Location = new System.Drawing.Point(3, 119);
+            this.ElementButton_17.Name = "ElementButton_17";
+            this.ElementButton_17.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_17.TabIndex = 22;
+            this.ElementButton_17.Text = "Lock 2";
+            this.ElementButton_17.UseVisualStyleBackColor = true;
+            this.ElementButton_17.Click += new System.EventHandler(this.ElementButton_17_Click);
+            // 
+            // ElementButton_18
+            // 
+            this.ElementButton_18.Location = new System.Drawing.Point(3, 148);
+            this.ElementButton_18.Name = "ElementButton_18";
+            this.ElementButton_18.Size = new System.Drawing.Size(221, 23);
+            this.ElementButton_18.TabIndex = 23;
+            this.ElementButton_18.Text = "Lock 3";
+            this.ElementButton_18.UseVisualStyleBackColor = true;
+            this.ElementButton_18.Click += new System.EventHandler(this.ElementButton_18_Click);
+            // 
+            // RemainingElementsLabel
+            // 
+            this.RemainingElementsLabel.AutoSize = true;
+            this.RemainingElementsLabel.Location = new System.Drawing.Point(1398, 86);
+            this.RemainingElementsLabel.Name = "RemainingElementsLabel";
+            this.RemainingElementsLabel.Size = new System.Drawing.Size(19, 15);
+            this.RemainingElementsLabel.TabIndex = 39;
+            this.RemainingElementsLabel.Text = "64";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(1276, 86);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(118, 15);
+            this.label11.TabIndex = 38;
+            this.label11.Text = "Remaining Elements:";
+            // 
+            // SelectedElement
+            // 
+            this.SelectedElement.AutoSize = true;
+            this.SelectedElement.Location = new System.Drawing.Point(1397, 61);
+            this.SelectedElement.Name = "SelectedElement";
+            this.SelectedElement.Size = new System.Drawing.Size(36, 15);
+            this.SelectedElement.TabIndex = 37;
+            this.SelectedElement.Text = "None";
+            // 
+            // Ypos
+            // 
+            this.Ypos.AutoSize = true;
+            this.Ypos.Location = new System.Drawing.Point(1398, 35);
+            this.Ypos.Name = "Ypos";
+            this.Ypos.Size = new System.Drawing.Size(13, 15);
+            this.Ypos.TabIndex = 36;
+            this.Ypos.Text = "0";
+            // 
+            // Xpos
+            // 
+            this.Xpos.AutoSize = true;
+            this.Xpos.Location = new System.Drawing.Point(1398, 8);
+            this.Xpos.Name = "Xpos";
+            this.Xpos.Size = new System.Drawing.Size(13, 15);
+            this.Xpos.TabIndex = 35;
+            this.Xpos.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(1276, 61);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 15);
+            this.label10.TabIndex = 34;
+            this.label10.Text = "Selected Entity:";
+            // 
+            // YposLabel
+            // 
+            this.YposLabel.AutoSize = true;
+            this.YposLabel.Location = new System.Drawing.Point(1276, 35);
+            this.YposLabel.Name = "YposLabel";
+            this.YposLabel.Size = new System.Drawing.Size(17, 15);
+            this.YposLabel.TabIndex = 33;
+            this.YposLabel.Text = "Y:";
+            // 
+            // XposLabel
+            // 
+            this.XposLabel.AutoSize = true;
+            this.XposLabel.Location = new System.Drawing.Point(1276, 8);
+            this.XposLabel.Name = "XposLabel";
+            this.XposLabel.Size = new System.Drawing.Size(17, 15);
+            this.XposLabel.TabIndex = 32;
+            this.XposLabel.Text = "X:";
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel5.Controls.Add(this.Player);
+            this.flowLayoutPanel5.Controls.Add(this.label7);
+            this.flowLayoutPanel5.Controls.Add(this.PlayerRotationUpDown);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(1215, 551);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(233, 68);
+            this.flowLayoutPanel5.TabIndex = 31;
+            // 
+            // Player
+            // 
+            this.Player.Location = new System.Drawing.Point(3, 3);
+            this.Player.Name = "Player";
+            this.Player.Size = new System.Drawing.Size(217, 27);
+            this.Player.TabIndex = 14;
+            this.Player.Text = "Player Start";
+            this.Player.UseVisualStyleBackColor = true;
+            this.Player.Click += new System.EventHandler(this.Player_Click);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 33);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 29);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Player start rotation";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlayerRotationUpDown
             // 
-            this.PlayerRotationUpDown.Location = new System.Drawing.Point(1804, 602);
+            this.PlayerRotationUpDown.Location = new System.Drawing.Point(119, 36);
             this.PlayerRotationUpDown.Maximum = new decimal(new int[] {
             360,
             0,
             0,
             0});
             this.PlayerRotationUpDown.Name = "PlayerRotationUpDown";
-            this.PlayerRotationUpDown.Size = new System.Drawing.Size(111, 23);
+            this.PlayerRotationUpDown.Size = new System.Drawing.Size(97, 23);
             this.PlayerRotationUpDown.TabIndex = 25;
             this.PlayerRotationUpDown.ValueChanged += new System.EventHandler(this.PlayerRotationUpDown_ValueChanged);
             // 
-            // label7
+            // flowLayoutPanel4
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1687, 604);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 15);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Player start rotation";
+            this.flowLayoutPanel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel4.Controls.Add(this.label6);
+            this.flowLayoutPanel4.Controls.Add(this.CeilingHeightUpDown);
+            this.flowLayoutPanel4.Controls.Add(this.label4);
+            this.flowLayoutPanel4.Controls.Add(this.FloorHeightUpDown);
+            this.flowLayoutPanel4.Controls.Add(this.label9);
+            this.flowLayoutPanel4.Controls.Add(this.CeilingColourUpDown);
+            this.flowLayoutPanel4.Controls.Add(this.label8);
+            this.flowLayoutPanel4.Controls.Add(this.FloorColourUpDown4);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(1215, 625);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(233, 120);
+            this.flowLayoutPanel4.TabIndex = 30;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 29);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Ceiling Height";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CeilingHeightUpDown
             // 
-            this.CeilingHeightUpDown.Location = new System.Drawing.Point(1347, 71);
+            this.CeilingHeightUpDown.Location = new System.Drawing.Point(92, 3);
             this.CeilingHeightUpDown.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.CeilingHeightUpDown.Name = "CeilingHeightUpDown";
-            this.CeilingHeightUpDown.Size = new System.Drawing.Size(95, 23);
+            this.CeilingHeightUpDown.Size = new System.Drawing.Size(124, 23);
             this.CeilingHeightUpDown.TabIndex = 23;
             this.CeilingHeightUpDown.Value = new decimal(new int[] {
             10,
@@ -495,14 +709,88 @@
             0});
             this.CeilingHeightUpDown.ValueChanged += new System.EventHandler(this.CeilingHeightUpDown_ValueChanged);
             // 
-            // label6
+            // label4
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1345, 53);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 15);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Ceiling Height";
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 29);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Floor Height";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // FloorHeightUpDown
+            // 
+            this.FloorHeightUpDown.Location = new System.Drawing.Point(82, 32);
+            this.FloorHeightUpDown.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.FloorHeightUpDown.Name = "FloorHeightUpDown";
+            this.FloorHeightUpDown.Size = new System.Drawing.Size(134, 23);
+            this.FloorHeightUpDown.TabIndex = 19;
+            this.FloorHeightUpDown.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.FloorHeightUpDown.ValueChanged += new System.EventHandler(this.FloorHeightUpDown_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(3, 58);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(83, 29);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Ceiling Colour";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CeilingColourUpDown
+            // 
+            this.CeilingColourUpDown.Location = new System.Drawing.Point(92, 61);
+            this.CeilingColourUpDown.Name = "CeilingColourUpDown";
+            this.CeilingColourUpDown.Size = new System.Drawing.Size(124, 23);
+            this.CeilingColourUpDown.TabIndex = 29;
+            this.CeilingColourUpDown.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.CeilingColourUpDown.ValueChanged += new System.EventHandler(this.CeilingColourUpDown_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 87);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 29);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Floor Colour";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // FloorColourUpDown4
+            // 
+            this.FloorColourUpDown4.Location = new System.Drawing.Point(82, 90);
+            this.FloorColourUpDown4.Name = "FloorColourUpDown4";
+            this.FloorColourUpDown4.Size = new System.Drawing.Size(134, 23);
+            this.FloorColourUpDown4.TabIndex = 27;
+            this.FloorColourUpDown4.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.FloorColourUpDown4.ValueChanged += new System.EventHandler(this.FloorColourUpDown4_ValueChanged);
             // 
             // label5
             // 
@@ -513,53 +801,6 @@
             this.label5.TabIndex = 21;
             this.label5.Text = "Floor Height";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1347, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 15);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Floor Height";
-            // 
-            // FloorHeightUpDown
-            // 
-            this.FloorHeightUpDown.Location = new System.Drawing.Point(1347, 25);
-            this.FloorHeightUpDown.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.FloorHeightUpDown.Name = "FloorHeightUpDown";
-            this.FloorHeightUpDown.Size = new System.Drawing.Size(95, 23);
-            this.FloorHeightUpDown.TabIndex = 19;
-            this.FloorHeightUpDown.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.FloorHeightUpDown.ValueChanged += new System.EventHandler(this.FloorHeightUpDown_ValueChanged);
-            // 
-            // GenerateMapBinary
-            // 
-            this.GenerateMapBinary.Location = new System.Drawing.Point(1508, 684);
-            this.GenerateMapBinary.Name = "GenerateMapBinary";
-            this.GenerateMapBinary.Size = new System.Drawing.Size(148, 23);
-            this.GenerateMapBinary.TabIndex = 17;
-            this.GenerateMapBinary.Text = "Generate Map Binary";
-            this.GenerateMapBinary.UseVisualStyleBackColor = true;
-            this.GenerateMapBinary.Click += new System.EventHandler(this.GenerateMapBinary_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1682, 631);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(233, 23);
-            this.button5.TabIndex = 16;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(1263, 1088);
@@ -569,21 +810,11 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // Player
-            // 
-            this.Player.Location = new System.Drawing.Point(1682, 569);
-            this.Player.Name = "Player";
-            this.Player.Size = new System.Drawing.Size(233, 27);
-            this.Player.TabIndex = 14;
-            this.Player.Text = "Player Start";
-            this.Player.UseVisualStyleBackColor = true;
-            this.Player.Click += new System.EventHandler(this.Player_Click);
-            // 
             // ClearMap
             // 
-            this.ClearMap.Location = new System.Drawing.Point(1062, 214);
+            this.ClearMap.Location = new System.Drawing.Point(1265, 117);
             this.ClearMap.Name = "ClearMap";
-            this.ClearMap.Size = new System.Drawing.Size(277, 23);
+            this.ClearMap.Size = new System.Drawing.Size(183, 23);
             this.ClearMap.TabIndex = 10;
             this.ClearMap.Text = "Clear Map";
             this.ClearMap.UseVisualStyleBackColor = true;
@@ -599,9 +830,9 @@
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_24);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_25);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_26);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1443, 5);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1215, 161);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(233, 208);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(233, 231);
             this.flowLayoutPanel3.TabIndex = 13;
             // 
             // ElementButton_20
@@ -630,7 +861,7 @@
             this.ElementButton_22.Name = "ElementButton_22";
             this.ElementButton_22.Size = new System.Drawing.Size(217, 23);
             this.ElementButton_22.TabIndex = 3;
-            this.ElementButton_22.Text = "33. Warrior";
+            this.ElementButton_22.Text = "34. Warrior";
             this.ElementButton_22.UseVisualStyleBackColor = true;
             this.ElementButton_22.Click += new System.EventHandler(this.ElementButton_22_Click);
             // 
@@ -640,7 +871,7 @@
             this.ElementButton_23.Name = "ElementButton_23";
             this.ElementButton_23.Size = new System.Drawing.Size(217, 23);
             this.ElementButton_23.TabIndex = 4;
-            this.ElementButton_23.Text = "34. Plasmabot";
+            this.ElementButton_23.Text = "35. Plasmabot";
             this.ElementButton_23.UseVisualStyleBackColor = true;
             this.ElementButton_23.Click += new System.EventHandler(this.ElementButton_23_Click);
             // 
@@ -650,7 +881,7 @@
             this.ElementButton_24.Name = "ElementButton_24";
             this.ElementButton_24.Size = new System.Drawing.Size(217, 23);
             this.ElementButton_24.TabIndex = 5;
-            this.ElementButton_24.Text = "35. Ender";
+            this.ElementButton_24.Text = "36. Ender";
             this.ElementButton_24.UseVisualStyleBackColor = true;
             this.ElementButton_24.Click += new System.EventHandler(this.ElementButton_24_Click);
             // 
@@ -660,7 +891,7 @@
             this.ElementButton_25.Name = "ElementButton_25";
             this.ElementButton_25.Size = new System.Drawing.Size(217, 23);
             this.ElementButton_25.TabIndex = 6;
-            this.ElementButton_25.Text = "36. Turret";
+            this.ElementButton_25.Text = "37. Turret";
             this.ElementButton_25.UseVisualStyleBackColor = true;
             this.ElementButton_25.Click += new System.EventHandler(this.ElementButton_25_Click);
             // 
@@ -670,7 +901,7 @@
             this.ElementButton_26.Name = "ElementButton_26";
             this.ElementButton_26.Size = new System.Drawing.Size(217, 23);
             this.ElementButton_26.TabIndex = 7;
-            this.ElementButton_26.Text = "37. Explorer";
+            this.ElementButton_26.Text = "38. Explorer";
             this.ElementButton_26.UseVisualStyleBackColor = true;
             this.ElementButton_26.Click += new System.EventHandler(this.ElementButton_26_Click);
             // 
@@ -689,16 +920,10 @@
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_10);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_11);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_12);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_13);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_14);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_15);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_16);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_17);
-            this.flowLayoutPanel2.Controls.Add(this.ElementButton_18);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_19);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(1682, 6);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(976, 161);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(233, 557);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(233, 384);
             this.flowLayoutPanel2.TabIndex = 12;
             // 
             // ElementButton_1
@@ -821,85 +1046,15 @@
             this.ElementButton_12.UseVisualStyleBackColor = true;
             this.ElementButton_12.Click += new System.EventHandler(this.ElementButton_12_Click);
             // 
-            // ElementButton_13
-            // 
-            this.ElementButton_13.Location = new System.Drawing.Point(3, 351);
-            this.ElementButton_13.Name = "ElementButton_13";
-            this.ElementButton_13.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_13.TabIndex = 12;
-            this.ElementButton_13.Text = "13. Card 0";
-            this.ElementButton_13.UseVisualStyleBackColor = true;
-            this.ElementButton_13.Click += new System.EventHandler(this.ElementButton_13_Click);
-            // 
-            // ElementButton_14
-            // 
-            this.ElementButton_14.Location = new System.Drawing.Point(3, 380);
-            this.ElementButton_14.Name = "ElementButton_14";
-            this.ElementButton_14.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_14.TabIndex = 13;
-            this.ElementButton_14.Text = "14. Card 1";
-            this.ElementButton_14.UseVisualStyleBackColor = true;
-            this.ElementButton_14.Click += new System.EventHandler(this.ElementButton_14_Click);
-            // 
-            // ElementButton_15
-            // 
-            this.ElementButton_15.Location = new System.Drawing.Point(3, 409);
-            this.ElementButton_15.Name = "ElementButton_15";
-            this.ElementButton_15.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_15.TabIndex = 14;
-            this.ElementButton_15.Text = "15. Card 2";
-            this.ElementButton_15.UseVisualStyleBackColor = true;
-            this.ElementButton_15.Click += new System.EventHandler(this.ElementButton_15_Click);
-            // 
-            // ElementButton_16
-            // 
-            this.ElementButton_16.Location = new System.Drawing.Point(3, 438);
-            this.ElementButton_16.Name = "ElementButton_16";
-            this.ElementButton_16.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_16.TabIndex = 15;
-            this.ElementButton_16.Text = "16. Lock 0";
-            this.ElementButton_16.UseVisualStyleBackColor = true;
-            this.ElementButton_16.Click += new System.EventHandler(this.ElementButton_16_Click);
-            // 
-            // ElementButton_17
-            // 
-            this.ElementButton_17.Location = new System.Drawing.Point(3, 467);
-            this.ElementButton_17.Name = "ElementButton_17";
-            this.ElementButton_17.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_17.TabIndex = 16;
-            this.ElementButton_17.Text = "17. Lock 1";
-            this.ElementButton_17.UseVisualStyleBackColor = true;
-            this.ElementButton_17.Click += new System.EventHandler(this.ElementButton_17_Click);
-            // 
-            // ElementButton_18
-            // 
-            this.ElementButton_18.Location = new System.Drawing.Point(3, 496);
-            this.ElementButton_18.Name = "ElementButton_18";
-            this.ElementButton_18.Size = new System.Drawing.Size(221, 23);
-            this.ElementButton_18.TabIndex = 17;
-            this.ElementButton_18.Text = "18. Lock 2";
-            this.ElementButton_18.UseVisualStyleBackColor = true;
-            this.ElementButton_18.Click += new System.EventHandler(this.ElementButton_18_Click);
-            // 
             // ElementButton_19
             // 
-            this.ElementButton_19.Location = new System.Drawing.Point(3, 525);
+            this.ElementButton_19.Location = new System.Drawing.Point(3, 351);
             this.ElementButton_19.Name = "ElementButton_19";
             this.ElementButton_19.Size = new System.Drawing.Size(221, 23);
             this.ElementButton_19.TabIndex = 18;
-            this.ElementButton_19.Text = "19. Blocker";
+            this.ElementButton_19.Text = "Blocker";
             this.ElementButton_19.UseVisualStyleBackColor = true;
             this.ElementButton_19.Click += new System.EventHandler(this.ElementButton_19_Click);
-            // 
-            // LevelArrayOutput
-            // 
-            this.LevelArrayOutput.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LevelArrayOutput.Location = new System.Drawing.Point(1062, 243);
-            this.LevelArrayOutput.Multiline = true;
-            this.LevelArrayOutput.Name = "LevelArrayOutput";
-            this.LevelArrayOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LevelArrayOutput.Size = new System.Drawing.Size(614, 464);
-            this.LevelArrayOutput.TabIndex = 11;
             // 
             // flowLayoutPanel1
             // 
@@ -922,9 +1077,9 @@
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door7);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.CellHeight);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1062, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(976, 6);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(277, 210);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(283, 149);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // label2
@@ -953,7 +1108,7 @@
             this.MapColour_2.Size = new System.Drawing.Size(32, 32);
             this.MapColour_2.TabIndex = 4;
             this.MapColour_2.UseVisualStyleBackColor = false;
-            this.MapColour_2.Click += new System.EventHandler(this.MapColour_2_Click);
+            this.MapColour_2.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // MapColour_3
             // 
@@ -963,7 +1118,7 @@
             this.MapColour_3.Size = new System.Drawing.Size(32, 32);
             this.MapColour_3.TabIndex = 5;
             this.MapColour_3.UseVisualStyleBackColor = false;
-            this.MapColour_3.Click += new System.EventHandler(this.MapColour_3_Click);
+            this.MapColour_3.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // MapColour_4
             // 
@@ -973,7 +1128,7 @@
             this.MapColour_4.Size = new System.Drawing.Size(32, 32);
             this.MapColour_4.TabIndex = 6;
             this.MapColour_4.UseVisualStyleBackColor = false;
-            this.MapColour_4.Click += new System.EventHandler(this.MapColour_4_Click);
+            this.MapColour_4.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // MapColour_5
             // 
@@ -983,7 +1138,7 @@
             this.MapColour_5.Size = new System.Drawing.Size(32, 32);
             this.MapColour_5.TabIndex = 7;
             this.MapColour_5.UseVisualStyleBackColor = false;
-            this.MapColour_5.Click += new System.EventHandler(this.MapColour_5_Click);
+            this.MapColour_5.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // MapColour_6
             // 
@@ -993,7 +1148,7 @@
             this.MapColour_6.Size = new System.Drawing.Size(32, 32);
             this.MapColour_6.TabIndex = 8;
             this.MapColour_6.UseVisualStyleBackColor = false;
-            this.MapColour_6.Click += new System.EventHandler(this.MapColour_6_Click);
+            this.MapColour_6.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // MapColour_7
             // 
@@ -1003,7 +1158,7 @@
             this.MapColour_7.Size = new System.Drawing.Size(32, 32);
             this.MapColour_7.TabIndex = 9;
             this.MapColour_7.UseVisualStyleBackColor = false;
-            this.MapColour_7.Click += new System.EventHandler(this.MapColour_7_Click);
+            this.MapColour_7.Click += new System.EventHandler(this.MapColour_1_Click);
             // 
             // label1
             // 
@@ -1031,7 +1186,7 @@
             this.MapColour_door2.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door2.TabIndex = 23;
             this.MapColour_door2.UseVisualStyleBackColor = false;
-            this.MapColour_door2.Click += new System.EventHandler(this.MapColour_door2_Click);
+            this.MapColour_door2.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // MapColour_door3
             // 
@@ -1041,7 +1196,7 @@
             this.MapColour_door3.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door3.TabIndex = 24;
             this.MapColour_door3.UseVisualStyleBackColor = false;
-            this.MapColour_door3.Click += new System.EventHandler(this.MapColour_door3_Click);
+            this.MapColour_door3.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // MapColour_door4
             // 
@@ -1051,7 +1206,7 @@
             this.MapColour_door4.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door4.TabIndex = 25;
             this.MapColour_door4.UseVisualStyleBackColor = false;
-            this.MapColour_door4.Click += new System.EventHandler(this.MapColour_door4_Click);
+            this.MapColour_door4.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // MapColour_door5
             // 
@@ -1061,7 +1216,7 @@
             this.MapColour_door5.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door5.TabIndex = 26;
             this.MapColour_door5.UseVisualStyleBackColor = false;
-            this.MapColour_door5.Click += new System.EventHandler(this.MapColour_door5_Click);
+            this.MapColour_door5.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // MapColour_door6
             // 
@@ -1071,7 +1226,7 @@
             this.MapColour_door6.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door6.TabIndex = 27;
             this.MapColour_door6.UseVisualStyleBackColor = false;
-            this.MapColour_door6.Click += new System.EventHandler(this.MapColour_door6_Click);
+            this.MapColour_door6.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // MapColour_door7
             // 
@@ -1081,7 +1236,7 @@
             this.MapColour_door7.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door7.TabIndex = 28;
             this.MapColour_door7.UseVisualStyleBackColor = false;
-            this.MapColour_door7.Click += new System.EventHandler(this.MapColour_door7_Click);
+            this.MapColour_door7.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
             // label3
             // 
@@ -1112,12 +1267,12 @@
             // pictureBox
             // 
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox.Location = new System.Drawing.Point(3, 6);
+            this.pictureBox.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.pictureBox.Location = new System.Drawing.Point(1, 1);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(1044, 933);
+            this.pictureBox.Size = new System.Drawing.Size(900, 933);
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
-            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -1134,14 +1289,57 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(0, 0);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1495, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.saveToolStripMenuItem.Text = "Save Level";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.loadToolStripMenuItem.Text = "Load Level";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1924, 1061);
+            this.ClientSize = new System.Drawing.Size(1495, 1061);
             this.Controls.Add(this.Tabs);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.FIle;
             this.Name = "Form1";
             this.Text = " Neko Engine";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1154,18 +1352,26 @@
             this.Audio.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CeilingColourUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FloorColourUpDown4)).EndInit();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerRotationUpDown)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CeilingHeightUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FloorHeightUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CeilingColourUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FloorColourUpDown4)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1203,7 +1409,6 @@
         private Button MapColour_5;
         private Button MapColour_6;
         private Button MapColour_7;
-        private TextBox LevelArrayOutput;
         private Button ClearMap;
         private Label label1;
         private Button MapColour_door;
@@ -1221,12 +1426,6 @@
         private Button ElementButton_10;
         private Button ElementButton_11;
         private Button ElementButton_12;
-        private Button ElementButton_13;
-        private Button ElementButton_14;
-        private Button ElementButton_15;
-        private Button ElementButton_16;
-        private Button ElementButton_17;
-        private Button ElementButton_18;
         private Button ElementButton_19;
         private FlowLayoutPanel flowLayoutPanel3;
         private Button ElementButton_20;
@@ -1238,8 +1437,6 @@
         private Button ElementButton_26;
         private Button Player;
         private Button button4;
-        private Button button5;
-        private Button GenerateMapBinary;
         private Label label4;
         private NumericUpDown FloorHeightUpDown;
         private Label label7;
@@ -1257,8 +1454,33 @@
         private Button MapColour_door5;
         private Button MapColour_door6;
         private Button MapColour_door7;
-        private Button LoadMap;
         private Label label3;
         private NumericUpDown CellHeight;
+        private MenuStrip FIle;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem loadToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private FlowLayoutPanel flowLayoutPanel5;
+        private FlowLayoutPanel flowLayoutPanel4;
+        private Label Xpos;
+        private Label label10;
+        private Label YposLabel;
+        private Label XposLabel;
+        private Label SelectedElement;
+        private Label Ypos;
+        private Label RemainingElementsLabel;
+        private Label label11;
+        private ScintillaNET.Scintilla scintilla1;
+        private Button SaveConstantsAs;
+        private Button SaveConstants;
+        private FlowLayoutPanel flowLayoutPanel6;
+        private Button ElementButton_13;
+        private Button ElementButton_14;
+        private Button ElementButton_15;
+        private Button ElementButton_16;
+        private Button ElementButton_17;
+        private Button ElementButton_18;
     }
 }

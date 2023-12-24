@@ -14,9 +14,7 @@ namespace NekoEngine
 
     [Serializable]
     public class Level
-    {
-     
-        
+    {   
         public byte ceilHeight = 10;
         public byte floorHeight = 10;
         public byte[] HeightArray;
@@ -28,7 +26,7 @@ namespace NekoEngine
             CeilingColor = 3;
 
             // 7 is transparent
-            TextureIndices = new byte[7] { 1, 2, 3, 4, 5, 6, 8 };
+            TextureIndices = new byte[7] { 5, 2, 3, 4, 5, 6, 8 };
 
             HeightArray = new byte[4096];
             MapArray = new byte[4096];
@@ -178,61 +176,61 @@ namespace NekoEngine
                 SFG_TD(floorHeight,ceilHeight,5,5), // 13
                 SFG_TD(floorHeight,ceilHeight,6,6), // 14
                 
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),0,0), // 15
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),1,1), // 16
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),2,2), // 17
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),3,3), // 18
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),4,4), // 19
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),5,5), // 20
-                SFG_TD((ushort)(1),(ushort)(ceilHeight - 1),6,6), // 21
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,0,0), // 15
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,1,1), // 16
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,2,2), // 17
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,3,3), // 18
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,4,4), // 19
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,5,5), // 20
+                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,6,6), // 21
                 
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),0,0), // 22
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),1,1), // 23
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),2,2), // 24
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),3,3), // 25
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),4,4), // 26
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),5,5), // 27
-                SFG_TD((ushort)(2),(ushort)(ceilHeight - 2),6,6), // 28
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,0,0), // 22
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,1,1), // 23
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,2,2), // 24
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,3,3), // 25
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,4,4), // 26
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,5,5), // 27
+                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,6,6), // 28
 
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),0,0), // 29
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),1,1), // 30
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),2,2), // 31
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),3,3), // 32
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),4,4), // 33
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),5,5), // 34
-                SFG_TD((ushort)(3),(ushort)(ceilHeight - 3),6,6), // 35
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,0,0), // 29
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,1,1), // 30
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,2,2), // 31
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,3,3), // 32
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,4,4), // 33
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,5,5), // 34
+                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,6,6), // 35
 
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),0,0), // 36
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),1,1), // 37
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),2,2), // 38
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),3,3), // 39
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),4,4), // 40
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),5,5), // 41
-                SFG_TD((ushort)(4),(ushort)(ceilHeight - 4),6,6), // 42
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,0,0), // 36
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,1,1), // 37
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,2,2), // 38
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,3,3), // 39
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,4,4), // 40
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,5,5), // 41
+                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,6,6), // 42
 
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),0,0), // 43
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),1,1), // 44
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),2,2), // 45
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),3,3), // 46
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),4,4), // 47
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),5,5), // 48
-                SFG_TD((ushort)(5),(ushort)(ceilHeight - 5),6,6), // 49
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,0,0), // 43
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,1,1), // 44
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,2,2), // 45
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,3,3), // 46
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,4,4), // 47
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,5,5), // 48
+                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,6,6), // 49
 
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),0,0), // 50
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),1,1), // 51
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),2,2), // 52
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),3,3), // 53
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),4,4), // 54
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),5,5), // 55
-                SFG_TD((ushort)(6),(ushort)(ceilHeight - 6),6,6), // 56
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,0,0), // 50
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,1,1), // 51
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,2,2), // 52 
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,3,3), // 53
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,4,4), // 54
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,5,5), // 55
+                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,6,6), // 56
 
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),0,0), // 57
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),1,1), // 58
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),2,2), // 59
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),3,3), // 60
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),4,4), // 61
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),5,5), // 62
-                SFG_TD((ushort)(7),(ushort)(ceilHeight - 7),6,6)  // 63
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,0,0), // 57
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,1,1), // 58
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,2,2), // 59
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,3,3), // 60
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,4,4), // 61
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,5,5), // 62
+                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,6,6), // 63
             };
         }
     }

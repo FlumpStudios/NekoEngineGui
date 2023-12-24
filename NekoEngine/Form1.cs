@@ -12,26 +12,39 @@ namespace NekoEngine
 
     public partial class Form1 : Form
     {
-        private const byte PLAYER_POSITION_TYPE = 99; 
+        private const byte PLAYER_POSITION_TYPE_INDEX = 99; 
+        private const int GRID_SIZE = 64;
+        private const int CELL_SIZE = 15;
+        private const int AVAILABLE_ELEMENTS = 64;
+        
+        private const int ACCESS_CARD_1 = 0x0d;
+        private const int ACCESS_CARD_2 = 0x0e;
+        private const int ACCESS_CARD_3 = 0x0f;
+
+        private const int LOCK_1 = 0x10;
+        private const int LOCK_2 = 0x11;
+        private const int LOCK_3 = 0x12;
+
+
+        private bool _isMousePressed = false;
+        private byte _currentElementNumber = 0;
+        private byte _selectedHeight = 0;
+        private EditState _currentEditState = EditState.Walls;
+        private Color _selectedMapColour = Color.FromArgb(255, 255, 20, 147);
         private Level _currentLevel = new Level();
-        private EditState currentEditState = EditState.Walls;
+        private Bitmap _gridImage;
+    
 #if DEBUG
         const string GAME_FILE_LOCATION = @"c:\projects\Neko";
+        const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
+        const string GAME_CONSTNTS_FILE_LOCATION = GAME_FILE_LOCATION + @"\constants.h";
 #else
         const string GAME_FILE_LOCATION = @"..\";
 #endif
-        private const int gridSize = 64;
-        private const int cellSize = 15; // Adjust the cell size as needed
-        private Bitmap gridImage;
-        private bool isMousePressed = false;
-        private byte currentElementNumber = 0;
-
-        Color selectedMapColour = Color.FromArgb(255, 255, 20, 147);
-        private byte _selectedHeight = 0;
-    
 
         public Form1()
         {
+           
             InitializeComponent();
             InitializeCodeEditor();
             InitializeGrid();
@@ -39,20 +52,22 @@ namespace NekoEngine
 
         private void InitializeCodeEditor()
         {
-            // Set up the ScintillaNET control
-            //codeEditor.Dock = DockStyle.Right;
-            codeEditor.Margins[0].Width = 20; // Add a margin for line numbers
+            codeEditor.Margins[0].Width = 20;
             codeEditor.Styles[ScintillaNET.Style.Default].Font = "Consolas";
             codeEditor.Styles[ScintillaNET.Style.Default].Size = 10;
-            //codeEditor.LexerName = "C++";
-            codeEditor.Lexer = Lexer.Cpp; // Set the lexer for C++ syntax highlighting
-            codeEditor.Text = System.IO.File.ReadAllText(GAME_FILE_LOCATION + @"\game.h");
+            codeEditor.Lexer = Lexer.Cpp;
+            codeEditor.Text = System.IO.File.ReadAllText(GAME_SETTINGS_FILE_LOCATION);
+
+            scintilla1.Margins[0].Width = 20;
+            scintilla1.Styles[ScintillaNET.Style.Default].Font = "Consolas";
+            scintilla1.Styles[ScintillaNET.Style.Default].Size = 10;
+            scintilla1.Lexer = Lexer.Cpp;
+            scintilla1.Text = System.IO.File.ReadAllText(GAME_CONSTNTS_FILE_LOCATION);
         }
 
         private string _imagePath = string.Empty;
         private string _audioPath = string.Empty;
 
-        
         private void button1_Click_1(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -63,25 +78,22 @@ namespace NekoEngine
                 {
                     try
                     {
-                        // Load the selected image into a Bitmap
                         Bitmap selectedImage = new Bitmap(openFileDialog.FileName);
 
                         if (selectedImage.Width != 32 || selectedImage.Height != 32)
                         {
-                            MessageBox.Show("The selected image must be 32x32 pixels.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return; // Exit the method if the image size is incorrect
+                            ShowErrorMessage("The selected image must be 32x32 pixels.");
+                            return;
                         }
 
 
-                        // Display the image in the PictureBox
                         pictureBox1.Image = selectedImage;
                         _imagePath = openFileDialog.FileName;
                         generate.Enabled = true;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error loading the image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                        ShowErrorMessage($"Error loading the image: {ex.Message}");                        
                     }
                 }
             }
@@ -91,14 +103,10 @@ namespace NekoEngine
         {
             try
             {
-                // Specify the path to the Python executable and the script
-                // string pythonPath = "path_to_your_python_executable";
                 string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\img2array.py";
 
-                // Construct the command with the provided arguments
                 string command = $"python {scriptPath} -t -c -x32 -y32 -p{GAME_FILE_LOCATION}\\assets\\palette565.png {_imagePath}";
 
-                // Set up process start info
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
@@ -108,20 +116,14 @@ namespace NekoEngine
                     UseShellExecute = false
                 };
 
-                // Start the process
                 using (Process process = new Process { StartInfo = startInfo })
                 {
                     process.Start();
 
-                    // Pass the command to the cmd.exe process
                     process.StandardInput.WriteLine(command);
                     process.StandardInput.Flush();
                     process.StandardInput.Close();
 
-                    // Wait for the process to exit
-                    //process.WaitForExit();
-
-                    // Optionally, you can retrieve the output of the Python script
                     string output = process.StandardOutput.ReadToEnd();
 
                     string pattern = @"\{[^}]*\}[^{]*\{([^}]*)\}";
@@ -132,14 +134,12 @@ namespace NekoEngine
                         string numbers = match.Groups[1].Value;
                         Output.Text = numbers;
                         copyToClipboard.Enabled = true;
-
-
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error running the Python script: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowErrorMessage($"Error running the Python script: {ex.Message}");                
             }
         }
 
@@ -183,12 +183,8 @@ namespace NekoEngine
         private void copyToClipboard_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Output.Text);
-
-
             MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-
 
         private void loadAudio_Click_1(object sender, EventArgs e)
         {
@@ -206,7 +202,7 @@ namespace NekoEngine
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error loading the image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorMessage($"Error loading the image: {ex.Message}");
                     }
                 }
             }
@@ -216,14 +212,10 @@ namespace NekoEngine
         {
             try
             {
-                // Specify the path to the Python executable and the script
-                // string pythonPath = "path_to_your_python_executable";
                 string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\snd2array.py";
 
-                // Construct the command with the provided arguments
                 string command = $"python {scriptPath} {_audioPath}";
 
-                // Set up process start info
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
@@ -233,20 +225,15 @@ namespace NekoEngine
                     UseShellExecute = false
                 };
 
-                // Start the process
                 using (Process process = new Process { StartInfo = startInfo })
                 {
                     process.Start();
 
-                    // Pass the command to the cmd.exe process
                     process.StandardInput.WriteLine(command);
                     process.StandardInput.Flush();
                     process.StandardInput.Close();
 
-                    // Wait for the process to exit
-                    //process.WaitForExit();
-
-                    // Optionally, you can retrieve the output of the Python script
+                
                     string output = process.StandardOutput.ReadToEnd();
 
                     string pattern = @"\{([^}]*)\}";
@@ -262,7 +249,7 @@ namespace NekoEngine
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error running the Python script: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ShowErrorMessage($"Error running the Python script: {ex.Message}");                
             }
         }
 
@@ -277,12 +264,11 @@ namespace NekoEngine
 
         private void SaveCode_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText(GAME_FILE_LOCATION + @"\game.h", codeEditor.Text);
+            System.IO.File.WriteAllText(GAME_SETTINGS_FILE_LOCATION, codeEditor.Text);
         }
 
         private void CodeSaveAs_Click(object sender, EventArgs e)
         {
-            // Use SaveFileDialog to specify a file for saving
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -290,7 +276,6 @@ namespace NekoEngine
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Save the contents of the editor to the selected file
                     System.IO.File.WriteAllText(saveFileDialog.FileName, codeEditor.Text);
                 }
             }
@@ -299,23 +284,23 @@ namespace NekoEngine
         private void InitializeGrid()
         {
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox.Size = new Size(gridSize * cellSize, gridSize * cellSize);
+            pictureBox.Size = new Size(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
 
-            gridImage = new Bitmap(gridSize * cellSize, gridSize * cellSize);
+            _gridImage = new Bitmap(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
 
-            using (Graphics g = Graphics.FromImage(gridImage))
+            using (Graphics g = Graphics.FromImage(_gridImage))
             {
-                for (int i = 0; i < gridSize; i++)
+                for (int i = 0; i < GRID_SIZE; i++)
                 {
-                    for (int j = 0; j < gridSize; j++)
+                    for (int j = 0; j < GRID_SIZE; j++)
                     {
-                        g.FillRectangle(Brushes.White, j * cellSize, i * cellSize, cellSize, cellSize);
-                        g.DrawRectangle(Pens.Black, j * cellSize, i * cellSize, cellSize, cellSize);
+                        g.FillRectangle(Brushes.White, j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        g.DrawRectangle(Pens.Black, j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                     }
                 }
             }
 
-            pictureBox.Image = gridImage;
+            pictureBox.Image = _gridImage;
             pictureBox.MouseDown += PictureBox_MouseDown;
             pictureBox.MouseMove += PictureBox_MouseMove;
             pictureBox.MouseUp += PictureBox_MouseUp;
@@ -326,7 +311,7 @@ namespace NekoEngine
             var position = ToGridPosition(e.X, e.Y);
             if (e.Button == MouseButtons.Left)
             {
-                isMousePressed = true;
+                _isMousePressed = true;
                 DrawOnGrid(position);
             }
             else if (e.Button == MouseButtons.Right)
@@ -338,17 +323,21 @@ namespace NekoEngine
 
         private void PictureBox_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMousePressed)
+            var gridPos = ToGridPosition(e.X, e.Y);
+            if (_isMousePressed)
             {
-                DrawOnGrid(ToGridPosition(e.X, e.Y));
+                DrawOnGrid(gridPos);
             }
+            Xpos.Text = gridPos.Column.ToString();
+            Ypos.Text = gridPos.Row.ToString();
+            
         }
 
         private void DrawOnGrid(GridPosition position)
         {
             if (_currentLevel != null)
             {
-                switch (currentEditState)
+                switch (_currentEditState)
                 {
                     case EditState.Walls:
                         RecordMapArrayClick(position);
@@ -358,7 +347,7 @@ namespace NekoEngine
                         break;
                 }
 
-                using (Graphics g = Graphics.FromImage(gridImage))
+                using (Graphics g = Graphics.FromImage(_gridImage))
                 {
                     ClearGrid(g, position);
                     DrawMapArrayBlock(g, position);
@@ -375,7 +364,7 @@ namespace NekoEngine
 
         private void PictureBox_MouseUp(object sender, MouseEventArgs e)
         {
-            isMousePressed = false;
+            _isMousePressed = false;
         }
 
         private void RecordMapArrayClick(GridPosition position)
@@ -383,7 +372,7 @@ namespace NekoEngine
             int col = position.Column;
             int row = position.Row;
 
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+            if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE)
             {
                 var index = position.MapArrayIndex();
 
@@ -396,12 +385,11 @@ namespace NekoEngine
             }
         }
 
-
         private byte GetMapArrayTextureIdFromPosition(in GridPosition pos)
         {   
             if (_currentLevel != null)
             {
-                return (byte)(GetTextureIndexFromColour(selectedMapColour) + (7 * _currentLevel.HeightArray[pos.MapArrayIndex()]));
+                return (byte)(GetTextureIndexFromColour(_selectedMapColour) + (7 * _currentLevel.HeightArray[pos.MapArrayIndex()]));
             }
             throw new Exception("Level is null for some reason");
         }
@@ -409,7 +397,7 @@ namespace NekoEngine
 
         private int GetMapArrayDrawHeightFromIndex(int index)
         {
-            if (index < 15 || index > 63) { return cellSize; }
+            if (index < 15 || index > 63) { return CELL_SIZE; }
 
             if (index >= 15 && index < 22) { return 3; }
             if (index >= 22 && index < 29) { return 4; }
@@ -419,15 +407,38 @@ namespace NekoEngine
             if (index >= 50 && index < 57) { return 8; }
             if (index >= 57 && index < 64) { return 9; }
 
-            return cellSize;
+            return CELL_SIZE;
         }
-            
+
+        private bool IsLockElement(byte element) => element >= 0x10 && element <= 0x12;       
 
         private void RecoredElementClicked(GridPosition position)
         {
+            const int STEP_ELEMENT_INDEX_START = 15;
+            var index = (position.Row * GRID_SIZE) + position.Column;
+
+            if (IsLockElement(_currentElementNumber))
+            {
+                if ((_currentLevel.MapArray[index] & DOOR_MASK) < DOOR_MASK)
+                {
+                    ShowErrorMessage("Lock elements can only be placed on door entities");
+                    return;
+                }
+            }
+            else if (_currentLevel.MapArray[index] > 0 && _currentLevel.MapArray[index] < STEP_ELEMENT_INDEX_START)
+            {
+                ShowErrorMessage("ELements can't be placed on walls");
+                return;
+            }
+            else if (_currentLevel.MapArray[index] > DOOR_MASK)
+            {
+                ShowErrorMessage("Only locks can't be placed on doors");
+                return;
+            }
+
             if (!RecordELementClickedCell(position))
             {
-                isMousePressed = false;
+                _isMousePressed = false;
                 return;
             };
         }
@@ -436,15 +447,15 @@ namespace NekoEngine
         {
             if (_currentLevel != null && _currentLevel.MapArray != null)
             {
-                var index = (position.Row * gridSize) + position.Column;
+                var index = (position.Row * GRID_SIZE) + position.Column;
                 _currentLevel.MapArray[index] = 0;
 
                 int col = position.Column;
                 int row = position.Row;
 
-                if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+                if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE)
                 {
-                    using (Graphics g = Graphics.FromImage(gridImage))
+                    using (Graphics g = Graphics.FromImage(_gridImage))
                     {
                         ClearGrid(g, position);
                         DrawGrid(g);
@@ -457,215 +468,55 @@ namespace NekoEngine
 
         private void ClearGrid(in Graphics g, GridPosition pos)
         {
-            g.FillRectangle(Brushes.White, pos.Column * cellSize, pos.Row * cellSize, cellSize, cellSize);
+            g.FillRectangle(Brushes.White, pos.Column * CELL_SIZE, pos.Row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         }
 
         private static void DrawGrid(Graphics g)
         {
-            for (int i = 0; i < gridSize; i++)
+            for (int i = 0; i < GRID_SIZE; i++)
             {
-                for (int j = 0; j < gridSize; j++)
+                for (int j = 0; j < GRID_SIZE; j++)
                 {
-                    g.DrawRectangle(Pens.Black, j * cellSize, i * cellSize, cellSize, cellSize);
+                    g.DrawRectangle(Pens.Black, j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }
             }
         }
 
-        private byte[] GetColoredCellsArray()
+        private void HandlWallSelectionClicked(Color col)
         {
-            byte[] coloredCellsArray = new byte[gridSize * gridSize];
-
-            for (int i = 0; i < gridSize; i++)
-            {
-                for (int j = 0; j < gridSize; j++)
-                {
-                    Color cellColor = gridImage.GetPixel((j * cellSize) + (cellSize / 2), (i * cellSize) + (cellSize - 2));
-                    
-                    coloredCellsArray[i * gridSize + j] = (byte)(GetTextureIndexFromColour(cellColor) + (7 * _currentLevel.HeightArray[i * gridSize + j]));
-                }
-            }
-
-            return coloredCellsArray;
-        }
-  
-
-        private void pictureBox_Click(object sender, EventArgs e)
-        {
-
+            _selectedMapColour = col;
+            SelectedElement.Text = GetSelectedElementName();
+            _currentEditState = EditState.Walls;            
         }
 
         private void MapColour_1_Click(object sender, EventArgs e)
         {
             if (sender is Button button)
-            {   
-               
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_2_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
             {
-
-                
-                selectedMapColour = button.BackColor;
+                HandlWallSelectionClicked(button.BackColor);
             }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_3_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-                
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_4_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-                
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_5_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-               
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_6_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-                
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_7_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-
-                
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
+             _currentEditState = EditState.Walls;
         }
 
         private void MapColour_door_Click(object sender, EventArgs e)
         {
             if (sender is Button button)
             {
-
-                
-                selectedMapColour = button.BackColor;
+                HandlWallSelectionClicked(button.BackColor);
             }
-            currentEditState = EditState.Walls;
+            ResetCellHeight();
+            _currentEditState = EditState.Walls;
         }
 
-        private void MapColour_door2_Click(object sender, EventArgs e)
+        private void ResetCellHeight()
         {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
+            _selectedHeight = 0;
+            CellHeight.Value = _selectedHeight;
         }
-
-        private void MapColour_door3_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_door4_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_door5_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_door6_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-        private void MapColour_door7_Click(object sender, EventArgs e)
-        {
-            if (sender is Button button)
-            {
-                selectedMapColour = button.BackColor;
-            }
-            currentEditState = EditState.Walls;
-        }
-
-
-        private void PrintMapArray()
-        {
-            StringBuilder sb = new();
-            var a = GetColoredCellsArray();
-
-            for (int i = 0; i < a.Length; i++)
-            {
-                if (i % 64 == 0 && i != 0)
-                {
-                    sb.AppendLine();
-                }
-
-                sb.Append(a[i].ToString());
-                if (i < a.Length - 1)
-                {
-                    sb.Append(",");
-                }
-            }
-
-            LevelArrayOutput.Text = sb.ToString();
-            if (_currentLevel != null)
-            {
-                _currentLevel.MapArray = a;
-            }
-        }
-
 
         private void ClearMap_Click(object sender, EventArgs e)
         {
-            using (Graphics g = Graphics.FromImage(gridImage))
+            using (Graphics g = Graphics.FromImage(_gridImage))
             {
                 g.Clear(Color.White);
 
@@ -674,9 +525,10 @@ namespace NekoEngine
 
             pictureBox.Invalidate(); // Force redraw
             _currentLevel = new Level();
+            UpdateRemainingElements();
         }
 
-        const int DOOR_MASK = 0xc0;
+        const byte DOOR_MASK = 0xc0;
         private byte GetTextureIndexFromColour(Color color)
         {
 
@@ -859,174 +711,160 @@ namespace NekoEngine
 
         }
 
+        private void HandleElementClicked(byte elementNumber)
+        {
+            _currentElementNumber = elementNumber;
+            _currentEditState = EditState.Elements;            
+             SelectedElement.Text =  GetSelectedElementName();
+        }
+
         private void ElementButton_1_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x01;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x01);
         }
 
         private void ElementButton_2_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x02;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x02);
         }
 
         private void ElementButton_3_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x03;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x03);            
         }
 
         private void ElementButton_4_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x04;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x04);
         }
 
         private void ElementButton_5_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x05;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x05);            
         }
 
         private void ElementButton_6_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x06;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x06);            
         }
 
         private void ElementButton_7_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x07;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x07);            
         }
 
         private void ElementButton_8_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x08;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x08);            
         }
 
         private void ElementButton_9_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x09;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x09);            
         }
 
         private void ElementButton_10_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x10;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x0a);            
         }
 
         private void ElementButton_11_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x11;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x0b);
         }
 
         private void ElementButton_12_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x12;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x0c);
         }
 
         private void ElementButton_13_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x13;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(ACCESS_CARD_1);
         }
 
         private void ElementButton_14_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x14;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(ACCESS_CARD_2);            
         }
 
         private void ElementButton_15_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x15;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(ACCESS_CARD_3);            
         }
 
         private void ElementButton_16_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x16;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(LOCK_1);            
         }
 
         private void ElementButton_17_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x17;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(LOCK_2);
         }
 
         private void ElementButton_18_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x18;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(LOCK_3);
         }
 
         private void ElementButton_19_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x19;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x13);
         }
 
         private void ElementButton_20_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x20;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x20);
         }
 
         private void ElementButton_21_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x21;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x21);
         }
 
         private void ElementButton_22_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x22;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x22);
         }
 
         private void ElementButton_23_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x23;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x23);
         }
 
         private void ElementButton_24_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x24;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x24);
         }
 
         private void ElementButton_25_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x25;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x25);
         }
 
         private void ElementButton_26_Click(object sender, EventArgs e)
         {
-            currentElementNumber = 0x26;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(0x26);
         }
 
         private void Player_Click(object sender, EventArgs e)
         {
-            currentElementNumber = PLAYER_POSITION_TYPE;
-            currentEditState = EditState.Elements;
+            HandleElementClicked(PLAYER_POSITION_TYPE_INDEX);            
+        }
+
+        private void UpdateRemainingElements()
+        {
+            var c = _currentLevel.elements.Where(x => x.Type > 0).Count();
+            RemainingElementsLabel.Text = (AVAILABLE_ELEMENTS - c).ToString();
         }
 
         private bool RecordELementClickedCell(GridPosition position)
-        {
+        {            
             int col = position.Column;
             int row = position.Row;
 
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+            if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE)
             {
                 if (_currentLevel?.elements != null)
                 {
@@ -1036,7 +874,7 @@ namespace NekoEngine
 
                     if (index == -1)
                     {
-                        MessageBox.Show("You have exceeded the max amount of elements allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowErrorMessage($"You have exceeded the maximum amount of { AVAILABLE_ELEMENTS } available elements.");
                         return false;
                     }
 
@@ -1045,58 +883,38 @@ namespace NekoEngine
                         _currentLevel.elements[index] = new Elements
                         {
                             Coords = new byte[2] { (byte)col, (byte)row },
-                            Type = currentElementNumber
+                            Type = _currentElementNumber
                         };
                     }
                 }
             }
-
+            UpdateRemainingElements();
             return true;
         }
         
 
         private void RemoveELementClickedCell(GridPosition position)
-        {
+        {            
             int col = position.Column;
             int row = position.Row;
 
-            if (col >= 0 && col < gridSize && row >= 0 && row < gridSize)
+            if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE)
             {
                 if (_currentLevel?.elements != null)
                 { 
                     int index = Array.FindIndex(_currentLevel.elements, element =>
-                    (element.Coords != null && element.Coords.Length >= 2 && element.Coords[0] == col && element.Coords[1] == row));
+                     (element.Coords != null && element.Coords.Length >= 2 && element.Coords[0] == col && element.Coords[1] == row));
                     if (index == -1) { return;  }
+
+                                        
                     _currentLevel.elements[index] = new Elements
                     {
                         Coords = new byte[2] { 32, 32 },
                         Type = 0
                     };
+                    UpdateRemainingElements();
                 }
             }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            using (SaveFileDialog openFileDialog = new SaveFileDialog())
-            {
-                PrintMapArray();
-                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Serialize the class to a binary file
-                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Create))
-                    {  
-                        _currentLevel.Serialise(new BinaryWriter(fs));
-                    }
-                }
-            }
-        }
-
-        private void GenerateMapBinary_Click(object sender, EventArgs e)
-        {
-            PrintMapArray();
         }
 
         private void FloorHeightUpDown_ValueChanged(object sender, EventArgs e)
@@ -1139,48 +957,6 @@ namespace NekoEngine
             _currentLevel.PlayerStart[2] = (byte)value;
         }
 
-        private void LoadMap_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Serialize the class to a binary file
-                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Open))
-                    {
-                        _currentLevel.Deserialise(new BinaryReader(fs));
-                    }
-                }
-            }
-
-        
-       
-            using (Graphics g = Graphics.FromImage(gridImage))
-            {
-                RedrawWholeMapArray(g);
-
-                // Draw Elements
-                var originalType = currentElementNumber;
-                RedrawAllElements(g);
-
-                // Draw player position
-                currentElementNumber = PLAYER_POSITION_TYPE;
-                RecoredElementClicked(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
-                currentElementNumber = originalType;
-
-                // Update GUI values
-                PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
-                FloorHeightUpDown.Value = _currentLevel.floorHeight;
-                CeilingHeightUpDown.Value = _currentLevel.ceilHeight;
-                CeilingColourUpDown.Value = _currentLevel.CeilingColor;
-                FloorColourUpDown4.Value = _currentLevel.FloorColor;
-
-                DrawGrid(g);
-                pictureBox.Invalidate();
-            }
-        }
 
         private void RedrawWholeMapArray(Graphics g)
         {
@@ -1189,7 +965,7 @@ namespace NekoEngine
  
             for (int i = 0; i < _currentLevel.MapArray.Length; i++)
             {
-                if (i > 0 && i % gridSize == 0)
+                if (i > 0 && i % GRID_SIZE == 0)
                 {
                     row++;
                     col = 0;
@@ -1206,14 +982,14 @@ namespace NekoEngine
 
             var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[index]);
 
-            if (position.Column >= 0 && position.Column < gridSize && position.Row >= 0 && position.Row < gridSize)
+            if (position.Column >= 0 && position.Column < GRID_SIZE && position.Row >= 0 && position.Row < GRID_SIZE)
             {
                 var brushHeight = GetMapArrayDrawHeightFromIndex(_currentLevel.MapArray[index]);
                 Brush brush = new SolidBrush(mapColour);
 
-                int startY = ((position.Row + 1) * cellSize) - (brushHeight);
+                int startY = ((position.Row + 1) * CELL_SIZE) - (brushHeight);
 
-                g.FillRectangle(brush, position.Column * cellSize, startY, cellSize, brushHeight);
+                g.FillRectangle(brush, position.Column * CELL_SIZE, startY, CELL_SIZE, brushHeight);
             }
         }
 
@@ -1230,17 +1006,22 @@ namespace NekoEngine
         {
             if (element.Type > 0)
             {
-                currentElementNumber = element.Type;
+                _currentElementNumber = element.Type;
 
                 Color textColor = Color.Black;
 
                 // If enemy, draw as red
-                if (currentElementNumber >= 20)
+                if (_currentElementNumber >= 20)
                 {
                     textColor = Color.Red;
                 }
 
-                if (currentElementNumber == PLAYER_POSITION_TYPE)
+                else if (IsLockElement(_currentElementNumber))
+                {
+                    textColor = Color.FromArgb(255,0,200,0);
+                }
+
+                if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
                 {
                     if (_currentLevel?.PlayerStart != null)
                     {
@@ -1257,19 +1038,43 @@ namespace NekoEngine
                 Brush textBrush = new SolidBrush(textColor);
                 // Draw the number in the cell
 
-                PointF textLocation = new PointF((element.Coords[0] * cellSize) + cellSize / 30, (element.Coords[1] * cellSize) + cellSize / 30);
-                if (currentElementNumber == PLAYER_POSITION_TYPE)
+                PointF textLocation = new PointF((element.Coords[0] * CELL_SIZE) + CELL_SIZE / 30, (element.Coords[1] * CELL_SIZE) + CELL_SIZE / 30);
+                if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
                 {
                     g.DrawString("P", DefaultFont, textBrush, textLocation);
                 }
+                else if (_currentElementNumber == ACCESS_CARD_1)
+                {
+                    g.DrawString("K1", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == ACCESS_CARD_2)
+                {
+                    g.DrawString("K2", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == ACCESS_CARD_3)
+                {
+                    g.DrawString("K3", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == LOCK_1)
+                {
+                    g.DrawString("L1", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == LOCK_2)
+                {
+                    g.DrawString("L2", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == LOCK_3)
+                {
+                    g.DrawString("L3", DefaultFont, textBrush, textLocation);
+                }
                 else
                 {
-                    g.DrawString(currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
+                    g.DrawString(_currentElementNumber.ToString(), DefaultFont, textBrush, textLocation);
                 }
             }
         }
 
-        private static GridPosition ToGridPosition(int x, int y) => new(x / cellSize, y / cellSize);
+        private static GridPosition ToGridPosition(int x, int y) => new(x / CELL_SIZE, y / CELL_SIZE);
 
         private void CellHeight_ValueChanged(object sender, EventArgs e)
         {
@@ -1277,6 +1082,136 @@ namespace NekoEngine
 
             int value = (int)numericUpDown.Value;
             _selectedHeight = (byte)value;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog openFileDialog = new SaveFileDialog())
+            {
+
+                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Serialize the class to a binary file
+                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Create))
+                    {
+                        _currentLevel.Serialise(new BinaryWriter(fs));
+                    }
+                }
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Serialize the class to a binary file
+                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Open))
+                    {
+                        _currentLevel.Deserialise(new BinaryReader(fs));
+                    }
+                }
+            }
+
+            using (Graphics g = Graphics.FromImage(_gridImage))
+            {
+                RedrawWholeMapArray(g);
+
+                // Draw Elements
+                var originalType = _currentElementNumber;
+                RedrawAllElements(g);
+
+                // Draw player position
+                _currentElementNumber = PLAYER_POSITION_TYPE_INDEX;
+                RecoredElementClicked(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                _currentElementNumber = originalType;
+
+                // Update GUI values
+                PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
+                FloorHeightUpDown.Value = _currentLevel.floorHeight;
+                CeilingHeightUpDown.Value = _currentLevel.ceilHeight;
+                CeilingColourUpDown.Value = _currentLevel.CeilingColor;
+                FloorColourUpDown4.Value = _currentLevel.FloorColor;
+
+                DrawGrid(g);
+                pictureBox.Invalidate();
+            }
+        }
+
+        private string GetSelectedElementName()
+        {
+            if (_currentEditState == EditState.Elements)
+            {
+                switch (_currentElementNumber)
+                {
+                    case PLAYER_POSITION_TYPE_INDEX:
+                        return "Player";
+                    case ACCESS_CARD_1:
+                        return "Key 1";
+                    case ACCESS_CARD_2:
+                        return "Key 2";
+                    case ACCESS_CARD_3:
+                        return "Key 3";
+                    case LOCK_1:
+                        return "Lock 1";
+                    case LOCK_2:
+                        return "Lock 2";
+                    case LOCK_3:
+                        return "Lock 3";
+                }
+
+                return _currentElementNumber.ToString();
+            }
+            else
+            {                
+                var mask = GetTextureIndexFromColour(_selectedMapColour) & DOOR_MASK;
+                if (mask >= DOOR_MASK)
+                {
+                    return "Door";
+                }
+
+                if (_selectedHeight > 0)
+                {
+                    return "Steps";
+                }
+
+                return "Wall";
+            }
+        }
+
+        private void Form_MouseMove(object sender, MouseEventArgs e)
+        {
+            _isMousePressed = false;
+        }
+
+        private void ShowErrorMessage(string error)
+        {
+            MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            _isMousePressed = false;
+        }
+
+        private void SaveConstants_Click(object sender, EventArgs e)
+        {        
+            System.IO.File.WriteAllText(GAME_CONSTNTS_FILE_LOCATION, codeEditor.Text);            
+        }
+
+        private void SaveConstantsAs_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    System.IO.File.WriteAllText(saveFileDialog.FileName, scintilla1.Text);
+                }
+            }
         }
     }
 
