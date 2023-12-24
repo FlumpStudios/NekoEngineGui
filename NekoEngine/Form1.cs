@@ -36,12 +36,13 @@ namespace NekoEngine
     
 #if DEBUG
         const string GAME_FILE_LOCATION = @"c:\projects\Neko";
-        const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
-        const string GAME_CONSTNTS_FILE_LOCATION = GAME_FILE_LOCATION + @"\constants.h";
+  
 #else
         const string GAME_FILE_LOCATION = @"..\";
 #endif
 
+        const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
+        const string GAME_CONSTNTS_FILE_LOCATION = GAME_FILE_LOCATION + @"\constants.h";
         public Form1()
         {
            
