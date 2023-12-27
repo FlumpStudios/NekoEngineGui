@@ -43,6 +43,8 @@ namespace NekoEngine
                     Type = 0
                 };
             }
+
+            this.TileDictionary = new ushort[64];
             GenerateTileDictionary();
         }
         

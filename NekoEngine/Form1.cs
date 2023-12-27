@@ -14,9 +14,11 @@ namespace NekoEngine
     {
         private const byte PLAYER_POSITION_TYPE_INDEX = 99; 
         private const int GRID_SIZE = 64;
-        private const int CELL_SIZE = 15;
+        private const int CELL_SIZE = 14;
         private const int AVAILABLE_ELEMENTS = 64;
-        
+        private const int ENEMIES_INDEX_OFFSET = 31;
+
+
         private const int ACCESS_CARD_1 = 0x0d;
         private const int ACCESS_CARD_2 = 0x0e;
         private const int ACCESS_CARD_3 = 0x0f;
@@ -24,6 +26,9 @@ namespace NekoEngine
         private const int LOCK_1 = 0x10;
         private const int LOCK_2 = 0x11;
         private const int LOCK_3 = 0x12;
+
+        private const int BLOCKER = 0x13;
+
 
 
         private bool _isMousePressed = false;
@@ -43,26 +48,201 @@ namespace NekoEngine
 
         const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
         const string GAME_CONSTNTS_FILE_LOCATION = GAME_FILE_LOCATION + @"\constants.h";
+        const string WALL_TEXTURE_FOLDER = @"\WallTextures";
+        const string ITEMS_TEXTURE_FOLDER = @"\Items";
+        const string BACKGROUND_TEXTURE_FOLDER = @"\Backgrounds";
+        const string WEAPONS_TEXTURE_FOLDER = @"\Weapons";
+        const string EFFECTS_TEXTURE_FOLDER = @"\Effects";
+        const string ENEMIES_TEXTURE_FOLDER = @"\Enemies";
+        const string LEVELS_FOLDER = @"\Levels";
+        const byte DEBUG_LEVEL_ID = 99;
+
         public Form1()
-        {
-           
+        {   
+            _gridImage = new Bitmap(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
             InitializeComponent();
             InitializeCodeEditor();
             InitializeGrid();
+            InitTexturesFile(GAME_FILE_LOCATION + WALL_TEXTURE_FOLDER, WallPictureBox_DoubleClick, wallTextureLayoutPanel);
+            InitTexturesFile(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER, ItemPictureBox_DoubleClick, itemTextureLayoutPanel);
+            InitTexturesFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER, BackgroundPictureBox_DoubleClick, backgroundTextureLayoutPanel);
+            InitTexturesFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, WeaponsPictureBox_DoubleClick, weaponsTextureLayoutPanel);
+            InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
+            InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);
+        }
+
+        private void InitEnemiesTexturesFile(string path, EventHandler action)
+        {
+            if (Directory.Exists(path))
+            {
+                var imageFileLocations = Directory.GetFiles(path, "*.png");
+
+                imageFileLocations = imageFileLocations.OrderBy(GetNumericPart).ToArray();
+
+               List<Image> imageFiles = new();
+
+                for (int i = 0; i < imageFileLocations.Length; i++)
+                {
+                    using (FileStream stream = new FileStream(imageFileLocations[i], FileMode.Open, FileAccess.Read))
+                    {
+                        Image originalImage = Image.FromStream(stream);
+                        Image resizedImage = new Bitmap(originalImage, new Size(32, 32));
+                        imageFiles.Add(originalImage);
+                    }
+                }
+
+                foreach (Control control in EnemiesTableLayoutPanel.Controls)
+                {                    
+                    if (control is PictureBox)
+                    {
+                        PictureBox pictureBox = (PictureBox)control;
+
+                        int boxNum = int.Parse(pictureBox.Name.Split('_').Last());
+                                
+                        pictureBox.Image = imageFiles[boxNum];
+                        pictureBox.Tag = boxNum;
+                        pictureBox.DoubleClick += action;
+                    }
+                }
+            }
+        }
+
+
+        private void InitTexturesFile(string path,EventHandler action, FlowLayoutPanel panel)
+        {
+            if (Directory.Exists(path))
+            {
+                string[] imageFiles = Directory.GetFiles(path, "*.png");
+
+                imageFiles = imageFiles.OrderBy(GetNumericPart).ToArray();
+
+                for (int i = 0; i < imageFiles.Length; i++)
+                {
+                    using (FileStream stream = new FileStream(imageFiles[i], FileMode.Open, FileAccess.Read))
+                    {
+                        Image originalImage = Image.FromStream(stream);
+                        Image resizedImage = new Bitmap(originalImage, new Size(32, 32));
+
+                        PictureBox pictureBox = new PictureBox
+                        {
+                            Image = resizedImage,
+                            Size = new Size(32, 32),
+                            SizeMode = PictureBoxSizeMode.StretchImage,
+                            Tag = i
+                        };
+
+                        Label label = new Label()
+                        {
+                            Width = 26,
+                            Text = (i + 1).ToString() + "."
+                        };
+
+                        if (string.Equals(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER, path))
+                        {
+                            
+                            label.Text = GetItemNameFromIndex(i);
+                            label.Width = 50;                            
+                        }
+                        else if (string.Equals(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, path))
+                        {
+                            label.Text = GetWeaponNameFromIndex(i);
+                            label.Width = 52;
+                        }
+
+                        pictureBox.DoubleClick += action;
+                        panel.Controls.Add(label);
+                        panel.Controls.Add(pictureBox);
+                    }
+                }
+            }
+        }
+
+        private string GetWeaponNameFromIndex(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return "Knife";
+                case 1:
+                    return "Shotgun";
+                case 2:
+                    return "SMG";
+                case 3:
+                    return "Bazooka";
+                case 4:
+                    return "Plasma Gun";
+                case 5:
+                    return "Solution";              
+                default:
+                    return "";
+            }
+        }
+
+        private string GetItemNameFromIndex(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return "Barrel";
+                case 1:
+                    return "Health";
+                case 2:
+                    return "Bullets";
+                case 3:
+                    return "Rockets";
+                case 4:
+                    return "Plasma";
+                case 5:
+                    return "Tree";
+                case 6:
+                    return "Finish";
+                case 7:
+                    return "Teleport";
+                case 8:
+                    return "Terminal";
+                case 9:
+                    return "column";
+                case 10:
+                    return "Ruin";
+                case 11:
+                    return "Lamp";
+                case 12:
+                    return "Key Card";
+                default:
+                    return "";
+            }
+        }
+
+        static int GetNumericPart(string fileName)
+        {
+            // Extract the numeric part from the file name
+            string numericPart = Path.GetFileNameWithoutExtension(fileName);
+
+            // Try to parse the numeric part as an integer
+            if (int.TryParse(numericPart, out int numericValue))
+            {
+                return numericValue;
+            }
+            else
+            {
+                // If parsing fails, return a default value (you can adjust this based on your requirements)
+                return 0;
+            }
         }
 
         private void InitializeCodeEditor()
         {
-            codeEditor.Margins[0].Width = 20;
-            codeEditor.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            codeEditor.Styles[ScintillaNET.Style.Default].Size = 10;
-            codeEditor.Lexer = Lexer.Cpp;
+            const int CODE_EDITOR_FONT_SIZE = 10;
+            const int CODE_EDITOR_MARGIN_WIDTH = 20;
+            const string CODE_EDITOR_FONT = "Consolas";
+            codeEditor.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
+            codeEditor.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
+            codeEditor.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
             codeEditor.Text = System.IO.File.ReadAllText(GAME_SETTINGS_FILE_LOCATION);
 
-            scintilla1.Margins[0].Width = 20;
-            scintilla1.Styles[ScintillaNET.Style.Default].Font = "Consolas";
-            scintilla1.Styles[ScintillaNET.Style.Default].Size = 10;
-            scintilla1.Lexer = Lexer.Cpp;
+            scintilla1.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
+            scintilla1.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
+            scintilla1.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
             scintilla1.Text = System.IO.File.ReadAllText(GAME_CONSTNTS_FILE_LOCATION);
         }
 
@@ -98,6 +278,58 @@ namespace NekoEngine
                     }
                 }
             }
+        }
+
+        private List<byte> GetTextureArray(string fileLocation)
+        {
+            var response = new List<byte>();
+
+            string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\img2array.py";
+
+            string command = $"python {scriptPath} -t -c -x32 -y32 -p{GAME_FILE_LOCATION}\\assets\\palette565.png {fileLocation}";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+                UseShellExecute = false
+            };
+
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.Start();
+
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.Flush();
+                process.StandardInput.Close();
+
+                string output = process.StandardOutput.ReadToEnd();
+
+                string pattern = @"\{[^}]*\}[^{]*\{([^}]*)\}";
+                Match match = Regex.Match(output, pattern);
+
+                if (match.Success)
+                {
+                    string numbers = match.Groups[1].Value;
+
+                    foreach (var n in numbers.Split(','))
+                    {
+                        var parseOK = byte.TryParse(n, out byte o);
+                        if (parseOK)
+                        {
+                            response.Add(o);
+                        }
+                        else
+                        {
+                            ShowErrorMessage("Could not generate array from image");
+                        }
+                    }
+                }
+            }
+
+            return response;
         }
 
         private void generate_Click(object sender, EventArgs e)
@@ -177,7 +409,6 @@ namespace NekoEngine
                 process.StandardInput.WriteLine($"code {GAME_FILE_LOCATION}");
                 process.StandardInput.Flush();
                 process.StandardInput.Close();
-
             }
         }
 
@@ -287,7 +518,7 @@ namespace NekoEngine
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
 
-            _gridImage = new Bitmap(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
+            
 
             using (Graphics g = Graphics.FromImage(_gridImage))
             {
@@ -307,7 +538,89 @@ namespace NekoEngine
             pictureBox.MouseUp += PictureBox_MouseUp;
         }
 
-        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        private void BackgroundPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
+        private void WeaponsPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
+        private void ItemPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
+        private void WallPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + WALL_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
+        private void EnemiesPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
+        private void EFfectsPictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER) ?? pictureBox.Image; 
+            }
+        }
+
+
+        private Bitmap? LoadInTextureFile(int index, string location)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.png;|All Files|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Bitmap selectedImage = new Bitmap(openFileDialog.FileName);
+
+                        if (selectedImage.Width != 32 || selectedImage.Height != 32)
+                        {
+                            ShowErrorMessage("The selected image must be 32x32 pixels.");
+                        }
+                        else
+                        { 
+                            generate.Enabled = true;
+                            var saveLocation = location + @"\" + index.ToString() + ".png";
+                            selectedImage.Save(saveLocation, System.Drawing.Imaging.ImageFormat.Png);
+                            return selectedImage;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage($"Error loading the image: {ex.Message}");
+                    }
+                }
+            }
+            return null;
+        }
+
+        private void PictureBox_MouseDown(object? sender, MouseEventArgs e)
         {
             var position = ToGridPosition(e.X, e.Y);
             if (e.Button == MouseButtons.Left)
@@ -322,7 +635,7 @@ namespace NekoEngine
             }
         }
 
-        private void PictureBox_MouseMove(object sender, MouseEventArgs e)
+        private void PictureBox_MouseMove(object? sender, MouseEventArgs e)
         {
             var gridPos = ToGridPosition(e.X, e.Y);
             if (_isMousePressed)
@@ -363,7 +676,7 @@ namespace NekoEngine
             }
         }
 
-        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
+        private void PictureBox_MouseUp(object? sender, MouseEventArgs e)
         {
             _isMousePressed = false;
         }
@@ -981,6 +1294,12 @@ namespace NekoEngine
         {
             var index = position.MapArrayIndex();
 
+            if (index >= _currentLevel.MapArray.Length)
+            {
+                return;
+            }
+
+
             var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[index]);
 
             if (position.Column >= 0 && position.Column < GRID_SIZE && position.Row >= 0 && position.Row < GRID_SIZE)
@@ -1040,7 +1359,11 @@ namespace NekoEngine
                 // Draw the number in the cell
 
                 PointF textLocation = new PointF((element.Coords[0] * CELL_SIZE) + CELL_SIZE / 30, (element.Coords[1] * CELL_SIZE) + CELL_SIZE / 30);
-                if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
+                if (_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
+                {
+                    g.DrawString("E" + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString(), DefaultFont, textBrush, textLocation);                    
+                }
+                else if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
                 {
                     g.DrawString("P", DefaultFont, textBrush, textLocation);
                 }
@@ -1067,6 +1390,10 @@ namespace NekoEngine
                 else if (_currentElementNumber == LOCK_3)
                 {
                     g.DrawString("L3", DefaultFont, textBrush, textLocation);
+                }
+                else if (_currentElementNumber == BLOCKER)
+                {
+                    g.DrawString("B", DefaultFont, textBrush, textLocation);
                 }
                 else
                 {
@@ -1148,6 +1475,12 @@ namespace NekoEngine
         {
             if (_currentEditState == EditState.Elements)
             {
+
+                if(_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
+                {
+                    return "Enemy " + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString();
+                }
+
                 switch (_currentElementNumber)
                 {
                     case PLAYER_POSITION_TYPE_INDEX:
@@ -1164,9 +1497,11 @@ namespace NekoEngine
                         return "Lock 2";
                     case LOCK_3:
                         return "Lock 3";
+                    case BLOCKER:
+                        return "Blocker";
                 }
 
-                return _currentElementNumber.ToString();
+                return "Item " + _currentElementNumber.ToString();
             }
             else
             {                
@@ -1213,6 +1548,87 @@ namespace NekoEngine
                     System.IO.File.WriteAllText(saveFileDialog.FileName, scintilla1.Text);
                 }
             }
+        }
+
+        private void GenerateTadFile(string location)
+        {
+            List<byte> dataArray = new List<byte>();
+
+            string folderPath = location;
+
+            if (Directory.Exists(folderPath))
+            {
+                string[] imageFiles = Directory.GetFiles(folderPath, "*.png");
+
+                for (int i = 0; i < imageFiles.Length; i++)
+                {
+                    dataArray.AddRange(GetTextureArray(imageFiles[i]));
+                }
+            }
+
+            using (FileStream fs = new(folderPath + @"\data.TAD", FileMode.Create))
+            {
+                var bw = new BinaryWriter(fs);
+                bw.Write(dataArray.ToArray());
+            }
+        }
+
+        private void GenerateWallTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + WALL_TEXTURE_FOLDER);
+        }
+
+        private void GenerateItemsTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER);
+        }
+        private void GenerateBackgroundTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER);
+        }
+
+        private void GenerateWeaponTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER);
+        }
+
+        private void GenerateEffectsTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER);
+        }
+
+        private void GenerateEnemeisTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER);
+        }
+
+        private void RunLevel_Click(object sender, EventArgs e)
+        {
+            string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
+            using (FileStream fs = new(fileLocation, FileMode.Create))
+            {
+                _currentLevel.Serialise(new BinaryWriter(fs));
+            }
+
+            
+            string exePath = $"{GAME_FILE_LOCATION}\\anarch.exe";
+
+            // w = windowed, d = debug
+            string arguments = "-w -d";
+           
+            ProcessStartInfo startInfo = new ProcessStartInfo(exePath);
+            startInfo.Arguments = arguments;
+
+            Process.Start(startInfo);
+        }
+
+        private void BackgroundUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+
+            _currentLevel.BackgroundImage = (byte)(value - 1);
         }
     }
 
