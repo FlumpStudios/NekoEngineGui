@@ -112,6 +112,14 @@
             this.ElementButton_12 = new System.Windows.Forms.Button();
             this.ElementButton_19 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.TextureAllocationUpDown0 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.MapColour_1 = new System.Windows.Forms.Button();
             this.MapColour_2 = new System.Windows.Forms.Button();
@@ -133,6 +141,10 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Textures_Tab = new System.Windows.Forms.TabPage();
+            this.GenerateTitleTextureFile = new System.Windows.Forms.Button();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.titleTextureLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.EnemiesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.label28 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
@@ -165,7 +177,14 @@
             this.EnemyTexturePreview_18 = new System.Windows.Forms.PictureBox();
             this.EnemyTexturePreview_12 = new System.Windows.Forms.PictureBox();
             this.EnemyTexturePreview_11 = new System.Windows.Forms.PictureBox();
-            this.label29 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.GenerateEnemeisTextureFile = new System.Windows.Forms.Button();
             this.GenerateEffectsTextureFile = new System.Windows.Forms.Button();
@@ -182,20 +201,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.GenerateWallTextureFile = new System.Windows.Forms.Button();
             this.wallTextureLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.label29 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.TextureAllocationUpDown0 = new System.Windows.Forms.NumericUpDown();
-            this.TextureAllocationUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.TextureAllocationUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.TextureAllocationUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.TextureAllocationUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.TextureAllocationUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.TextureAllocationUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.Tabs.SuspendLayout();
             this.Images.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -214,6 +226,13 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.Textures_Tab.SuspendLayout();
@@ -238,13 +257,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_11)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabs
@@ -563,9 +575,9 @@
             // 
             // RunLevel
             // 
-            this.RunLevel.Location = new System.Drawing.Point(1209, 697);
+            this.RunLevel.Location = new System.Drawing.Point(1209, 684);
             this.RunLevel.Name = "RunLevel";
-            this.RunLevel.Size = new System.Drawing.Size(230, 118);
+            this.RunLevel.Size = new System.Drawing.Size(230, 119);
             this.RunLevel.TabIndex = 41;
             this.RunLevel.Text = "Preview Level";
             this.RunLevel.UseVisualStyleBackColor = true;
@@ -582,7 +594,7 @@
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_18);
             this.flowLayoutPanel6.Location = new System.Drawing.Point(970, 621);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(233, 194);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(233, 182);
             this.flowLayoutPanel6.TabIndex = 40;
             // 
             // ElementButton_13
@@ -743,24 +755,23 @@
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(3, 33);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 29);
+            this.label7.Size = new System.Drawing.Size(150, 29);
             this.label7.TabIndex = 24;
             this.label7.Text = "Player start rotation";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // PlayerRotationUpDown
             // 
-            this.PlayerRotationUpDown.Location = new System.Drawing.Point(119, 36);
+            this.PlayerRotationUpDown.Location = new System.Drawing.Point(159, 36);
             this.PlayerRotationUpDown.Maximum = new decimal(new int[] {
             360,
             0,
             0,
             0});
             this.PlayerRotationUpDown.Name = "PlayerRotationUpDown";
-            this.PlayerRotationUpDown.Size = new System.Drawing.Size(97, 23);
+            this.PlayerRotationUpDown.Size = new System.Drawing.Size(57, 23);
             this.PlayerRotationUpDown.TabIndex = 25;
             this.PlayerRotationUpDown.ValueChanged += new System.EventHandler(this.PlayerRotationUpDown_ValueChanged);
             // 
@@ -779,7 +790,7 @@
             this.flowLayoutPanel4.Controls.Add(this.BackgroundUpDown);
             this.flowLayoutPanel4.Location = new System.Drawing.Point(1209, 526);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(233, 165);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(233, 152);
             this.flowLayoutPanel4.TabIndex = 30;
             // 
             // label6
@@ -787,24 +798,23 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 29);
+            this.label6.Size = new System.Drawing.Size(150, 29);
             this.label6.TabIndex = 22;
             this.label6.Text = "Ceiling Height";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CeilingHeightUpDown
             // 
-            this.CeilingHeightUpDown.Location = new System.Drawing.Point(92, 3);
+            this.CeilingHeightUpDown.Location = new System.Drawing.Point(159, 3);
             this.CeilingHeightUpDown.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.CeilingHeightUpDown.Name = "CeilingHeightUpDown";
-            this.CeilingHeightUpDown.Size = new System.Drawing.Size(97, 23);
+            this.CeilingHeightUpDown.Size = new System.Drawing.Size(60, 23);
             this.CeilingHeightUpDown.TabIndex = 23;
             this.CeilingHeightUpDown.Value = new decimal(new int[] {
             10,
@@ -818,24 +828,23 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(3, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 29);
+            this.label4.Size = new System.Drawing.Size(150, 29);
             this.label4.TabIndex = 20;
             this.label4.Text = "Floor Height";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FloorHeightUpDown
             // 
-            this.FloorHeightUpDown.Location = new System.Drawing.Point(82, 32);
+            this.FloorHeightUpDown.Location = new System.Drawing.Point(159, 32);
             this.FloorHeightUpDown.Maximum = new decimal(new int[] {
             31,
             0,
             0,
             0});
             this.FloorHeightUpDown.Name = "FloorHeightUpDown";
-            this.FloorHeightUpDown.Size = new System.Drawing.Size(97, 23);
+            this.FloorHeightUpDown.Size = new System.Drawing.Size(61, 23);
             this.FloorHeightUpDown.TabIndex = 19;
             this.FloorHeightUpDown.Value = new decimal(new int[] {
             10,
@@ -849,19 +858,18 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(3, 58);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(83, 29);
+            this.label9.Size = new System.Drawing.Size(150, 29);
             this.label9.TabIndex = 28;
             this.label9.Text = "Ceiling Colour";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CeilingColourUpDown
             // 
-            this.CeilingColourUpDown.Location = new System.Drawing.Point(92, 61);
+            this.CeilingColourUpDown.Location = new System.Drawing.Point(159, 61);
             this.CeilingColourUpDown.Name = "CeilingColourUpDown";
-            this.CeilingColourUpDown.Size = new System.Drawing.Size(97, 23);
+            this.CeilingColourUpDown.Size = new System.Drawing.Size(61, 23);
             this.CeilingColourUpDown.TabIndex = 29;
             this.CeilingColourUpDown.Value = new decimal(new int[] {
             3,
@@ -875,19 +883,18 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(3, 87);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 29);
+            this.label8.Size = new System.Drawing.Size(150, 29);
             this.label8.TabIndex = 26;
             this.label8.Text = "Floor Colour";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FloorColourUpDown4
             // 
-            this.FloorColourUpDown4.Location = new System.Drawing.Point(82, 90);
+            this.FloorColourUpDown4.Location = new System.Drawing.Point(159, 90);
             this.FloorColourUpDown4.Name = "FloorColourUpDown4";
-            this.FloorColourUpDown4.Size = new System.Drawing.Size(87, 23);
+            this.FloorColourUpDown4.Size = new System.Drawing.Size(61, 23);
             this.FloorColourUpDown4.TabIndex = 27;
             this.FloorColourUpDown4.Value = new decimal(new int[] {
             20,
@@ -901,17 +908,16 @@
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
             this.label17.Location = new System.Drawing.Point(3, 116);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(71, 29);
+            this.label17.Size = new System.Drawing.Size(150, 29);
             this.label17.TabIndex = 32;
             this.label17.Text = "Background";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BackgroundUpDown
             // 
-            this.BackgroundUpDown.Location = new System.Drawing.Point(80, 119);
+            this.BackgroundUpDown.Location = new System.Drawing.Point(159, 119);
             this.BackgroundUpDown.Maximum = new decimal(new int[] {
             3,
             0,
@@ -923,7 +929,7 @@
             0,
             0});
             this.BackgroundUpDown.Name = "BackgroundUpDown";
-            this.BackgroundUpDown.Size = new System.Drawing.Size(97, 23);
+            this.BackgroundUpDown.Size = new System.Drawing.Size(61, 23);
             this.BackgroundUpDown.TabIndex = 31;
             this.BackgroundUpDown.Value = new decimal(new int[] {
             1,
@@ -952,7 +958,7 @@
             // 
             // ClearMap
             // 
-            this.ClearMap.Location = new System.Drawing.Point(1265, 117);
+            this.ClearMap.Location = new System.Drawing.Point(1265, 158);
             this.ClearMap.Name = "ClearMap";
             this.ClearMap.Size = new System.Drawing.Size(183, 23);
             this.ClearMap.TabIndex = 10;
@@ -1225,10 +1231,179 @@
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door7);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.CellHeight);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(976, 6);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(970, 6);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(283, 198);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(289, 198);
             this.flowLayoutPanel1.TabIndex = 5;
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(260, 15);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Texture Allocation";
+            // 
+            // TextureAllocationUpDown0
+            // 
+            this.TextureAllocationUpDown0.Location = new System.Drawing.Point(3, 18);
+            this.TextureAllocationUpDown0.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.Name = "TextureAllocationUpDown0";
+            this.TextureAllocationUpDown0.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown0.TabIndex = 32;
+            this.TextureAllocationUpDown0.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown0_ValueChanged);
+            // 
+            // TextureAllocationUpDown1
+            // 
+            this.TextureAllocationUpDown1.Location = new System.Drawing.Point(41, 18);
+            this.TextureAllocationUpDown1.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.Name = "TextureAllocationUpDown1";
+            this.TextureAllocationUpDown1.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown1.TabIndex = 33;
+            this.TextureAllocationUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown1_ValueChanged);
+            // 
+            // TextureAllocationUpDown2
+            // 
+            this.TextureAllocationUpDown2.Location = new System.Drawing.Point(79, 18);
+            this.TextureAllocationUpDown2.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.Name = "TextureAllocationUpDown2";
+            this.TextureAllocationUpDown2.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown2.TabIndex = 34;
+            this.TextureAllocationUpDown2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown2_ValueChanged);
+            // 
+            // TextureAllocationUpDown3
+            // 
+            this.TextureAllocationUpDown3.Location = new System.Drawing.Point(117, 18);
+            this.TextureAllocationUpDown3.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.Name = "TextureAllocationUpDown3";
+            this.TextureAllocationUpDown3.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown3.TabIndex = 35;
+            this.TextureAllocationUpDown3.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown3_ValueChanged);
+            // 
+            // TextureAllocationUpDown4
+            // 
+            this.TextureAllocationUpDown4.Location = new System.Drawing.Point(155, 18);
+            this.TextureAllocationUpDown4.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.Name = "TextureAllocationUpDown4";
+            this.TextureAllocationUpDown4.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown4.TabIndex = 36;
+            this.TextureAllocationUpDown4.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown4_ValueChanged);
+            // 
+            // TextureAllocationUpDown5
+            // 
+            this.TextureAllocationUpDown5.Location = new System.Drawing.Point(193, 18);
+            this.TextureAllocationUpDown5.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.Name = "TextureAllocationUpDown5";
+            this.TextureAllocationUpDown5.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown5.TabIndex = 37;
+            this.TextureAllocationUpDown5.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown5_ValueChanged);
+            // 
+            // TextureAllocationUpDown6
+            // 
+            this.TextureAllocationUpDown6.Location = new System.Drawing.Point(231, 18);
+            this.TextureAllocationUpDown6.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.Name = "TextureAllocationUpDown6";
+            this.TextureAllocationUpDown6.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown6.TabIndex = 39;
+            this.TextureAllocationUpDown6.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown6_ValueChanged);
             // 
             // label2
             // 
@@ -1440,6 +1615,10 @@
             // 
             // Textures_Tab
             // 
+            this.Textures_Tab.Controls.Add(this.GenerateTitleTextureFile);
+            this.Textures_Tab.Controls.Add(this.label31);
+            this.Textures_Tab.Controls.Add(this.label30);
+            this.Textures_Tab.Controls.Add(this.titleTextureLayoutPanel);
             this.Textures_Tab.Controls.Add(this.EnemiesTableLayoutPanel);
             this.Textures_Tab.Controls.Add(this.label14);
             this.Textures_Tab.Controls.Add(this.GenerateEnemeisTextureFile);
@@ -1457,6 +1636,7 @@
             this.Textures_Tab.Controls.Add(this.label12);
             this.Textures_Tab.Controls.Add(this.GenerateWallTextureFile);
             this.Textures_Tab.Controls.Add(this.wallTextureLayoutPanel);
+            this.Textures_Tab.Controls.Add(this.label29);
             this.Textures_Tab.Location = new System.Drawing.Point(4, 24);
             this.Textures_Tab.Name = "Textures_Tab";
             this.Textures_Tab.Padding = new System.Windows.Forms.Padding(3);
@@ -1464,6 +1644,42 @@
             this.Textures_Tab.TabIndex = 4;
             this.Textures_Tab.Text = "Textures";
             this.Textures_Tab.UseVisualStyleBackColor = true;
+            // 
+            // GenerateTitleTextureFile
+            // 
+            this.GenerateTitleTextureFile.Location = new System.Drawing.Point(448, 643);
+            this.GenerateTitleTextureFile.Name = "GenerateTitleTextureFile";
+            this.GenerateTitleTextureFile.Size = new System.Drawing.Size(231, 30);
+            this.GenerateTitleTextureFile.TabIndex = 42;
+            this.GenerateTitleTextureFile.Text = "Sync with game";
+            this.GenerateTitleTextureFile.UseVisualStyleBackColor = true;
+            this.GenerateTitleTextureFile.Click += new System.EventHandler(this.GenerateTitleTextureFile_Click);
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(448, 491);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(65, 15);
+            this.label31.TabIndex = 41;
+            this.label31.Text = "Title Image";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(1075, 1107);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(42, 15);
+            this.label30.TabIndex = 40;
+            this.label30.Text = "Effects";
+            // 
+            // titleTextureLayoutPanel
+            // 
+            this.titleTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.titleTextureLayoutPanel.Location = new System.Drawing.Point(448, 509);
+            this.titleTextureLayoutPanel.Name = "titleTextureLayoutPanel";
+            this.titleTextureLayoutPanel.Size = new System.Drawing.Size(231, 128);
+            this.titleTextureLayoutPanel.TabIndex = 39;
             // 
             // EnemiesTableLayoutPanel
             // 
@@ -1504,27 +1720,34 @@
             this.EnemiesTableLayoutPanel.Controls.Add(this.EnemyTexturePreview_18, 1, 9);
             this.EnemiesTableLayoutPanel.Controls.Add(this.EnemyTexturePreview_12, 2, 5);
             this.EnemiesTableLayoutPanel.Controls.Add(this.EnemyTexturePreview_11, 3, 5);
-            this.EnemiesTableLayoutPanel.Controls.Add(this.label29, 0, 0);
-            this.EnemiesTableLayoutPanel.Location = new System.Drawing.Point(504, 474);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label32, 3, 3);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label33, 3, 4);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label34, 1, 7);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label35, 2, 7);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label36, 2, 8);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label37, 3, 8);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label38, 2, 9);
+            this.EnemiesTableLayoutPanel.Controls.Add(this.label39, 3, 9);
+            this.EnemiesTableLayoutPanel.Location = new System.Drawing.Point(702, 27);
             this.EnemiesTableLayoutPanel.Name = "EnemiesTableLayoutPanel";
             this.EnemiesTableLayoutPanel.RowCount = 10;
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.85366F));
-            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
             this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44F));
-            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.EnemiesTableLayoutPanel.Size = new System.Drawing.Size(243, 412);
+            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.EnemiesTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.EnemiesTableLayoutPanel.Size = new System.Drawing.Size(243, 402);
             this.EnemiesTableLayoutPanel.TabIndex = 18;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(4, 373);
+            this.label28.Location = new System.Drawing.Point(4, 361);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(38, 15);
             this.label28.TabIndex = 35;
@@ -1533,7 +1756,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(4, 286);
+            this.label26.Location = new System.Drawing.Point(4, 276);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(53, 15);
             this.label26.TabIndex = 33;
@@ -1541,7 +1764,8 @@
             // 
             // EnemyTexturePreview_2
             // 
-            this.EnemyTexturePreview_2.Location = new System.Drawing.Point(206, 36);
+            this.EnemyTexturePreview_2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_2.Location = new System.Drawing.Point(206, 26);
             this.EnemyTexturePreview_2.Name = "EnemyTexturePreview_2";
             this.EnemyTexturePreview_2.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_2.TabIndex = 8;
@@ -1549,7 +1773,8 @@
             // 
             // EnemyTexturePreview_1
             // 
-            this.EnemyTexturePreview_1.Location = new System.Drawing.Point(156, 36);
+            this.EnemyTexturePreview_1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_1.Location = new System.Drawing.Point(156, 26);
             this.EnemyTexturePreview_1.Name = "EnemyTexturePreview_1";
             this.EnemyTexturePreview_1.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_1.TabIndex = 7;
@@ -1557,7 +1782,8 @@
             // 
             // EnemyTexturePreview_0
             // 
-            this.EnemyTexturePreview_0.Location = new System.Drawing.Point(108, 36);
+            this.EnemyTexturePreview_0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_0.Location = new System.Drawing.Point(108, 26);
             this.EnemyTexturePreview_0.Name = "EnemyTexturePreview_0";
             this.EnemyTexturePreview_0.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_0.TabIndex = 2;
@@ -1592,7 +1818,8 @@
             // 
             // EnemyTexturePreview_3
             // 
-            this.EnemyTexturePreview_3.Location = new System.Drawing.Point(108, 76);
+            this.EnemyTexturePreview_3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_3.Location = new System.Drawing.Point(108, 67);
             this.EnemyTexturePreview_3.Name = "EnemyTexturePreview_3";
             this.EnemyTexturePreview_3.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_3.TabIndex = 9;
@@ -1600,7 +1827,8 @@
             // 
             // EnemyTexturePreview_4
             // 
-            this.EnemyTexturePreview_4.Location = new System.Drawing.Point(156, 76);
+            this.EnemyTexturePreview_4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_4.Location = new System.Drawing.Point(156, 67);
             this.EnemyTexturePreview_4.Name = "EnemyTexturePreview_4";
             this.EnemyTexturePreview_4.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_4.TabIndex = 10;
@@ -1608,7 +1836,8 @@
             // 
             // EnemyTexturePreview_5
             // 
-            this.EnemyTexturePreview_5.Location = new System.Drawing.Point(206, 76);
+            this.EnemyTexturePreview_5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_5.Location = new System.Drawing.Point(206, 67);
             this.EnemyTexturePreview_5.Name = "EnemyTexturePreview_5";
             this.EnemyTexturePreview_5.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_5.TabIndex = 11;
@@ -1616,7 +1845,8 @@
             // 
             // EnemyTexturePreview_6
             // 
-            this.EnemyTexturePreview_6.Location = new System.Drawing.Point(108, 118);
+            this.EnemyTexturePreview_6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_6.Location = new System.Drawing.Point(108, 108);
             this.EnemyTexturePreview_6.Name = "EnemyTexturePreview_6";
             this.EnemyTexturePreview_6.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_6.TabIndex = 12;
@@ -1624,7 +1854,8 @@
             // 
             // EnemyTexturePreview_7
             // 
-            this.EnemyTexturePreview_7.Location = new System.Drawing.Point(156, 118);
+            this.EnemyTexturePreview_7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_7.Location = new System.Drawing.Point(156, 108);
             this.EnemyTexturePreview_7.Name = "EnemyTexturePreview_7";
             this.EnemyTexturePreview_7.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_7.TabIndex = 13;
@@ -1632,7 +1863,8 @@
             // 
             // EnemyTexturePreview_8
             // 
-            this.EnemyTexturePreview_8.Location = new System.Drawing.Point(108, 161);
+            this.EnemyTexturePreview_8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_8.Location = new System.Drawing.Point(108, 151);
             this.EnemyTexturePreview_8.Name = "EnemyTexturePreview_8";
             this.EnemyTexturePreview_8.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_8.TabIndex = 15;
@@ -1640,7 +1872,8 @@
             // 
             // EnemyTexturePreview_9
             // 
-            this.EnemyTexturePreview_9.Location = new System.Drawing.Point(156, 161);
+            this.EnemyTexturePreview_9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_9.Location = new System.Drawing.Point(156, 151);
             this.EnemyTexturePreview_9.Name = "EnemyTexturePreview_9";
             this.EnemyTexturePreview_9.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_9.TabIndex = 16;
@@ -1648,7 +1881,8 @@
             // 
             // EnemyTexturePreview_10
             // 
-            this.EnemyTexturePreview_10.Location = new System.Drawing.Point(108, 205);
+            this.EnemyTexturePreview_10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_10.Location = new System.Drawing.Point(108, 195);
             this.EnemyTexturePreview_10.Name = "EnemyTexturePreview_10";
             this.EnemyTexturePreview_10.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_10.TabIndex = 18;
@@ -1656,7 +1890,8 @@
             // 
             // EnemyTexturePreview_13
             // 
-            this.EnemyTexturePreview_13.Location = new System.Drawing.Point(108, 247);
+            this.EnemyTexturePreview_13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_13.Location = new System.Drawing.Point(108, 237);
             this.EnemyTexturePreview_13.Name = "EnemyTexturePreview_13";
             this.EnemyTexturePreview_13.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_13.TabIndex = 21;
@@ -1664,7 +1899,8 @@
             // 
             // EnemyTexturePreview_15
             // 
-            this.EnemyTexturePreview_15.Location = new System.Drawing.Point(156, 247);
+            this.EnemyTexturePreview_15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_15.Location = new System.Drawing.Point(156, 237);
             this.EnemyTexturePreview_15.Name = "EnemyTexturePreview_15";
             this.EnemyTexturePreview_15.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_15.TabIndex = 22;
@@ -1672,7 +1908,8 @@
             // 
             // EnemyTexturePreview_14
             // 
-            this.EnemyTexturePreview_14.Location = new System.Drawing.Point(206, 247);
+            this.EnemyTexturePreview_14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_14.Location = new System.Drawing.Point(206, 237);
             this.EnemyTexturePreview_14.Name = "EnemyTexturePreview_14";
             this.EnemyTexturePreview_14.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_14.TabIndex = 23;
@@ -1680,7 +1917,8 @@
             // 
             // EnemyTexturePreview_16
             // 
-            this.EnemyTexturePreview_16.Location = new System.Drawing.Point(206, 289);
+            this.EnemyTexturePreview_16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_16.Location = new System.Drawing.Point(206, 279);
             this.EnemyTexturePreview_16.Name = "EnemyTexturePreview_16";
             this.EnemyTexturePreview_16.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_16.TabIndex = 26;
@@ -1689,7 +1927,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(4, 33);
+            this.label20.Location = new System.Drawing.Point(4, 23);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(40, 15);
             this.label20.TabIndex = 27;
@@ -1698,7 +1936,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(4, 73);
+            this.label21.Location = new System.Drawing.Point(4, 64);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(57, 15);
             this.label21.TabIndex = 28;
@@ -1707,7 +1945,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(4, 115);
+            this.label22.Location = new System.Drawing.Point(4, 105);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(46, 15);
             this.label22.TabIndex = 29;
@@ -1716,7 +1954,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(4, 158);
+            this.label23.Location = new System.Drawing.Point(4, 148);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(63, 15);
             this.label23.TabIndex = 30;
@@ -1725,7 +1963,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(4, 202);
+            this.label24.Location = new System.Drawing.Point(4, 192);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(37, 15);
             this.label24.TabIndex = 31;
@@ -1734,7 +1972,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(4, 244);
+            this.label25.Location = new System.Drawing.Point(4, 234);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(38, 15);
             this.label25.TabIndex = 32;
@@ -1743,7 +1981,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(4, 331);
+            this.label27.Location = new System.Drawing.Point(4, 321);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(38, 15);
             this.label27.TabIndex = 34;
@@ -1751,7 +1989,8 @@
             // 
             // EnemyTexturePreview_17
             // 
-            this.EnemyTexturePreview_17.Location = new System.Drawing.Point(108, 334);
+            this.EnemyTexturePreview_17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_17.Location = new System.Drawing.Point(108, 324);
             this.EnemyTexturePreview_17.Name = "EnemyTexturePreview_17";
             this.EnemyTexturePreview_17.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_17.TabIndex = 36;
@@ -1759,7 +1998,8 @@
             // 
             // EnemyTexturePreview_18
             // 
-            this.EnemyTexturePreview_18.Location = new System.Drawing.Point(108, 376);
+            this.EnemyTexturePreview_18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_18.Location = new System.Drawing.Point(108, 364);
             this.EnemyTexturePreview_18.Name = "EnemyTexturePreview_18";
             this.EnemyTexturePreview_18.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_18.TabIndex = 37;
@@ -1767,7 +2007,8 @@
             // 
             // EnemyTexturePreview_12
             // 
-            this.EnemyTexturePreview_12.Location = new System.Drawing.Point(156, 205);
+            this.EnemyTexturePreview_12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_12.Location = new System.Drawing.Point(156, 195);
             this.EnemyTexturePreview_12.Name = "EnemyTexturePreview_12";
             this.EnemyTexturePreview_12.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_12.TabIndex = 20;
@@ -1775,25 +2016,137 @@
             // 
             // EnemyTexturePreview_11
             // 
-            this.EnemyTexturePreview_11.Location = new System.Drawing.Point(206, 205);
+            this.EnemyTexturePreview_11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.EnemyTexturePreview_11.Location = new System.Drawing.Point(206, 195);
             this.EnemyTexturePreview_11.Name = "EnemyTexturePreview_11";
             this.EnemyTexturePreview_11.Size = new System.Drawing.Size(32, 32);
             this.EnemyTexturePreview_11.TabIndex = 19;
             this.EnemyTexturePreview_11.TabStop = false;
             // 
-            // label29
+            // label32
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(4, 1);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(51, 15);
-            this.label29.TabIndex = 38;
-            this.label29.Text = "Enemies";
+            this.label32.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label32.ForeColor = System.Drawing.Color.Red;
+            this.label32.Location = new System.Drawing.Point(206, 105);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(33, 42);
+            this.label32.TabIndex = 38;
+            this.label32.Text = "X";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label33.ForeColor = System.Drawing.Color.Red;
+            this.label33.Location = new System.Drawing.Point(206, 148);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(33, 43);
+            this.label33.TabIndex = 39;
+            this.label33.Text = "X";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label34
+            // 
+            this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label34.ForeColor = System.Drawing.Color.Red;
+            this.label34.Location = new System.Drawing.Point(108, 276);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(41, 44);
+            this.label34.TabIndex = 40;
+            this.label34.Text = "X";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label35
+            // 
+            this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label35.ForeColor = System.Drawing.Color.Red;
+            this.label35.Location = new System.Drawing.Point(156, 276);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(43, 44);
+            this.label35.TabIndex = 41;
+            this.label35.Text = "X";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label36
+            // 
+            this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label36.ForeColor = System.Drawing.Color.Red;
+            this.label36.Location = new System.Drawing.Point(156, 321);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(43, 39);
+            this.label36.TabIndex = 42;
+            this.label36.Text = "X";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label37
+            // 
+            this.label37.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label37.ForeColor = System.Drawing.Color.Red;
+            this.label37.Location = new System.Drawing.Point(206, 321);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(33, 39);
+            this.label37.TabIndex = 43;
+            this.label37.Text = "X";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label38.ForeColor = System.Drawing.Color.Red;
+            this.label38.Location = new System.Drawing.Point(156, 361);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(43, 40);
+            this.label38.TabIndex = 44;
+            this.label38.Text = "X";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label39
+            // 
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label39.ForeColor = System.Drawing.Color.Red;
+            this.label39.Location = new System.Drawing.Point(206, 361);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(33, 40);
+            this.label39.TabIndex = 45;
+            this.label39.Text = "X";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(181, 5);
+            this.label14.Location = new System.Drawing.Point(193, 491);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(42, 15);
             this.label14.TabIndex = 16;
@@ -1801,7 +2154,7 @@
             // 
             // GenerateEnemeisTextureFile
             // 
-            this.GenerateEnemeisTextureFile.Location = new System.Drawing.Point(504, 892);
+            this.GenerateEnemeisTextureFile.Location = new System.Drawing.Point(702, 435);
             this.GenerateEnemeisTextureFile.Name = "GenerateEnemeisTextureFile";
             this.GenerateEnemeisTextureFile.Size = new System.Drawing.Size(243, 31);
             this.GenerateEnemeisTextureFile.TabIndex = 15;
@@ -1811,9 +2164,9 @@
             // 
             // GenerateEffectsTextureFile
             // 
-            this.GenerateEffectsTextureFile.Location = new System.Drawing.Point(181, 421);
+            this.GenerateEffectsTextureFile.Location = new System.Drawing.Point(193, 643);
             this.GenerateEffectsTextureFile.Name = "GenerateEffectsTextureFile";
-            this.GenerateEffectsTextureFile.Size = new System.Drawing.Size(158, 28);
+            this.GenerateEffectsTextureFile.Size = new System.Drawing.Size(231, 28);
             this.GenerateEffectsTextureFile.TabIndex = 13;
             this.GenerateEffectsTextureFile.Text = "Sync With Game";
             this.GenerateEffectsTextureFile.UseVisualStyleBackColor = true;
@@ -1822,14 +2175,14 @@
             // effectTextureLayoutPanel
             // 
             this.effectTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.effectTextureLayoutPanel.Location = new System.Drawing.Point(181, 23);
+            this.effectTextureLayoutPanel.Location = new System.Drawing.Point(193, 509);
             this.effectTextureLayoutPanel.Name = "effectTextureLayoutPanel";
-            this.effectTextureLayoutPanel.Size = new System.Drawing.Size(158, 394);
+            this.effectTextureLayoutPanel.Size = new System.Drawing.Size(231, 128);
             this.effectTextureLayoutPanel.TabIndex = 12;
             // 
             // GenerateWeaponTextureFile
             // 
-            this.GenerateWeaponTextureFile.Location = new System.Drawing.Point(255, 893);
+            this.GenerateWeaponTextureFile.Location = new System.Drawing.Point(193, 435);
             this.GenerateWeaponTextureFile.Name = "GenerateWeaponTextureFile";
             this.GenerateWeaponTextureFile.Size = new System.Drawing.Size(231, 30);
             this.GenerateWeaponTextureFile.TabIndex = 11;
@@ -1840,7 +2193,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(255, 456);
+            this.label13.Location = new System.Drawing.Point(193, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(56, 15);
             this.label13.TabIndex = 10;
@@ -1849,14 +2202,14 @@
             // weaponsTextureLayoutPanel
             // 
             this.weaponsTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.weaponsTextureLayoutPanel.Location = new System.Drawing.Point(255, 474);
+            this.weaponsTextureLayoutPanel.Location = new System.Drawing.Point(193, 27);
             this.weaponsTextureLayoutPanel.Name = "weaponsTextureLayoutPanel";
-            this.weaponsTextureLayoutPanel.Size = new System.Drawing.Size(231, 413);
+            this.weaponsTextureLayoutPanel.Size = new System.Drawing.Size(231, 402);
             this.weaponsTextureLayoutPanel.TabIndex = 9;
             // 
             // GenerateBackgroundTextureFile
             // 
-            this.GenerateBackgroundTextureFile.Location = new System.Drawing.Point(356, 423);
+            this.GenerateBackgroundTextureFile.Location = new System.Drawing.Point(6, 643);
             this.GenerateBackgroundTextureFile.Name = "GenerateBackgroundTextureFile";
             this.GenerateBackgroundTextureFile.Size = new System.Drawing.Size(159, 30);
             this.GenerateBackgroundTextureFile.TabIndex = 8;
@@ -1867,7 +2220,7 @@
             // BackgroundLabel
             // 
             this.BackgroundLabel.AutoSize = true;
-            this.BackgroundLabel.Location = new System.Drawing.Point(356, 5);
+            this.BackgroundLabel.Location = new System.Drawing.Point(7, 492);
             this.BackgroundLabel.Name = "BackgroundLabel";
             this.BackgroundLabel.Size = new System.Drawing.Size(71, 15);
             this.BackgroundLabel.TabIndex = 7;
@@ -1876,14 +2229,14 @@
             // backgroundTextureLayoutPanel
             // 
             this.backgroundTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.backgroundTextureLayoutPanel.Location = new System.Drawing.Point(356, 23);
+            this.backgroundTextureLayoutPanel.Location = new System.Drawing.Point(6, 510);
             this.backgroundTextureLayoutPanel.Name = "backgroundTextureLayoutPanel";
-            this.backgroundTextureLayoutPanel.Size = new System.Drawing.Size(158, 394);
+            this.backgroundTextureLayoutPanel.Size = new System.Drawing.Size(158, 127);
             this.backgroundTextureLayoutPanel.TabIndex = 6;
             // 
             // GenerateItemsTextureFile
             // 
-            this.GenerateItemsTextureFile.Location = new System.Drawing.Point(7, 893);
+            this.GenerateItemsTextureFile.Location = new System.Drawing.Point(448, 435);
             this.GenerateItemsTextureFile.Name = "GenerateItemsTextureFile";
             this.GenerateItemsTextureFile.Size = new System.Drawing.Size(231, 30);
             this.GenerateItemsTextureFile.TabIndex = 5;
@@ -1894,7 +2247,7 @@
             // ItemsLabel
             // 
             this.ItemsLabel.AutoSize = true;
-            this.ItemsLabel.Location = new System.Drawing.Point(7, 456);
+            this.ItemsLabel.Location = new System.Drawing.Point(448, 9);
             this.ItemsLabel.Name = "ItemsLabel";
             this.ItemsLabel.Size = new System.Drawing.Size(36, 15);
             this.ItemsLabel.TabIndex = 4;
@@ -1903,9 +2256,9 @@
             // itemTextureLayoutPanel
             // 
             this.itemTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.itemTextureLayoutPanel.Location = new System.Drawing.Point(7, 474);
+            this.itemTextureLayoutPanel.Location = new System.Drawing.Point(448, 27);
             this.itemTextureLayoutPanel.Name = "itemTextureLayoutPanel";
-            this.itemTextureLayoutPanel.Size = new System.Drawing.Size(231, 412);
+            this.itemTextureLayoutPanel.Size = new System.Drawing.Size(231, 402);
             this.itemTextureLayoutPanel.TabIndex = 3;
             // 
             // label12
@@ -1919,7 +2272,7 @@
             // 
             // GenerateWallTextureFile
             // 
-            this.GenerateWallTextureFile.Location = new System.Drawing.Point(7, 423);
+            this.GenerateWallTextureFile.Location = new System.Drawing.Point(6, 435);
             this.GenerateWallTextureFile.Name = "GenerateWallTextureFile";
             this.GenerateWallTextureFile.Size = new System.Drawing.Size(158, 30);
             this.GenerateWallTextureFile.TabIndex = 1;
@@ -1932,8 +2285,17 @@
             this.wallTextureLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.wallTextureLayoutPanel.Location = new System.Drawing.Point(7, 23);
             this.wallTextureLayoutPanel.Name = "wallTextureLayoutPanel";
-            this.wallTextureLayoutPanel.Size = new System.Drawing.Size(158, 394);
+            this.wallTextureLayoutPanel.Size = new System.Drawing.Size(158, 406);
             this.wallTextureLayoutPanel.TabIndex = 0;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(702, 9);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(51, 15);
+            this.label29.TabIndex = 38;
+            this.label29.Text = "Enemies";
             // 
             // menuStrip1
             // 
@@ -1975,175 +2337,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // TextureAllocationUpDown0
-            // 
-            this.TextureAllocationUpDown0.Location = new System.Drawing.Point(3, 18);
-            this.TextureAllocationUpDown0.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown0.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown0.Name = "TextureAllocationUpDown0";
-            this.TextureAllocationUpDown0.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown0.TabIndex = 32;
-            this.TextureAllocationUpDown0.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown0.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown0_ValueChanged);
-            // 
-            // TextureAllocationUpDown1
-            // 
-            this.TextureAllocationUpDown1.Location = new System.Drawing.Point(41, 18);
-            this.TextureAllocationUpDown1.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown1.Name = "TextureAllocationUpDown1";
-            this.TextureAllocationUpDown1.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown1.TabIndex = 33;
-            this.TextureAllocationUpDown1.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown1.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown1_ValueChanged);
-            // 
-            // TextureAllocationUpDown2
-            // 
-            this.TextureAllocationUpDown2.Location = new System.Drawing.Point(79, 18);
-            this.TextureAllocationUpDown2.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown2.Name = "TextureAllocationUpDown2";
-            this.TextureAllocationUpDown2.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown2.TabIndex = 34;
-            this.TextureAllocationUpDown2.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown2.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown2_ValueChanged);
-            // 
-            // TextureAllocationUpDown3
-            // 
-            this.TextureAllocationUpDown3.Location = new System.Drawing.Point(117, 18);
-            this.TextureAllocationUpDown3.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown3.Name = "TextureAllocationUpDown3";
-            this.TextureAllocationUpDown3.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown3.TabIndex = 35;
-            this.TextureAllocationUpDown3.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown3.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown3_ValueChanged);
-            // 
-            // TextureAllocationUpDown4
-            // 
-            this.TextureAllocationUpDown4.Location = new System.Drawing.Point(155, 18);
-            this.TextureAllocationUpDown4.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown4.Name = "TextureAllocationUpDown4";
-            this.TextureAllocationUpDown4.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown4.TabIndex = 36;
-            this.TextureAllocationUpDown4.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown4.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown4_ValueChanged);
-            // 
-            // TextureAllocationUpDown5
-            // 
-            this.TextureAllocationUpDown5.Location = new System.Drawing.Point(193, 18);
-            this.TextureAllocationUpDown5.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown5.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown5.Name = "TextureAllocationUpDown5";
-            this.TextureAllocationUpDown5.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown5.TabIndex = 37;
-            this.TextureAllocationUpDown5.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown5.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown5_ValueChanged);
-            // 
-            // label15
-            // 
-            this.label15.Location = new System.Drawing.Point(3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(260, 15);
-            this.label15.TabIndex = 38;
-            this.label15.Text = "Texture Allocation";
-            // 
-            // TextureAllocationUpDown6
-            // 
-            this.TextureAllocationUpDown6.Location = new System.Drawing.Point(231, 18);
-            this.TextureAllocationUpDown6.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown6.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown6.Name = "TextureAllocationUpDown6";
-            this.TextureAllocationUpDown6.Size = new System.Drawing.Size(32, 23);
-            this.TextureAllocationUpDown6.TabIndex = 39;
-            this.TextureAllocationUpDown6.Value = new decimal(new int[] {
-            7,
-            0,
-            0,
-            0});
-            this.TextureAllocationUpDown6.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown6_ValueChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2169,10 +2362,8 @@
             this.tabPage1.PerformLayout();
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PlayerRotationUpDown)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CeilingHeightUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FloorHeightUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CeilingColourUpDown)).EndInit();
@@ -2182,6 +2373,13 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.Textures_Tab.ResumeLayout(false);
@@ -2209,13 +2407,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_11)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2390,5 +2581,17 @@
         private NumericUpDown TextureAllocationUpDown4;
         private NumericUpDown TextureAllocationUpDown5;
         private NumericUpDown TextureAllocationUpDown6;
+        private Label label30;
+        private FlowLayoutPanel titleTextureLayoutPanel;
+        private Button GenerateTitleTextureFile;
+        private Label label31;
+        private Label label32;
+        private Label label33;
+        private Label label34;
+        private Label label35;
+        private Label label36;
+        private Label label37;
+        private Label label38;
+        private Label label39;
     }
 }

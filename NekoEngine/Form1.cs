@@ -53,6 +53,7 @@ namespace NekoEngine
         const string WEAPONS_TEXTURE_FOLDER = @"\Weapons";
         const string EFFECTS_TEXTURE_FOLDER = @"\Effects";
         const string ENEMIES_TEXTURE_FOLDER = @"\Enemies";
+        const string TITLE_TEXTURE_FOLDER = @"\Title";
         const string LEVELS_FOLDER = @"\Levels";
         const byte DEBUG_LEVEL_ID = 99;
 
@@ -67,6 +68,8 @@ namespace NekoEngine
             InitTexturesFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER, BackgroundPictureBox_DoubleClick, backgroundTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, WeaponsPictureBox_DoubleClick, weaponsTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
+            InitTexturesFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER, TitlePictureBox_DoubleClick, titleTextureLayoutPanel);
+
             InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);          
         }
 
@@ -147,6 +150,11 @@ namespace NekoEngine
                             label.Text = GetWeaponNameFromIndex(i);
                             label.Width = 52;
                         }
+                        else if (string.Equals(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, path))
+                        {
+                            label.Text = GetEffectNameFromIndex(i);
+                            label.Width = 60;
+                        }
 
                         pictureBox.DoubleClick += action;
                         panel.Controls.Add(label);
@@ -209,6 +217,23 @@ namespace NekoEngine
                     return "Key Card";
                 default:
                     return "";
+            }
+        }
+
+        private string GetEffectNameFromIndex(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return "Explosion";
+                case 1:
+                    return "Fireball";
+                case 2:
+                    return "Plasma";
+                case 3:
+                    return "Dust";
+                default:
+                    return string.Empty;
             }
         }
 
@@ -585,6 +610,14 @@ namespace NekoEngine
             }
         }
 
+        private void TitlePictureBox_DoubleClick(object? sender, EventArgs e)
+        {
+            if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
+            {
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER) ?? pictureBox.Image;
+            }
+        }
+
 
         private Bitmap? LoadInTextureFile(int index, string location)
         {
@@ -819,6 +852,7 @@ namespace NekoEngine
                 HandlWallSelectionClicked(button.BackColor);
             }
              _currentEditState = EditState.Walls;
+            CellHeight.Enabled = true;
         }
 
 
@@ -829,6 +863,7 @@ namespace NekoEngine
                 HandlWallSelectionClicked(button.BackColor);
             }
             ResetCellHeight();
+            CellHeight.Enabled = false;
             _currentEditState = EditState.Walls;
         }
 
@@ -1703,6 +1738,11 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[6] = (byte)(value - 1);
+        }
+
+        private void GenerateTitleTextureFile_Click(object sender, EventArgs e)
+        {
+            GenerateTadFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER);
         }
     }
 
