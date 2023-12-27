@@ -188,6 +188,14 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TextureAllocationUpDown0 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.TextureAllocationUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.TextureAllocationUpDown6 = new System.Windows.Forms.NumericUpDown();
             this.Tabs.SuspendLayout();
             this.Images.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -230,6 +238,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_11)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).BeginInit();
             this.SuspendLayout();
             // 
             // Tabs
@@ -548,7 +563,7 @@
             // 
             // RunLevel
             // 
-            this.RunLevel.Location = new System.Drawing.Point(1215, 627);
+            this.RunLevel.Location = new System.Drawing.Point(1209, 697);
             this.RunLevel.Name = "RunLevel";
             this.RunLevel.Size = new System.Drawing.Size(230, 118);
             this.RunLevel.TabIndex = 41;
@@ -565,7 +580,7 @@
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_16);
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_17);
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_18);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(976, 551);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(970, 621);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(233, 194);
             this.flowLayoutPanel6.TabIndex = 40;
@@ -708,7 +723,7 @@
             this.flowLayoutPanel5.Controls.Add(this.Player);
             this.flowLayoutPanel5.Controls.Add(this.label7);
             this.flowLayoutPanel5.Controls.Add(this.PlayerRotationUpDown);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(1215, 382);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(1209, 452);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(233, 68);
             this.flowLayoutPanel5.TabIndex = 31;
@@ -762,7 +777,7 @@
             this.flowLayoutPanel4.Controls.Add(this.FloorColourUpDown4);
             this.flowLayoutPanel4.Controls.Add(this.label17);
             this.flowLayoutPanel4.Controls.Add(this.BackgroundUpDown);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(1215, 456);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(1209, 526);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(233, 165);
             this.flowLayoutPanel4.TabIndex = 30;
@@ -955,7 +970,7 @@
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_24);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_25);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_26);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1215, 161);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1209, 231);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(233, 215);
             this.flowLayoutPanel3.TabIndex = 13;
@@ -1046,7 +1061,7 @@
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_11);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_12);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_19);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(976, 161);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(970, 231);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(233, 384);
             this.flowLayoutPanel2.TabIndex = 12;
@@ -1184,6 +1199,14 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowLayoutPanel1.Controls.Add(this.label15);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown0);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown1);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown2);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown3);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown4);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown5);
+            this.flowLayoutPanel1.Controls.Add(this.TextureAllocationUpDown6);
             this.flowLayoutPanel1.Controls.Add(this.label2);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_1);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_2);
@@ -1204,12 +1227,12 @@
             this.flowLayoutPanel1.Controls.Add(this.CellHeight);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(976, 6);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(283, 149);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(283, 198);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(3, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(260, 15);
             this.label2.TabIndex = 20;
@@ -1218,17 +1241,18 @@
             // MapColour_1
             // 
             this.MapColour_1.BackColor = System.Drawing.Color.DeepPink;
-            this.MapColour_1.Location = new System.Drawing.Point(3, 18);
+            this.MapColour_1.Location = new System.Drawing.Point(3, 62);
             this.MapColour_1.Name = "MapColour_1";
             this.MapColour_1.Size = new System.Drawing.Size(32, 32);
             this.MapColour_1.TabIndex = 3;
             this.MapColour_1.UseVisualStyleBackColor = false;
             this.MapColour_1.Click += new System.EventHandler(this.MapColour_1_Click);
+            this.MapColour_1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MapColour_MouseDown);
             // 
             // MapColour_2
             // 
             this.MapColour_2.BackColor = System.Drawing.Color.Red;
-            this.MapColour_2.Location = new System.Drawing.Point(41, 18);
+            this.MapColour_2.Location = new System.Drawing.Point(41, 62);
             this.MapColour_2.Name = "MapColour_2";
             this.MapColour_2.Size = new System.Drawing.Size(32, 32);
             this.MapColour_2.TabIndex = 4;
@@ -1238,7 +1262,7 @@
             // MapColour_3
             // 
             this.MapColour_3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.MapColour_3.Location = new System.Drawing.Point(79, 18);
+            this.MapColour_3.Location = new System.Drawing.Point(79, 62);
             this.MapColour_3.Name = "MapColour_3";
             this.MapColour_3.Size = new System.Drawing.Size(32, 32);
             this.MapColour_3.TabIndex = 5;
@@ -1248,7 +1272,7 @@
             // MapColour_4
             // 
             this.MapColour_4.BackColor = System.Drawing.Color.Blue;
-            this.MapColour_4.Location = new System.Drawing.Point(117, 18);
+            this.MapColour_4.Location = new System.Drawing.Point(117, 62);
             this.MapColour_4.Name = "MapColour_4";
             this.MapColour_4.Size = new System.Drawing.Size(32, 32);
             this.MapColour_4.TabIndex = 6;
@@ -1258,7 +1282,7 @@
             // MapColour_5
             // 
             this.MapColour_5.BackColor = System.Drawing.Color.Maroon;
-            this.MapColour_5.Location = new System.Drawing.Point(155, 18);
+            this.MapColour_5.Location = new System.Drawing.Point(155, 62);
             this.MapColour_5.Name = "MapColour_5";
             this.MapColour_5.Size = new System.Drawing.Size(32, 32);
             this.MapColour_5.TabIndex = 7;
@@ -1268,7 +1292,7 @@
             // MapColour_6
             // 
             this.MapColour_6.BackColor = System.Drawing.Color.Yellow;
-            this.MapColour_6.Location = new System.Drawing.Point(193, 18);
+            this.MapColour_6.Location = new System.Drawing.Point(193, 62);
             this.MapColour_6.Name = "MapColour_6";
             this.MapColour_6.Size = new System.Drawing.Size(32, 32);
             this.MapColour_6.TabIndex = 8;
@@ -1278,7 +1302,7 @@
             // MapColour_7
             // 
             this.MapColour_7.BackColor = System.Drawing.Color.Green;
-            this.MapColour_7.Location = new System.Drawing.Point(231, 18);
+            this.MapColour_7.Location = new System.Drawing.Point(231, 62);
             this.MapColour_7.Name = "MapColour_7";
             this.MapColour_7.Size = new System.Drawing.Size(32, 32);
             this.MapColour_7.TabIndex = 9;
@@ -1287,7 +1311,7 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(3, 53);
+            this.label1.Location = new System.Drawing.Point(3, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 15);
             this.label1.TabIndex = 18;
@@ -1296,7 +1320,7 @@
             // MapColour_door
             // 
             this.MapColour_door.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
-            this.MapColour_door.Location = new System.Drawing.Point(3, 71);
+            this.MapColour_door.Location = new System.Drawing.Point(3, 115);
             this.MapColour_door.Name = "MapColour_door";
             this.MapColour_door.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door.TabIndex = 19;
@@ -1306,7 +1330,7 @@
             // MapColour_door2
             // 
             this.MapColour_door2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(77)))), ((int)(((byte)(77)))));
-            this.MapColour_door2.Location = new System.Drawing.Point(41, 71);
+            this.MapColour_door2.Location = new System.Drawing.Point(41, 115);
             this.MapColour_door2.Name = "MapColour_door2";
             this.MapColour_door2.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door2.TabIndex = 23;
@@ -1316,7 +1340,7 @@
             // MapColour_door3
             // 
             this.MapColour_door3.BackColor = System.Drawing.Color.Gray;
-            this.MapColour_door3.Location = new System.Drawing.Point(79, 71);
+            this.MapColour_door3.Location = new System.Drawing.Point(79, 115);
             this.MapColour_door3.Name = "MapColour_door3";
             this.MapColour_door3.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door3.TabIndex = 24;
@@ -1326,7 +1350,7 @@
             // MapColour_door4
             // 
             this.MapColour_door4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.MapColour_door4.Location = new System.Drawing.Point(117, 71);
+            this.MapColour_door4.Location = new System.Drawing.Point(117, 115);
             this.MapColour_door4.Name = "MapColour_door4";
             this.MapColour_door4.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door4.TabIndex = 25;
@@ -1336,7 +1360,7 @@
             // MapColour_door5
             // 
             this.MapColour_door5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(179)))), ((int)(((byte)(179)))));
-            this.MapColour_door5.Location = new System.Drawing.Point(155, 71);
+            this.MapColour_door5.Location = new System.Drawing.Point(155, 115);
             this.MapColour_door5.Name = "MapColour_door5";
             this.MapColour_door5.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door5.TabIndex = 26;
@@ -1346,7 +1370,7 @@
             // MapColour_door6
             // 
             this.MapColour_door6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.MapColour_door6.Location = new System.Drawing.Point(193, 71);
+            this.MapColour_door6.Location = new System.Drawing.Point(193, 115);
             this.MapColour_door6.Name = "MapColour_door6";
             this.MapColour_door6.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door6.TabIndex = 27;
@@ -1356,7 +1380,7 @@
             // MapColour_door7
             // 
             this.MapColour_door7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.MapColour_door7.Location = new System.Drawing.Point(231, 71);
+            this.MapColour_door7.Location = new System.Drawing.Point(231, 115);
             this.MapColour_door7.Name = "MapColour_door7";
             this.MapColour_door7.Size = new System.Drawing.Size(32, 32);
             this.MapColour_door7.TabIndex = 28;
@@ -1369,7 +1393,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 106);
+            this.label3.Location = new System.Drawing.Point(3, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 29);
             this.label3.TabIndex = 29;
@@ -1378,7 +1402,7 @@
             // 
             // CellHeight
             // 
-            this.CellHeight.Location = new System.Drawing.Point(139, 109);
+            this.CellHeight.Location = new System.Drawing.Point(139, 153);
             this.CellHeight.Maximum = new decimal(new int[] {
             7,
             0,
@@ -1951,6 +1975,175 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // TextureAllocationUpDown0
+            // 
+            this.TextureAllocationUpDown0.Location = new System.Drawing.Point(3, 18);
+            this.TextureAllocationUpDown0.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.Name = "TextureAllocationUpDown0";
+            this.TextureAllocationUpDown0.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown0.TabIndex = 32;
+            this.TextureAllocationUpDown0.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown0.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown0_ValueChanged);
+            // 
+            // TextureAllocationUpDown1
+            // 
+            this.TextureAllocationUpDown1.Location = new System.Drawing.Point(41, 18);
+            this.TextureAllocationUpDown1.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.Name = "TextureAllocationUpDown1";
+            this.TextureAllocationUpDown1.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown1.TabIndex = 33;
+            this.TextureAllocationUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown1.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown1_ValueChanged);
+            // 
+            // TextureAllocationUpDown2
+            // 
+            this.TextureAllocationUpDown2.Location = new System.Drawing.Point(79, 18);
+            this.TextureAllocationUpDown2.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.Name = "TextureAllocationUpDown2";
+            this.TextureAllocationUpDown2.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown2.TabIndex = 34;
+            this.TextureAllocationUpDown2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown2.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown2_ValueChanged);
+            // 
+            // TextureAllocationUpDown3
+            // 
+            this.TextureAllocationUpDown3.Location = new System.Drawing.Point(117, 18);
+            this.TextureAllocationUpDown3.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.Name = "TextureAllocationUpDown3";
+            this.TextureAllocationUpDown3.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown3.TabIndex = 35;
+            this.TextureAllocationUpDown3.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown3.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown3_ValueChanged);
+            // 
+            // TextureAllocationUpDown4
+            // 
+            this.TextureAllocationUpDown4.Location = new System.Drawing.Point(155, 18);
+            this.TextureAllocationUpDown4.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.Name = "TextureAllocationUpDown4";
+            this.TextureAllocationUpDown4.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown4.TabIndex = 36;
+            this.TextureAllocationUpDown4.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown4.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown4_ValueChanged);
+            // 
+            // TextureAllocationUpDown5
+            // 
+            this.TextureAllocationUpDown5.Location = new System.Drawing.Point(193, 18);
+            this.TextureAllocationUpDown5.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.Name = "TextureAllocationUpDown5";
+            this.TextureAllocationUpDown5.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown5.TabIndex = 37;
+            this.TextureAllocationUpDown5.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown5.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown5_ValueChanged);
+            // 
+            // label15
+            // 
+            this.label15.Location = new System.Drawing.Point(3, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(260, 15);
+            this.label15.TabIndex = 38;
+            this.label15.Text = "Texture Allocation";
+            // 
+            // TextureAllocationUpDown6
+            // 
+            this.TextureAllocationUpDown6.Location = new System.Drawing.Point(231, 18);
+            this.TextureAllocationUpDown6.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.Name = "TextureAllocationUpDown6";
+            this.TextureAllocationUpDown6.Size = new System.Drawing.Size(32, 23);
+            this.TextureAllocationUpDown6.TabIndex = 39;
+            this.TextureAllocationUpDown6.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.TextureAllocationUpDown6.ValueChanged += new System.EventHandler(this.TextureAllocationUpDown6_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2016,6 +2209,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_11)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2182,5 +2382,13 @@
         private PictureBox EnemyTexturePreview_17;
         private PictureBox EnemyTexturePreview_18;
         private Label label29;
+        private Label label15;
+        private NumericUpDown TextureAllocationUpDown0;
+        private NumericUpDown TextureAllocationUpDown1;
+        private NumericUpDown TextureAllocationUpDown2;
+        private NumericUpDown TextureAllocationUpDown3;
+        private NumericUpDown TextureAllocationUpDown4;
+        private NumericUpDown TextureAllocationUpDown5;
+        private NumericUpDown TextureAllocationUpDown6;
     }
 }

@@ -17,8 +17,7 @@ namespace NekoEngine
         private const int CELL_SIZE = 14;
         private const int AVAILABLE_ELEMENTS = 64;
         private const int ENEMIES_INDEX_OFFSET = 31;
-
-
+        
         private const int ACCESS_CARD_1 = 0x0d;
         private const int ACCESS_CARD_2 = 0x0e;
         private const int ACCESS_CARD_3 = 0x0f;
@@ -68,7 +67,7 @@ namespace NekoEngine
             InitTexturesFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER, BackgroundPictureBox_DoubleClick, backgroundTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, WeaponsPictureBox_DoubleClick, weaponsTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
-            InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);
+            InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);          
         }
 
         private void InitEnemiesTexturesFile(string path, EventHandler action)
@@ -796,11 +795,21 @@ namespace NekoEngine
             }
         }
 
+
         private void HandlWallSelectionClicked(Color col)
         {
             _selectedMapColour = col;
             SelectedElement.Text = GetSelectedElementName();
             _currentEditState = EditState.Walls;            
+        }
+
+        private void MapColour_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                TextureIndexPopup textureSelectorForm = new();
+                textureSelectorForm.Show();
+            }
         }
 
         private void MapColour_1_Click(object sender, EventArgs e)
@@ -811,6 +820,7 @@ namespace NekoEngine
             }
              _currentEditState = EditState.Walls;
         }
+
 
         private void MapColour_door_Click(object sender, EventArgs e)
         {
@@ -1468,6 +1478,14 @@ namespace NekoEngine
 
                 DrawGrid(g);
                 pictureBox.Invalidate();
+
+                TextureAllocationUpDown0.Value = _currentLevel.TextureIndices[0] + 1;
+                TextureAllocationUpDown1.Value = _currentLevel.TextureIndices[1] + 1;
+                TextureAllocationUpDown2.Value = _currentLevel.TextureIndices[2] + 1;
+                TextureAllocationUpDown3.Value = _currentLevel.TextureIndices[3] + 1;
+                TextureAllocationUpDown4.Value = _currentLevel.TextureIndices[4] + 1;
+                TextureAllocationUpDown5.Value = _currentLevel.TextureIndices[5] + 1;
+                TextureAllocationUpDown6.Value = _currentLevel.TextureIndices[6] + 1;
             }
         }
 
@@ -1629,6 +1647,62 @@ namespace NekoEngine
             decimal value = numericUpDown.Value;
 
             _currentLevel.BackgroundImage = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown0_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[0] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[1] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[2] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown3_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[3] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown4_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[4] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown5_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[5] = (byte)(value - 1);
+        }
+
+        private void TextureAllocationUpDown6_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            decimal value = numericUpDown.Value;
+            _currentLevel.TextureIndices[6] = (byte)(value - 1);
         }
     }
 
