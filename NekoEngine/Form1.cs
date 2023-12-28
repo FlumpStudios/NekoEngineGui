@@ -55,6 +55,9 @@ namespace NekoEngine
         const string ENEMIES_TEXTURE_FOLDER = @"\Enemies";
         const string TITLE_TEXTURE_FOLDER = @"\Title";
         const string LEVELS_FOLDER = @"\Levels";
+        const string SFX_FOLDER = @"\Sfx";
+
+
         const byte DEBUG_LEVEL_ID = 99;
 
         public Form1()
@@ -163,6 +166,7 @@ namespace NekoEngine
                 }
             }
         }
+
 
         private string GetWeaponNameFromIndex(int index)
         {
@@ -348,6 +352,60 @@ namespace NekoEngine
                         else
                         {
                             ShowErrorMessage("Could not generate array from image");
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return response;
+        }
+
+        private List<byte> GetAudioArray(string fileLocation)
+        {
+            var response = new List<byte>();
+
+            string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\snd2array.py";
+
+            string command = $"python {scriptPath} {fileLocation}";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true,
+                UseShellExecute = false
+            };
+
+            using (Process process = new Process { StartInfo = startInfo })
+            {
+                process.Start();
+
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.Flush();
+                process.StandardInput.Close();
+
+
+                string output = process.StandardOutput.ReadToEnd();
+
+                string pattern = @"\{([^}]*)\}";
+                Match match = Regex.Match(output, pattern);
+
+                if (match.Success)
+                {
+                    string numbers = match.Groups[1].Value;
+                    foreach (var n in numbers.Split(','))
+                    {
+                        var parseOK = byte.TryParse(n, out byte o);
+                        if (parseOK)
+                        {
+                            response.Add(o);
+                        }
+                        else
+                        {
+                            ShowErrorMessage("Could not generate array from raw file");
+                            break;
                         }
                     }
                 }
@@ -646,6 +704,32 @@ namespace NekoEngine
                     catch (Exception ex)
                     {
                         ShowErrorMessage($"Error loading the image: {ex.Message}");
+                    }
+                }
+            }
+            return null;
+        }
+
+        private string? LoadInSfxFile(int index, string location)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "RAW Files|*.raw;|All Files|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+
+                        var saveLocation = location + @"\" + index.ToString() + ".raw";
+                        string textToSave = File.ReadAllText(openFileDialog.FileName);
+                        File.WriteAllText(saveLocation, textToSave);
+                        var response = openFileDialog.FileName.Split(@"\").Last();
+                        return response;
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage($"Error loading the RAW file: {ex.Message}");
                     }
                 }
             }
@@ -1401,7 +1485,6 @@ namespace NekoEngine
                 }
 
                 Brush textBrush = new SolidBrush(textColor);
-                // Draw the number in the cell
 
                 PointF textLocation = new PointF((element.Coords[0] * CELL_SIZE) + CELL_SIZE / 30, (element.Coords[1] * CELL_SIZE) + CELL_SIZE / 30);
                 if (_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
@@ -1612,6 +1695,7 @@ namespace NekoEngine
             if (Directory.Exists(folderPath))
             {
                 string[] imageFiles = Directory.GetFiles(folderPath, "*.png");
+                imageFiles = imageFiles.OrderBy(GetNumericPart).ToArray();
 
                 for (int i = 0; i < imageFiles.Length; i++)
                 {
@@ -1620,6 +1704,31 @@ namespace NekoEngine
             }
 
             using (FileStream fs = new(folderPath + @"\data.TAD", FileMode.Create))
+            {
+                var bw = new BinaryWriter(fs);
+                bw.Write(dataArray.ToArray());
+            }
+        }
+
+        private void GenerateSadFile(string location)
+        {
+            List<byte> dataArray = new List<byte>();
+
+            string folderPath = location;
+
+            if (Directory.Exists(folderPath))
+            {
+                string[] imageFiles = Directory.GetFiles(folderPath, "*.raw");
+                imageFiles = imageFiles.OrderBy(GetNumericPart).ToArray();
+
+
+                for (int i = 0; i < imageFiles.Length; i++)
+                {
+                    dataArray.AddRange(GetAudioArray(imageFiles[i]));
+                }
+            }
+
+            using (FileStream fs = new(folderPath + @"\data.SAD", FileMode.Create))
             {
                 var bw = new BinaryWriter(fs);
                 bw.Write(dataArray.ToArray());
@@ -1740,9 +1849,44 @@ namespace NekoEngine
             _currentLevel.TextureIndices[6] = (byte)(value - 1);
         }
 
+        private void SyncSfxWithGame_Click(object sender, EventArgs e)
+        {
+            GenerateSadFile(GAME_FILE_LOCATION + SFX_FOLDER);
+        }
+
         private void GenerateTitleTextureFile_Click(object sender, EventArgs e)
         {
             GenerateTadFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER);
+        }
+
+        private void BulletShotLabel_DoubleClick(object sender, EventArgs e)
+        {
+            BulletShotLabel.Text = BulletShotLabel.Text + " (" +  LoadInSfxFile(0, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void label41_DoubleClick(object sender, EventArgs e)
+        {
+            label41.Text = label41.Text + " (" + LoadInSfxFile(1, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void label42_DoubleClick(object sender, EventArgs e)
+        {
+            label42.Text = label42.Text + " (" + LoadInSfxFile(2, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void label43_DoubleClick(object sender, EventArgs e)
+        {
+            label43.Text = label43.Text + " (" + LoadInSfxFile(3, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void label44_DoubleClick(object sender, EventArgs e)
+        {
+            label44.Text = label44.Text + " (" + LoadInSfxFile(4, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void label45_DoubleClick(object sender, EventArgs e)
+        {
+            label45.Text = label45.Text + " (" + LoadInSfxFile(5, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
         }
     }
 
