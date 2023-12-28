@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tabs = new System.Windows.Forms.TabControl();
-            this.Images = new System.Windows.Forms.TabPage();
-            this.copyToClipboard = new System.Windows.Forms.Button();
-            this.Output = new System.Windows.Forms.TextBox();
-            this.generate = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.FIle = new System.Windows.Forms.MenuStrip();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SaveConstantsAs = new System.Windows.Forms.Button();
             this.SaveConstants = new System.Windows.Forms.Button();
@@ -149,6 +142,11 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Textures_Tab = new System.Windows.Forms.TabPage();
+            this.CopyToClipboardTex = new System.Windows.Forms.Button();
+            this.GenTextureArrayTextBox = new System.Windows.Forms.TextBox();
+            this.GenerateTextureArray = new System.Windows.Forms.Button();
+            this.LoadImageForArrayGen = new System.Windows.Forms.Button();
+            this.PreviewTextureBox = new System.Windows.Forms.PictureBox();
             this.GenerateTitleTextureFile = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
@@ -216,9 +214,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label40 = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
-            this.Images.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
             this.SfxFlowPanel.SuspendLayout();
@@ -245,6 +242,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.Textures_Tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviewTextureBox)).BeginInit();
             this.EnemiesTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_1)).BeginInit();
@@ -273,7 +271,6 @@
             this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs.Controls.Add(this.Images);
             this.Tabs.Controls.Add(this.tabPage2);
             this.Tabs.Controls.Add(this.Audio);
             this.Tabs.Controls.Add(this.tabPage1);
@@ -283,82 +280,6 @@
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(2201, 2257);
             this.Tabs.TabIndex = 5;
-            // 
-            // Images
-            // 
-            this.Images.AutoScroll = true;
-            this.Images.Controls.Add(this.copyToClipboard);
-            this.Images.Controls.Add(this.Output);
-            this.Images.Controls.Add(this.generate);
-            this.Images.Controls.Add(this.pictureBox1);
-            this.Images.Controls.Add(this.button1);
-            this.Images.Controls.Add(this.FIle);
-            this.Images.Location = new System.Drawing.Point(4, 24);
-            this.Images.Name = "Images";
-            this.Images.Padding = new System.Windows.Forms.Padding(3);
-            this.Images.Size = new System.Drawing.Size(2193, 2229);
-            this.Images.TabIndex = 0;
-            this.Images.Text = "Images";
-            this.Images.UseVisualStyleBackColor = true;
-            // 
-            // copyToClipboard
-            // 
-            this.copyToClipboard.Enabled = false;
-            this.copyToClipboard.Location = new System.Drawing.Point(747, 203);
-            this.copyToClipboard.Name = "copyToClipboard";
-            this.copyToClipboard.Size = new System.Drawing.Size(126, 23);
-            this.copyToClipboard.TabIndex = 7;
-            this.copyToClipboard.Text = "Copy to clipboard";
-            this.copyToClipboard.UseVisualStyleBackColor = true;
-            this.copyToClipboard.Click += new System.EventHandler(this.copyToClipboard_Click);
-            // 
-            // Output
-            // 
-            this.Output.Location = new System.Drawing.Point(6, 232);
-            this.Output.Multiline = true;
-            this.Output.Name = "Output";
-            this.Output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Output.Size = new System.Drawing.Size(867, 319);
-            this.Output.TabIndex = 6;
-            // 
-            // generate
-            // 
-            this.generate.Enabled = false;
-            this.generate.Location = new System.Drawing.Point(252, 35);
-            this.generate.Name = "generate";
-            this.generate.Size = new System.Drawing.Size(128, 23);
-            this.generate.TabIndex = 5;
-            this.generate.Text = "Generate Array";
-            this.generate.UseVisualStyleBackColor = true;
-            this.generate.Click += new System.EventHandler(this.generate_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(243, 220);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(252, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Load image";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // FIle
-            // 
-            this.FIle.Location = new System.Drawing.Point(3, 3);
-            this.FIle.Name = "FIle";
-            this.FIle.Size = new System.Drawing.Size(2187, 24);
-            this.FIle.TabIndex = 8;
-            this.FIle.Text = "File";
             // 
             // tabPage2
             // 
@@ -1704,6 +1625,12 @@
             // 
             // Textures_Tab
             // 
+            this.Textures_Tab.Controls.Add(this.label40);
+            this.Textures_Tab.Controls.Add(this.CopyToClipboardTex);
+            this.Textures_Tab.Controls.Add(this.GenTextureArrayTextBox);
+            this.Textures_Tab.Controls.Add(this.GenerateTextureArray);
+            this.Textures_Tab.Controls.Add(this.LoadImageForArrayGen);
+            this.Textures_Tab.Controls.Add(this.PreviewTextureBox);
             this.Textures_Tab.Controls.Add(this.GenerateTitleTextureFile);
             this.Textures_Tab.Controls.Add(this.label31);
             this.Textures_Tab.Controls.Add(this.label30);
@@ -1733,6 +1660,56 @@
             this.Textures_Tab.TabIndex = 4;
             this.Textures_Tab.Text = "Textures";
             this.Textures_Tab.UseVisualStyleBackColor = true;
+            // 
+            // CopyToClipboardTex
+            // 
+            this.CopyToClipboardTex.Enabled = false;
+            this.CopyToClipboardTex.Location = new System.Drawing.Point(541, 902);
+            this.CopyToClipboardTex.Name = "CopyToClipboardTex";
+            this.CopyToClipboardTex.Size = new System.Drawing.Size(138, 23);
+            this.CopyToClipboardTex.TabIndex = 47;
+            this.CopyToClipboardTex.Text = "Copy To Clickboard";
+            this.CopyToClipboardTex.UseVisualStyleBackColor = true;
+            this.CopyToClipboardTex.Click += new System.EventHandler(this.CopyToClipboardTex_Click);
+            // 
+            // GenTextureArrayTextBox
+            // 
+            this.GenTextureArrayTextBox.Location = new System.Drawing.Point(193, 709);
+            this.GenTextureArrayTextBox.Multiline = true;
+            this.GenTextureArrayTextBox.Name = "GenTextureArrayTextBox";
+            this.GenTextureArrayTextBox.Size = new System.Drawing.Size(486, 216);
+            this.GenTextureArrayTextBox.TabIndex = 46;
+            // 
+            // GenerateTextureArray
+            // 
+            this.GenerateTextureArray.Enabled = false;
+            this.GenerateTextureArray.Location = new System.Drawing.Point(7, 895);
+            this.GenerateTextureArray.Name = "GenerateTextureArray";
+            this.GenerateTextureArray.Size = new System.Drawing.Size(159, 30);
+            this.GenerateTextureArray.TabIndex = 45;
+            this.GenerateTextureArray.Text = "Generate Array";
+            this.GenerateTextureArray.UseVisualStyleBackColor = true;
+            this.GenerateTextureArray.Click += new System.EventHandler(this.GenerateTextureArray_Click);
+            // 
+            // LoadImageForArrayGen
+            // 
+            this.LoadImageForArrayGen.Location = new System.Drawing.Point(7, 862);
+            this.LoadImageForArrayGen.Name = "LoadImageForArrayGen";
+            this.LoadImageForArrayGen.Size = new System.Drawing.Size(159, 30);
+            this.LoadImageForArrayGen.TabIndex = 44;
+            this.LoadImageForArrayGen.Text = "Load Image";
+            this.LoadImageForArrayGen.UseVisualStyleBackColor = true;
+            this.LoadImageForArrayGen.Click += new System.EventHandler(this.LoadImageForArrayGen_Click);
+            // 
+            // PreviewTextureBox
+            // 
+            this.PreviewTextureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PreviewTextureBox.Location = new System.Drawing.Point(7, 709);
+            this.PreviewTextureBox.Name = "PreviewTextureBox";
+            this.PreviewTextureBox.Size = new System.Drawing.Size(158, 147);
+            this.PreviewTextureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PreviewTextureBox.TabIndex = 43;
+            this.PreviewTextureBox.TabStop = false;
             // 
             // GenerateTitleTextureFile
             // 
@@ -2426,6 +2403,15 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(7, 691);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(121, 15);
+            this.label40.TabIndex = 48;
+            this.label40.Text = "Generate Image Array";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2436,14 +2422,10 @@
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.FIle;
             this.Name = "Form1";
             this.Text = " Neko Engine";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Tabs.ResumeLayout(false);
-            this.Images.ResumeLayout(false);
-            this.Images.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.Audio.ResumeLayout(false);
             this.Audio.PerformLayout();
@@ -2474,6 +2456,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.Textures_Tab.ResumeLayout(false);
             this.Textures_Tab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PreviewTextureBox)).EndInit();
             this.EnemiesTableLayoutPanel.ResumeLayout(false);
             this.EnemiesTableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EnemyTexturePreview_2)).EndInit();
@@ -2505,17 +2488,11 @@
         #endregion
 
         private TabControl Tabs;
-        private TabPage Images;
-        private TextBox Output;
-        private Button generate;
-        private PictureBox pictureBox1;
-        private Button button1;
         private TabPage tabPage2;
         private Button button2;
         private Button button3;
         private TabPage Audio;
         private Button VsCode;
-        private Button copyToClipboard;
         private Button copyAudioToClipboard;
         private TextBox audioArrayOutput;
         private Button GenerateAudioArray;
@@ -2583,7 +2560,6 @@
         private Button MapColour_door7;
         private Label label3;
         private NumericUpDown CellHeight;
-        private MenuStrip FIle;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem saveToolStripMenuItem;
@@ -2691,5 +2667,11 @@
         private Label label43;
         private Label label44;
         private Label label45;
+        private TextBox GenTextureArrayTextBox;
+        private Button GenerateTextureArray;
+        private Button LoadImageForArrayGen;
+        private PictureBox PreviewTextureBox;
+        private Button CopyToClipboardTex;
+        private Label label40;
     }
 }

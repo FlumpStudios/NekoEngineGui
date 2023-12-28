@@ -277,37 +277,6 @@ namespace NekoEngine
         private string _imagePath = string.Empty;
         private string _audioPath = string.Empty;
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        Bitmap selectedImage = new Bitmap(openFileDialog.FileName);
-
-                        if (selectedImage.Width != 32 || selectedImage.Height != 32)
-                        {
-                            ShowErrorMessage("The selected image must be 32x32 pixels.");
-                            return;
-                        }
-
-
-                        pictureBox1.Image = selectedImage;
-                        _imagePath = openFileDialog.FileName;
-                        generate.Enabled = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowErrorMessage($"Error loading the image: {ex.Message}");                        
-                    }
-                }
-            }
-        }
-
         private List<byte> GetTextureArray(string fileLocation)
         {
             var response = new List<byte>();
@@ -414,50 +383,6 @@ namespace NekoEngine
             return response;
         }
 
-        private void generate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\img2array.py";
-
-                string command = $"python {scriptPath} -t -c -x32 -y32 -p{GAME_FILE_LOCATION}\\assets\\palette565.png {_imagePath}";
-
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true,
-                    UseShellExecute = false
-                };
-
-                using (Process process = new Process { StartInfo = startInfo })
-                {
-                    process.Start();
-
-                    process.StandardInput.WriteLine(command);
-                    process.StandardInput.Flush();
-                    process.StandardInput.Close();
-
-                    string output = process.StandardOutput.ReadToEnd();
-
-                    string pattern = @"\{[^}]*\}[^{]*\{([^}]*)\}";
-                    Match match = Regex.Match(output, pattern);
-
-                    if (match.Success)
-                    {
-                        string numbers = match.Groups[1].Value;
-                        Output.Text = numbers;
-                        copyToClipboard.Enabled = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ShowErrorMessage($"Error running the Python script: {ex.Message}");                
-            }
-        }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -494,11 +419,7 @@ namespace NekoEngine
             }
         }
 
-        private void copyToClipboard_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(Output.Text);
-            MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+  
 
         private void loadAudio_Click_1(object sender, EventArgs e)
         {
@@ -694,8 +615,7 @@ namespace NekoEngine
                             ShowErrorMessage("The selected image must be 32x32 pixels.");
                         }
                         else
-                        { 
-                            generate.Enabled = true;
+                        {
                             var saveLocation = location + @"\" + index.ToString() + ".png";
                             selectedImage.Save(saveLocation, System.Drawing.Imaging.ImageFormat.Png);
                             return selectedImage;
@@ -1886,6 +1806,90 @@ namespace NekoEngine
         private void label45_DoubleClick(object sender, EventArgs e)
         {
             label45.Text = label45.Text + " (" + LoadInSfxFile(5, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+        }
+
+        private void LoadImageForArrayGen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        Bitmap selectedImage = new Bitmap(openFileDialog.FileName);
+
+                        if (selectedImage.Width != 32 || selectedImage.Height != 32)
+                        {
+                            ShowErrorMessage("The selected image must be 32x32 pixels.");
+                            return;
+                        }
+
+
+                        PreviewTextureBox.Image = selectedImage;
+                        _imagePath = openFileDialog.FileName;
+                        GenerateTextureArray.Enabled = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage($"Error loading the image: {ex.Message}");
+                    }
+                }
+            }
+        }
+
+        private void GenerateTextureArray_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string scriptPath = $"{GAME_FILE_LOCATION}\\assets\\img2array.py";
+
+                string command = $"python {scriptPath} -t -c -x32 -y32 -p{GAME_FILE_LOCATION}\\assets\\palette565.png {_imagePath}";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                };
+
+                using (Process process = new Process { StartInfo = startInfo })
+                {
+                    process.Start();
+
+                    process.StandardInput.WriteLine(command);
+                    process.StandardInput.Flush();
+                    process.StandardInput.Close();
+
+                    string output = process.StandardOutput.ReadToEnd();
+
+                    string pattern = @"\{[^}]*\}[^{]*\{([^}]*)\}";
+                    Match match = Regex.Match(output, pattern);
+
+                    if (match.Success)
+                    {
+                        string numbers = match.Groups[1].Value;
+                        GenTextureArrayTextBox.Text = numbers;
+                        CopyToClipboardTex.Enabled = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage($"Error running the Python script: {ex.Message}");
+            }
+        }
+
+        private void CopyToClipboardTex_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(GenTextureArrayTextBox.Text))
+            { 
+                Clipboard.SetText(GenTextureArrayTextBox.Text);
+                MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 
