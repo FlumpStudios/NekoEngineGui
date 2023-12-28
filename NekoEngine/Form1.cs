@@ -720,10 +720,9 @@ namespace NekoEngine
                 {
                     try
                     {
-
                         var saveLocation = location + @"\" + index.ToString() + ".raw";
-                        string textToSave = File.ReadAllText(openFileDialog.FileName);
-                        File.WriteAllText(saveLocation, textToSave);
+                        var textToSave = File.ReadAllBytes(openFileDialog.FileName);
+                        File.WriteAllBytes(saveLocation, textToSave);
                         var response = openFileDialog.FileName.Split(@"\").Last();
                         return response;
                     }
