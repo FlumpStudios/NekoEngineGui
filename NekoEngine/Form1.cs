@@ -1,4 +1,6 @@
-using System.Diagnostics;using System.Text;
+using System.Diagnostics;
+using System.Media;
+using System.Text;
 using System.Text.RegularExpressions;
 using ScintillaNET;
 
@@ -29,7 +31,6 @@ namespace NekoEngine
         private const int BLOCKER = 0x13;
 
 
-
         private bool _isMousePressed = false;
         private byte _currentElementNumber = 0;
         private byte _selectedHeight = 0;
@@ -37,7 +38,10 @@ namespace NekoEngine
         private Color _selectedMapColour = Color.FromArgb(255, 255, 20, 147);
         private Level _currentLevel = new Level();
         private Bitmap _gridImage;
-    
+        private SoundPlayer _soundPlayer;
+
+        private int _selectedSfxForPreview = 0;
+
 #if DEBUG
         const string GAME_FILE_LOCATION = @"c:\projects\Neko";
   
@@ -73,7 +77,8 @@ namespace NekoEngine
             InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER, TitlePictureBox_DoubleClick, titleTextureLayoutPanel);
 
-            InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);          
+            InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);
+            _soundPlayer = new SoundPlayer();
         }
 
         private void InitEnemiesTexturesFile(string path, EventHandler action)
@@ -1780,32 +1785,56 @@ namespace NekoEngine
 
         private void BulletShotLabel_DoubleClick(object sender, EventArgs e)
         {
-            BulletShotLabel.Text = BulletShotLabel.Text + " (" +  LoadInSfxFile(0, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(0, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            { 
+                BulletShotLabel.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void label41_DoubleClick(object sender, EventArgs e)
         {
-            label41.Text = label41.Text + " (" + LoadInSfxFile(1, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(1, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                label41.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void label42_DoubleClick(object sender, EventArgs e)
         {
-            label42.Text = label42.Text + " (" + LoadInSfxFile(2, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(2, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                label42.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void label43_DoubleClick(object sender, EventArgs e)
         {
-            label43.Text = label43.Text + " (" + LoadInSfxFile(3, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(3, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                label43.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void label44_DoubleClick(object sender, EventArgs e)
         {
-            label44.Text = label44.Text + " (" + LoadInSfxFile(4, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(4, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                label44.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void label45_DoubleClick(object sender, EventArgs e)
         {
-            label45.Text = label45.Text + " (" + LoadInSfxFile(5, GAME_FILE_LOCATION + SFX_FOLDER) + ")";
+            var fileName = LoadInSfxFile(5, GAME_FILE_LOCATION + SFX_FOLDER);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                label45.Text = BulletShotLabel.Text + " (" + fileName + ")";
+            }
         }
 
         private void LoadImageForArrayGen_Click(object sender, EventArgs e)
@@ -1889,6 +1918,106 @@ namespace NekoEngine
             { 
                 Clipboard.SetText(GenTextureArrayTextBox.Text);
                 MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void BulletShotLabel_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 0;
+            SfxPreviewLabel.Text = "Bullet Shot";
+        }
+
+        private void label41_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 1;
+            SfxPreviewLabel.Text = "Door Opening";
+        }
+
+        private void label42_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 2;
+            SfxPreviewLabel.Text = "Explosion";
+        }
+
+        private void label43_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 3;
+            SfxPreviewLabel.Text = "Click";
+        }
+
+        private void label44_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 4;
+            SfxPreviewLabel.Text = "Plasma Shot";
+        }
+
+        private void label45_Click(object sender, EventArgs e)
+        {
+            _selectedSfxForPreview = 5;
+            SfxPreviewLabel.Text = "Monster";
+        }
+
+        private void PlaySfx_Click(object sender, EventArgs e)
+        {
+            // Specify the path to your .raw file
+            string rawFilePath = GAME_FILE_LOCATION + SFX_FOLDER + @"\" +_selectedSfxForPreview.ToString()  + ".raw";
+            string wavFilePath = GAME_FILE_LOCATION + SFX_FOLDER + @"\preview.wav";
+
+            try
+            {
+                ConvertRawToWav(rawFilePath, wavFilePath);
+
+                // Load the .raw file and play it
+                _soundPlayer.SoundLocation = wavFilePath;
+                _soundPlayer.Play();                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error playing audio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        static void ConvertRawToWav(string rawFilePath, string wavFilePath)
+        {
+            int sampleRate = 8000;
+            int bitsPerSample = 8;
+            int channels = 1;
+            try
+            {
+                // Calculate the total number of samples
+                int numSamples = (int)new FileInfo(rawFilePath).Length / (bitsPerSample / 8);
+
+                // Create a MemoryStream to hold the WAV file in memory
+                using (MemoryStream wavStream = new MemoryStream())
+                {
+                    // Write WAV header
+                    wavStream.Write(new byte[] { 82, 73, 70, 70 }, 0, 4); // "RIFF"
+                    wavStream.Write(BitConverter.GetBytes(36 + numSamples), 0, 4); // File size
+                    wavStream.Write(new byte[] { 87, 65, 86, 69 }, 0, 4); // "WAVE"
+                    wavStream.Write(new byte[] { 102, 109, 116, 32 }, 0, 4); // "fmt "
+                    wavStream.Write(BitConverter.GetBytes(16), 0, 4); // Subchunk1Size
+                    wavStream.Write(BitConverter.GetBytes((short)1), 0, 2); // AudioFormat (1 for PCM)
+                    wavStream.Write(BitConverter.GetBytes((short)channels), 0, 2); // NumChannels
+                    wavStream.Write(BitConverter.GetBytes(sampleRate), 0, 4); // SampleRate
+                    wavStream.Write(BitConverter.GetBytes(sampleRate * channels * bitsPerSample / 8), 0, 4); // ByteRate
+                    wavStream.Write(BitConverter.GetBytes((short)(channels * bitsPerSample / 8)), 0, 2); // BlockAlign
+                    wavStream.Write(BitConverter.GetBytes((short)bitsPerSample), 0, 2); // BitsPerSample
+                    wavStream.Write(new byte[] { 100, 97, 116, 97 }, 0, 4); // "data"
+                    wavStream.Write(BitConverter.GetBytes(numSamples), 0, 4); // Subchunk2Size
+
+                    // Read the raw PCM data
+                    byte[] rawBytes = File.ReadAllBytes(rawFilePath);
+
+                    // Write the raw PCM data to the WAV file
+                    wavStream.Write(rawBytes, 0, rawBytes.Length);
+
+                    // Write the WAV data to the output file
+                    File.WriteAllBytes(wavFilePath, wavStream.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error converting to WAV: {ex.Message}");
             }
         }
     }

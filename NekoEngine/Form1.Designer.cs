@@ -42,6 +42,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Audio = new System.Windows.Forms.TabPage();
+            this.PlaySfx = new System.Windows.Forms.Button();
+            this.SfxPreviewLabel = new System.Windows.Forms.Label();
             this.SfxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.BulletShotLabel = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -142,6 +144,7 @@
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Textures_Tab = new System.Windows.Forms.TabPage();
+            this.label40 = new System.Windows.Forms.Label();
             this.CopyToClipboardTex = new System.Windows.Forms.Button();
             this.GenTextureArrayTextBox = new System.Windows.Forms.TextBox();
             this.GenerateTextureArray = new System.Windows.Forms.Button();
@@ -214,7 +217,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label40 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
@@ -408,6 +411,9 @@
             // 
             // Audio
             // 
+            this.Audio.Controls.Add(this.label46);
+            this.Audio.Controls.Add(this.PlaySfx);
+            this.Audio.Controls.Add(this.SfxPreviewLabel);
             this.Audio.Controls.Add(this.SfxFlowPanel);
             this.Audio.Controls.Add(this.SyncSfxWithGame);
             this.Audio.Controls.Add(this.AudioFileLocation);
@@ -422,6 +428,25 @@
             this.Audio.TabIndex = 2;
             this.Audio.Text = "Audio";
             this.Audio.UseVisualStyleBackColor = true;
+            // 
+            // PlaySfx
+            // 
+            this.PlaySfx.Location = new System.Drawing.Point(230, 28);
+            this.PlaySfx.Name = "PlaySfx";
+            this.PlaySfx.Size = new System.Drawing.Size(69, 23);
+            this.PlaySfx.TabIndex = 16;
+            this.PlaySfx.Text = "Preview";
+            this.PlaySfx.UseVisualStyleBackColor = true;
+            this.PlaySfx.Click += new System.EventHandler(this.PlaySfx_Click);
+            // 
+            // SfxPreviewLabel
+            // 
+            this.SfxPreviewLabel.AutoSize = true;
+            this.SfxPreviewLabel.Location = new System.Drawing.Point(230, 10);
+            this.SfxPreviewLabel.Name = "SfxPreviewLabel";
+            this.SfxPreviewLabel.Size = new System.Drawing.Size(64, 15);
+            this.SfxPreviewLabel.TabIndex = 15;
+            this.SfxPreviewLabel.Text = "Bullet Shot";
             // 
             // SfxFlowPanel
             // 
@@ -444,6 +469,7 @@
             this.BulletShotLabel.Size = new System.Drawing.Size(200, 15);
             this.BulletShotLabel.TabIndex = 0;
             this.BulletShotLabel.Text = "Bullet Shot";
+            this.BulletShotLabel.Click += new System.EventHandler(this.BulletShotLabel_Click);
             this.BulletShotLabel.DoubleClick += new System.EventHandler(this.BulletShotLabel_DoubleClick);
             // 
             // label41
@@ -453,6 +479,7 @@
             this.label41.Size = new System.Drawing.Size(200, 15);
             this.label41.TabIndex = 1;
             this.label41.Text = "Door Opening";
+            this.label41.Click += new System.EventHandler(this.label41_Click);
             this.label41.DoubleClick += new System.EventHandler(this.label41_DoubleClick);
             // 
             // label42
@@ -462,6 +489,7 @@
             this.label42.Size = new System.Drawing.Size(200, 15);
             this.label42.TabIndex = 2;
             this.label42.Text = "Explosion";
+            this.label42.Click += new System.EventHandler(this.label42_Click);
             this.label42.DoubleClick += new System.EventHandler(this.label42_DoubleClick);
             // 
             // label43
@@ -471,6 +499,7 @@
             this.label43.Size = new System.Drawing.Size(200, 15);
             this.label43.TabIndex = 3;
             this.label43.Text = "Click";
+            this.label43.Click += new System.EventHandler(this.label43_Click);
             this.label43.DoubleClick += new System.EventHandler(this.label43_DoubleClick);
             // 
             // label44
@@ -480,6 +509,7 @@
             this.label44.Size = new System.Drawing.Size(200, 15);
             this.label44.TabIndex = 4;
             this.label44.Text = "Plasma Shot";
+            this.label44.Click += new System.EventHandler(this.label44_Click);
             this.label44.DoubleClick += new System.EventHandler(this.label44_DoubleClick);
             // 
             // label45
@@ -489,6 +519,7 @@
             this.label45.Size = new System.Drawing.Size(200, 15);
             this.label45.TabIndex = 5;
             this.label45.Text = "Monster";
+            this.label45.Click += new System.EventHandler(this.label45_Click);
             this.label45.DoubleClick += new System.EventHandler(this.label45_DoubleClick);
             // 
             // SyncSfxWithGame
@@ -512,7 +543,7 @@
             // copyAudioToClipboard
             // 
             this.copyAudioToClipboard.Enabled = false;
-            this.copyAudioToClipboard.Location = new System.Drawing.Point(739, 168);
+            this.copyAudioToClipboard.Location = new System.Drawing.Point(739, 196);
             this.copyAudioToClipboard.Name = "copyAudioToClipboard";
             this.copyAudioToClipboard.Size = new System.Drawing.Size(126, 23);
             this.copyAudioToClipboard.TabIndex = 11;
@@ -522,7 +553,7 @@
             // 
             // audioArrayOutput
             // 
-            this.audioArrayOutput.Location = new System.Drawing.Point(6, 197);
+            this.audioArrayOutput.Location = new System.Drawing.Point(6, 225);
             this.audioArrayOutput.Multiline = true;
             this.audioArrayOutput.Name = "audioArrayOutput";
             this.audioArrayOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -532,7 +563,7 @@
             // GenerateAudioArray
             // 
             this.GenerateAudioArray.Enabled = false;
-            this.GenerateAudioArray.Location = new System.Drawing.Point(140, 168);
+            this.GenerateAudioArray.Location = new System.Drawing.Point(140, 196);
             this.GenerateAudioArray.Name = "GenerateAudioArray";
             this.GenerateAudioArray.Size = new System.Drawing.Size(128, 23);
             this.GenerateAudioArray.TabIndex = 9;
@@ -542,7 +573,7 @@
             // 
             // loadAudio
             // 
-            this.loadAudio.Location = new System.Drawing.Point(6, 168);
+            this.loadAudio.Location = new System.Drawing.Point(6, 196);
             this.loadAudio.Name = "loadAudio";
             this.loadAudio.Size = new System.Drawing.Size(128, 23);
             this.loadAudio.TabIndex = 8;
@@ -1661,6 +1692,15 @@
             this.Textures_Tab.Text = "Textures";
             this.Textures_Tab.UseVisualStyleBackColor = true;
             // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(7, 691);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(121, 15);
+            this.label40.TabIndex = 48;
+            this.label40.Text = "Generate Image Array";
+            // 
             // CopyToClipboardTex
             // 
             this.CopyToClipboardTex.Enabled = false;
@@ -2403,14 +2443,14 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // label40
+            // label46
             // 
-            this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(7, 691);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(121, 15);
-            this.label40.TabIndex = 48;
-            this.label40.Text = "Generate Image Array";
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(7, 172);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(120, 15);
+            this.label46.TabIndex = 17;
+            this.label46.Text = "Generate Audio Array";
             // 
             // Form1
             // 
@@ -2673,5 +2713,8 @@
         private PictureBox PreviewTextureBox;
         private Button CopyToClipboardTex;
         private Label label40;
+        private Button PlaySfx;
+        private Label SfxPreviewLabel;
+        private Label label46;
     }
 }
