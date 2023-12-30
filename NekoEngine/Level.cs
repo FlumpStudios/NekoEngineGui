@@ -14,7 +14,8 @@ namespace NekoEngine
 
     [Serializable]
     public class Level
-    {   
+    { 
+        public const int MAX_ELEMENT_SIZE = 128;
         public byte ceilHeight = 10;
         public byte floorHeight = 10;
         public byte[] HeightArray;
@@ -32,10 +33,10 @@ namespace NekoEngine
             MapArray = new byte[4096];
 
             PlayerStart = new byte[3] { 32, 32, 0 };
-            elements = new Elements[64];
+            elements = new Elements[MAX_ELEMENT_SIZE];
             BackgroundImage = 1;
 
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < MAX_ELEMENT_SIZE; i++)
             {
                 elements[i] = new Elements
                 {
@@ -87,7 +88,7 @@ namespace NekoEngine
 
             this.BackgroundImage = br.ReadByte();
 
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < MAX_ELEMENT_SIZE; i++)
             {
                 this.elements[i].Type = br.ReadByte();
                 for (int j = 0; j < 2; j++)

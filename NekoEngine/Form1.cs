@@ -17,7 +17,7 @@ namespace NekoEngine
         private const byte PLAYER_POSITION_TYPE_INDEX = 99; 
         private const int GRID_SIZE = 64;
         private const int CELL_SIZE = 14;
-        private const int AVAILABLE_ELEMENTS = 64;
+        private const int AVAILABLE_ELEMENTS = Level.MAX_ELEMENT_SIZE;
         private const int ENEMIES_INDEX_OFFSET = 31;
         
         private const int ACCESS_CARD_1 = 0x0d;
