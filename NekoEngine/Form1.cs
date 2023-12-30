@@ -43,7 +43,7 @@ namespace NekoEngine
         private int _selectedSfxForPreview = 0;
 
 #if DEBUG
-        const string GAME_FILE_LOCATION = @"c:\projects\Neko";
+        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
   
 #else
         const string GAME_FILE_LOCATION = @"..\";
@@ -273,10 +273,10 @@ namespace NekoEngine
             codeEditor.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
             codeEditor.Text = System.IO.File.ReadAllText(GAME_SETTINGS_FILE_LOCATION);
 
-            scintilla1.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
-            scintilla1.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
-            scintilla1.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
-            scintilla1.Text = System.IO.File.ReadAllText(GAME_CONSTNTS_FILE_LOCATION);
+            CosntantsCodeEditor.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
+            CosntantsCodeEditor.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
+            CosntantsCodeEditor.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
+            CosntantsCodeEditor.Text = System.IO.File.ReadAllText(GAME_CONSTNTS_FILE_LOCATION);
         }
 
         private string _imagePath = string.Empty;
@@ -388,17 +388,18 @@ namespace NekoEngine
             return response;
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = @"c:\msys64\mingw64.exe";
-            startInfo.Arguments = @"c:\projects\anarch\make.sh sdl";
-            Process.Start(startInfo);
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Process.Start($"{GAME_FILE_LOCATION}\\anarch.exe");
+            Environment.CurrentDirectory = GAME_FILE_LOCATION;
+
+            // Start the process with the specified working directory
+            Process.Start(new ProcessStartInfo
+            {
+
+                FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
+                WorkingDirectory = GAME_FILE_LOCATION
+            });
         }
 
         private void VsCode_Click(object sender, EventArgs e)
@@ -503,8 +504,16 @@ namespace NekoEngine
 
 
         private void SaveCode_Click(object sender, EventArgs e)
-        {
-            System.IO.File.WriteAllText(GAME_SETTINGS_FILE_LOCATION, codeEditor.Text);
+        {   
+            try
+            {
+                System.IO.File.WriteAllText(GAME_SETTINGS_FILE_LOCATION, codeEditor.Text);
+                MessageBox.Show("Settings file saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
         }
 
         private void CodeSaveAs_Click(object sender, EventArgs e)
@@ -1592,8 +1601,17 @@ namespace NekoEngine
         }
 
         private void SaveConstants_Click(object sender, EventArgs e)
-        {        
-            System.IO.File.WriteAllText(GAME_CONSTNTS_FILE_LOCATION, codeEditor.Text);            
+        {
+            try
+            {
+                System.IO.File.WriteAllText(GAME_CONSTNTS_FILE_LOCATION, CosntantsCodeEditor.Text);
+                MessageBox.Show("Constants file saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMessage(ex.Message);
+            }
+
         }
 
         private void SaveConstantsAs_Click(object sender, EventArgs e)
@@ -1605,7 +1623,7 @@ namespace NekoEngine
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    System.IO.File.WriteAllText(saveFileDialog.FileName, scintilla1.Text);
+                    System.IO.File.WriteAllText(saveFileDialog.FileName, CosntantsCodeEditor.Text);
                 }
             }
         }
@@ -1659,34 +1677,72 @@ namespace NekoEngine
             }
         }
 
-        private void GenerateWallTextureFile_Click(object sender, EventArgs e)
+        private async Task RunTadFileGenAsync(string folder, Button x)
         {
-            GenerateTadFile(GAME_FILE_LOCATION + WALL_TEXTURE_FOLDER);
+            var originalText = x.Text;
+            x.Text = "Processing...";
+            x.Enabled = false;
+            await Task.Run(() => GenerateTadFile(GAME_FILE_LOCATION + folder));
+            x.Text = originalText;
+            x.Enabled = true;
         }
 
-        private void GenerateItemsTextureFile_Click(object sender, EventArgs e)
+        private async void GenerateWallTextureFileAsync_Click(object sender, EventArgs e)
         {
-            GenerateTadFile(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER);
-        }
-        private void GenerateBackgroundTextureFile_Click(object sender, EventArgs e)
-        {
-            GenerateTadFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER);
-        }
-
-        private void GenerateWeaponTextureFile_Click(object sender, EventArgs e)
-        {
-            GenerateTadFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER);
+            var x = sender as Button;
+            if (x is not null)
+            { 
+                await RunTadFileGenAsync(WALL_TEXTURE_FOLDER, x);
+            }
         }
 
-        private void GenerateEffectsTextureFile_Click(object sender, EventArgs e)
+        private async void GenerateItemsTextureFileAsync_Click(object sender, EventArgs e)
         {
-            GenerateTadFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER);
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(ITEMS_TEXTURE_FOLDER, x);
+            }
         }
 
-        private void GenerateEnemeisTextureFile_Click(object sender, EventArgs e)
+        private async void GenerateBackgroundTextureFileAsync_Click(object sender, EventArgs e)
         {
-            GenerateTadFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER);
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(BACKGROUND_TEXTURE_FOLDER, x);
+            }
         }
+
+
+        private async void GenerateWeaponTextureFileAsync_Click(object sender, EventArgs e)
+        {
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(WEAPONS_TEXTURE_FOLDER, x);
+            }
+        }
+
+        private async void GenerateEffectsTextureFileAsync_Click(object sender, EventArgs e)
+        {
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(EFFECTS_TEXTURE_FOLDER, x);
+            }  
+        }
+
+
+        private async void GenerateEnemeisTextureFileAsync_Click(object sender, EventArgs e)
+        {
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(ENEMIES_TEXTURE_FOLDER, x);
+            }
+        }
+
 
         private void RunLevel_Click(object sender, EventArgs e)
         {
@@ -1696,16 +1752,15 @@ namespace NekoEngine
                 _currentLevel.Serialise(new BinaryWriter(fs));
             }
 
+            Environment.CurrentDirectory = GAME_FILE_LOCATION;            
             
-            string exePath = $"{GAME_FILE_LOCATION}\\anarch.exe";
-
-            // w = windowed, d = debug
-            string arguments = "-w -d";
-           
-            ProcessStartInfo startInfo = new ProcessStartInfo(exePath);
-            startInfo.Arguments = arguments;
-
-            Process.Start(startInfo);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
+                WorkingDirectory = GAME_FILE_LOCATION,
+                // w = windowed, d = debug
+                Arguments = " -w -d"
+            });
         }
 
         private void BackgroundUpDown_ValueChanged(object sender, EventArgs e)
@@ -1773,14 +1828,27 @@ namespace NekoEngine
             _currentLevel.TextureIndices[6] = (byte)(value - 1);
         }
 
-        private void SyncSfxWithGame_Click(object sender, EventArgs e)
+        private async void SyncSfxWithGame_Click(object sender, EventArgs e)
         {
-            GenerateSadFile(GAME_FILE_LOCATION + SFX_FOLDER);
+            var x = sender as Button;
+            if (x is not null)
+            { 
+                var originalText = x.Text;
+                x.Text = "Processing...";
+                x.Enabled = false;
+                await Task.Run(() => GenerateSadFile(GAME_FILE_LOCATION + SFX_FOLDER));
+                x.Text = originalText;
+                x.Enabled = true;
+            }
         }
 
-        private void GenerateTitleTextureFile_Click(object sender, EventArgs e)
+        private async void GenerateTitleTextureFileAsync_Click(object sender, EventArgs e)
         {
-            GenerateTadFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER);
+            var x = sender as Button;
+            if (x is not null)
+            {
+                await RunTadFileGenAsync(TITLE_TEXTURE_FOLDER, x);
+            }           
         }
 
         private void BulletShotLabel_DoubleClick(object sender, EventArgs e)

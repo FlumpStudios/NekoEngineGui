@@ -34,13 +34,12 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.SaveConstantsAs = new System.Windows.Forms.Button();
             this.SaveConstants = new System.Windows.Forms.Button();
-            this.scintilla1 = new ScintillaNET.Scintilla();
+            this.CosntantsCodeEditor = new ScintillaNET.Scintilla();
             this.CodeSaveAs = new System.Windows.Forms.Button();
             this.SaveCode = new System.Windows.Forms.Button();
             this.codeEditor = new ScintillaNET.Scintilla();
             this.VsCode = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.Audio = new System.Windows.Forms.TabPage();
             this.label46 = new System.Windows.Forms.Label();
             this.PlaySfx = new System.Windows.Forms.Button();
@@ -288,13 +287,12 @@
             // 
             this.tabPage2.Controls.Add(this.SaveConstantsAs);
             this.tabPage2.Controls.Add(this.SaveConstants);
-            this.tabPage2.Controls.Add(this.scintilla1);
+            this.tabPage2.Controls.Add(this.CosntantsCodeEditor);
             this.tabPage2.Controls.Add(this.CodeSaveAs);
             this.tabPage2.Controls.Add(this.SaveCode);
             this.tabPage2.Controls.Add(this.codeEditor);
             this.tabPage2.Controls.Add(this.VsCode);
             this.tabPage2.Controls.Add(this.button3);
-            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -323,23 +321,23 @@
             this.SaveConstants.UseVisualStyleBackColor = true;
             this.SaveConstants.Click += new System.EventHandler(this.SaveConstants_Click);
             // 
-            // scintilla1
+            // CosntantsCodeEditor
             // 
-            this.scintilla1.AutoCMaxHeight = 9;
-            this.scintilla1.BiDirectionality = ScintillaNET.BiDirectionalDisplayType.Disabled;
-            this.scintilla1.CaretLineBackColor = System.Drawing.Color.Black;
-            this.scintilla1.CaretLineBackColorAlpha = 0;
-            this.scintilla1.CaretLineLayer = ScintillaNET.Layer.OverText;
-            this.scintilla1.CaretLineVisible = true;
-            this.scintilla1.LexerName = null;
-            this.scintilla1.Location = new System.Drawing.Point(744, 6);
-            this.scintilla1.Name = "scintilla1";
-            this.scintilla1.ScrollWidth = 49;
-            this.scintilla1.Size = new System.Drawing.Size(619, 528);
-            this.scintilla1.TabIndents = true;
-            this.scintilla1.TabIndex = 6;
-            this.scintilla1.UseRightToLeftReadingLayout = false;
-            this.scintilla1.WrapMode = ScintillaNET.WrapMode.None;
+            this.CosntantsCodeEditor.AutoCMaxHeight = 9;
+            this.CosntantsCodeEditor.BiDirectionality = ScintillaNET.BiDirectionalDisplayType.Disabled;
+            this.CosntantsCodeEditor.CaretLineBackColor = System.Drawing.Color.Black;
+            this.CosntantsCodeEditor.CaretLineBackColorAlpha = 0;
+            this.CosntantsCodeEditor.CaretLineLayer = ScintillaNET.Layer.OverText;
+            this.CosntantsCodeEditor.CaretLineVisible = true;
+            this.CosntantsCodeEditor.LexerName = null;
+            this.CosntantsCodeEditor.Location = new System.Drawing.Point(744, 6);
+            this.CosntantsCodeEditor.Name = "CosntantsCodeEditor";
+            this.CosntantsCodeEditor.ScrollWidth = 49;
+            this.CosntantsCodeEditor.Size = new System.Drawing.Size(619, 528);
+            this.CosntantsCodeEditor.TabIndents = true;
+            this.CosntantsCodeEditor.TabIndex = 6;
+            this.CosntantsCodeEditor.UseRightToLeftReadingLayout = false;
+            this.CosntantsCodeEditor.WrapMode = ScintillaNET.WrapMode.None;
             // 
             // CodeSaveAs
             // 
@@ -381,7 +379,7 @@
             // 
             // VsCode
             // 
-            this.VsCode.Location = new System.Drawing.Point(6, 64);
+            this.VsCode.Location = new System.Drawing.Point(6, 35);
             this.VsCode.Name = "VsCode";
             this.VsCode.Size = new System.Drawing.Size(107, 23);
             this.VsCode.TabIndex = 2;
@@ -391,23 +389,13 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 35);
+            this.button3.Location = new System.Drawing.Point(7, 6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(107, 23);
             this.button3.TabIndex = 1;
             this.button3.Text = "Run";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(107, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Compile";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // Audio
             // 
@@ -1768,7 +1756,7 @@
             this.GenerateTitleTextureFile.TabIndex = 42;
             this.GenerateTitleTextureFile.Text = "Sync with game";
             this.GenerateTitleTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateTitleTextureFile.Click += new System.EventHandler(this.GenerateTitleTextureFile_Click);
+            this.GenerateTitleTextureFile.Click += new System.EventHandler(this.GenerateTitleTextureFileAsync_Click);
             // 
             // label31
             // 
@@ -2294,7 +2282,7 @@
             this.GenerateEnemeisTextureFile.TabIndex = 15;
             this.GenerateEnemeisTextureFile.Text = "Sync With Game";
             this.GenerateEnemeisTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateEnemeisTextureFile.Click += new System.EventHandler(this.GenerateEnemeisTextureFile_Click);
+            this.GenerateEnemeisTextureFile.Click += new System.EventHandler(this.GenerateEnemeisTextureFileAsync_Click);
             // 
             // GenerateEffectsTextureFile
             // 
@@ -2304,7 +2292,7 @@
             this.GenerateEffectsTextureFile.TabIndex = 13;
             this.GenerateEffectsTextureFile.Text = "Sync With Game";
             this.GenerateEffectsTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateEffectsTextureFile.Click += new System.EventHandler(this.GenerateEffectsTextureFile_Click);
+            this.GenerateEffectsTextureFile.Click += new System.EventHandler(this.GenerateEffectsTextureFileAsync_Click);
             // 
             // effectTextureLayoutPanel
             // 
@@ -2322,7 +2310,7 @@
             this.GenerateWeaponTextureFile.TabIndex = 11;
             this.GenerateWeaponTextureFile.Text = "Sync With Game";
             this.GenerateWeaponTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateWeaponTextureFile.Click += new System.EventHandler(this.GenerateWeaponTextureFile_Click);
+            this.GenerateWeaponTextureFile.Click += new System.EventHandler(this.GenerateWeaponTextureFileAsync_Click);
             // 
             // label13
             // 
@@ -2349,7 +2337,7 @@
             this.GenerateBackgroundTextureFile.TabIndex = 8;
             this.GenerateBackgroundTextureFile.Text = "Sync With Game";
             this.GenerateBackgroundTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateBackgroundTextureFile.Click += new System.EventHandler(this.GenerateBackgroundTextureFile_Click);
+            this.GenerateBackgroundTextureFile.Click += new System.EventHandler(this.GenerateBackgroundTextureFileAsync_Click);
             // 
             // BackgroundLabel
             // 
@@ -2376,7 +2364,7 @@
             this.GenerateItemsTextureFile.TabIndex = 5;
             this.GenerateItemsTextureFile.Text = "Sync With Game";
             this.GenerateItemsTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateItemsTextureFile.Click += new System.EventHandler(this.GenerateItemsTextureFile_Click);
+            this.GenerateItemsTextureFile.Click += new System.EventHandler(this.GenerateItemsTextureFileAsync_Click);
             // 
             // ItemsLabel
             // 
@@ -2412,7 +2400,7 @@
             this.GenerateWallTextureFile.TabIndex = 1;
             this.GenerateWallTextureFile.Text = "Sync With Game";
             this.GenerateWallTextureFile.UseVisualStyleBackColor = true;
-            this.GenerateWallTextureFile.Click += new System.EventHandler(this.GenerateWallTextureFile_Click);
+            this.GenerateWallTextureFile.Click += new System.EventHandler(this.GenerateWallTextureFileAsync_Click);
             // 
             // wallTextureLayoutPanel
             // 
@@ -2548,7 +2536,6 @@
 
         private TabControl Tabs;
         private TabPage tabPage2;
-        private Button button2;
         private Button button3;
         private TabPage Audio;
         private Button VsCode;
@@ -2634,7 +2621,7 @@
         private Label Ypos;
         private Label RemainingElementsLabel;
         private Label label11;
-        private ScintillaNET.Scintilla scintilla1;
+        private ScintillaNET.Scintilla CosntantsCodeEditor;
         private Button SaveConstantsAs;
         private Button SaveConstants;
         private FlowLayoutPanel flowLayoutPanel6;
