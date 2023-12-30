@@ -42,6 +42,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.Audio = new System.Windows.Forms.TabPage();
+            this.label46 = new System.Windows.Forms.Label();
             this.PlaySfx = new System.Windows.Forms.Button();
             this.SfxPreviewLabel = new System.Windows.Forms.Label();
             this.SfxFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -217,7 +218,6 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label46 = new System.Windows.Forms.Label();
             this.Tabs.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
@@ -428,6 +428,15 @@
             this.Audio.TabIndex = 2;
             this.Audio.Text = "Audio";
             this.Audio.UseVisualStyleBackColor = true;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(7, 172);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(120, 15);
+            this.label46.TabIndex = 17;
+            this.label46.Text = "Generate Audio Array";
             // 
             // PlaySfx
             // 
@@ -1792,9 +1801,9 @@
             this.EnemiesTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.EnemiesTableLayoutPanel.ColumnCount = 4;
             this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 47F));
-            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.EnemiesTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.EnemiesTableLayoutPanel.Controls.Add(this.label28, 0, 9);
             this.EnemiesTableLayoutPanel.Controls.Add(this.label26, 0, 7);
             this.EnemiesTableLayoutPanel.Controls.Add(this.EnemyTexturePreview_2, 3, 1);
@@ -1871,34 +1880,37 @@
             // EnemyTexturePreview_2
             // 
             this.EnemyTexturePreview_2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_2.Location = new System.Drawing.Point(206, 26);
+            this.EnemyTexturePreview_2.Location = new System.Drawing.Point(197, 26);
             this.EnemyTexturePreview_2.Name = "EnemyTexturePreview_2";
-            this.EnemyTexturePreview_2.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_2.Size = new System.Drawing.Size(42, 32);
+            this.EnemyTexturePreview_2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_2.TabIndex = 8;
             this.EnemyTexturePreview_2.TabStop = false;
             // 
             // EnemyTexturePreview_1
             // 
             this.EnemyTexturePreview_1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_1.Location = new System.Drawing.Point(156, 26);
+            this.EnemyTexturePreview_1.Location = new System.Drawing.Point(145, 26);
             this.EnemyTexturePreview_1.Name = "EnemyTexturePreview_1";
-            this.EnemyTexturePreview_1.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_1.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_1.TabIndex = 7;
             this.EnemyTexturePreview_1.TabStop = false;
             // 
             // EnemyTexturePreview_0
             // 
             this.EnemyTexturePreview_0.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_0.Location = new System.Drawing.Point(108, 26);
+            this.EnemyTexturePreview_0.Location = new System.Drawing.Point(94, 26);
             this.EnemyTexturePreview_0.Name = "EnemyTexturePreview_0";
-            this.EnemyTexturePreview_0.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_0.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_0.TabIndex = 2;
             this.EnemyTexturePreview_0.TabStop = false;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(206, 1);
+            this.label19.Location = new System.Drawing.Point(197, 1);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(33, 15);
             this.label19.TabIndex = 5;
@@ -1907,7 +1919,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(156, 1);
+            this.label18.Location = new System.Drawing.Point(145, 1);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(41, 15);
             this.label18.TabIndex = 4;
@@ -1916,7 +1928,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(108, 1);
+            this.label16.Location = new System.Drawing.Point(94, 1);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(26, 15);
             this.label16.TabIndex = 6;
@@ -1925,108 +1937,120 @@
             // EnemyTexturePreview_3
             // 
             this.EnemyTexturePreview_3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_3.Location = new System.Drawing.Point(108, 67);
+            this.EnemyTexturePreview_3.Location = new System.Drawing.Point(94, 67);
             this.EnemyTexturePreview_3.Name = "EnemyTexturePreview_3";
-            this.EnemyTexturePreview_3.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_3.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_3.TabIndex = 9;
             this.EnemyTexturePreview_3.TabStop = false;
             // 
             // EnemyTexturePreview_4
             // 
             this.EnemyTexturePreview_4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_4.Location = new System.Drawing.Point(156, 67);
+            this.EnemyTexturePreview_4.Location = new System.Drawing.Point(145, 67);
             this.EnemyTexturePreview_4.Name = "EnemyTexturePreview_4";
-            this.EnemyTexturePreview_4.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_4.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_4.TabIndex = 10;
             this.EnemyTexturePreview_4.TabStop = false;
             // 
             // EnemyTexturePreview_5
             // 
             this.EnemyTexturePreview_5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_5.Location = new System.Drawing.Point(206, 67);
+            this.EnemyTexturePreview_5.Location = new System.Drawing.Point(197, 67);
             this.EnemyTexturePreview_5.Name = "EnemyTexturePreview_5";
-            this.EnemyTexturePreview_5.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_5.Size = new System.Drawing.Size(42, 32);
+            this.EnemyTexturePreview_5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_5.TabIndex = 11;
             this.EnemyTexturePreview_5.TabStop = false;
             // 
             // EnemyTexturePreview_6
             // 
             this.EnemyTexturePreview_6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_6.Location = new System.Drawing.Point(108, 108);
+            this.EnemyTexturePreview_6.Location = new System.Drawing.Point(94, 108);
             this.EnemyTexturePreview_6.Name = "EnemyTexturePreview_6";
-            this.EnemyTexturePreview_6.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_6.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_6.TabIndex = 12;
             this.EnemyTexturePreview_6.TabStop = false;
             // 
             // EnemyTexturePreview_7
             // 
             this.EnemyTexturePreview_7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_7.Location = new System.Drawing.Point(156, 108);
+            this.EnemyTexturePreview_7.Location = new System.Drawing.Point(145, 108);
             this.EnemyTexturePreview_7.Name = "EnemyTexturePreview_7";
-            this.EnemyTexturePreview_7.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_7.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_7.TabIndex = 13;
             this.EnemyTexturePreview_7.TabStop = false;
             // 
             // EnemyTexturePreview_8
             // 
             this.EnemyTexturePreview_8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_8.Location = new System.Drawing.Point(108, 151);
+            this.EnemyTexturePreview_8.Location = new System.Drawing.Point(94, 151);
             this.EnemyTexturePreview_8.Name = "EnemyTexturePreview_8";
-            this.EnemyTexturePreview_8.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_8.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_8.TabIndex = 15;
             this.EnemyTexturePreview_8.TabStop = false;
             // 
             // EnemyTexturePreview_9
             // 
             this.EnemyTexturePreview_9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_9.Location = new System.Drawing.Point(156, 151);
+            this.EnemyTexturePreview_9.Location = new System.Drawing.Point(145, 151);
             this.EnemyTexturePreview_9.Name = "EnemyTexturePreview_9";
-            this.EnemyTexturePreview_9.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_9.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_9.TabIndex = 16;
             this.EnemyTexturePreview_9.TabStop = false;
             // 
             // EnemyTexturePreview_10
             // 
             this.EnemyTexturePreview_10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_10.Location = new System.Drawing.Point(108, 195);
+            this.EnemyTexturePreview_10.Location = new System.Drawing.Point(94, 195);
             this.EnemyTexturePreview_10.Name = "EnemyTexturePreview_10";
-            this.EnemyTexturePreview_10.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_10.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_10.TabIndex = 18;
             this.EnemyTexturePreview_10.TabStop = false;
             // 
             // EnemyTexturePreview_13
             // 
             this.EnemyTexturePreview_13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_13.Location = new System.Drawing.Point(108, 237);
+            this.EnemyTexturePreview_13.Location = new System.Drawing.Point(94, 237);
             this.EnemyTexturePreview_13.Name = "EnemyTexturePreview_13";
-            this.EnemyTexturePreview_13.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_13.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_13.TabIndex = 21;
             this.EnemyTexturePreview_13.TabStop = false;
             // 
             // EnemyTexturePreview_15
             // 
             this.EnemyTexturePreview_15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_15.Location = new System.Drawing.Point(156, 237);
+            this.EnemyTexturePreview_15.Location = new System.Drawing.Point(145, 237);
             this.EnemyTexturePreview_15.Name = "EnemyTexturePreview_15";
-            this.EnemyTexturePreview_15.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_15.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_15.TabIndex = 22;
             this.EnemyTexturePreview_15.TabStop = false;
             // 
             // EnemyTexturePreview_14
             // 
             this.EnemyTexturePreview_14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_14.Location = new System.Drawing.Point(206, 237);
+            this.EnemyTexturePreview_14.Location = new System.Drawing.Point(197, 237);
             this.EnemyTexturePreview_14.Name = "EnemyTexturePreview_14";
-            this.EnemyTexturePreview_14.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_14.Size = new System.Drawing.Size(42, 32);
+            this.EnemyTexturePreview_14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_14.TabIndex = 23;
             this.EnemyTexturePreview_14.TabStop = false;
             // 
             // EnemyTexturePreview_16
             // 
             this.EnemyTexturePreview_16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_16.Location = new System.Drawing.Point(206, 279);
+            this.EnemyTexturePreview_16.Location = new System.Drawing.Point(197, 279);
             this.EnemyTexturePreview_16.Name = "EnemyTexturePreview_16";
-            this.EnemyTexturePreview_16.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_16.Size = new System.Drawing.Size(42, 32);
+            this.EnemyTexturePreview_16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_16.TabIndex = 26;
             this.EnemyTexturePreview_16.TabStop = false;
             // 
@@ -2096,36 +2120,40 @@
             // EnemyTexturePreview_17
             // 
             this.EnemyTexturePreview_17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_17.Location = new System.Drawing.Point(108, 324);
+            this.EnemyTexturePreview_17.Location = new System.Drawing.Point(94, 324);
             this.EnemyTexturePreview_17.Name = "EnemyTexturePreview_17";
-            this.EnemyTexturePreview_17.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_17.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_17.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_17.TabIndex = 36;
             this.EnemyTexturePreview_17.TabStop = false;
             // 
             // EnemyTexturePreview_18
             // 
             this.EnemyTexturePreview_18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_18.Location = new System.Drawing.Point(108, 364);
+            this.EnemyTexturePreview_18.Location = new System.Drawing.Point(94, 364);
             this.EnemyTexturePreview_18.Name = "EnemyTexturePreview_18";
-            this.EnemyTexturePreview_18.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_18.Size = new System.Drawing.Size(44, 32);
+            this.EnemyTexturePreview_18.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_18.TabIndex = 37;
             this.EnemyTexturePreview_18.TabStop = false;
             // 
             // EnemyTexturePreview_12
             // 
             this.EnemyTexturePreview_12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_12.Location = new System.Drawing.Point(156, 195);
+            this.EnemyTexturePreview_12.Location = new System.Drawing.Point(145, 195);
             this.EnemyTexturePreview_12.Name = "EnemyTexturePreview_12";
-            this.EnemyTexturePreview_12.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_12.Size = new System.Drawing.Size(41, 32);
+            this.EnemyTexturePreview_12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_12.TabIndex = 20;
             this.EnemyTexturePreview_12.TabStop = false;
             // 
             // EnemyTexturePreview_11
             // 
             this.EnemyTexturePreview_11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.EnemyTexturePreview_11.Location = new System.Drawing.Point(206, 195);
+            this.EnemyTexturePreview_11.Location = new System.Drawing.Point(197, 195);
             this.EnemyTexturePreview_11.Name = "EnemyTexturePreview_11";
-            this.EnemyTexturePreview_11.Size = new System.Drawing.Size(32, 32);
+            this.EnemyTexturePreview_11.Size = new System.Drawing.Size(42, 32);
+            this.EnemyTexturePreview_11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.EnemyTexturePreview_11.TabIndex = 19;
             this.EnemyTexturePreview_11.TabStop = false;
             // 
@@ -2137,9 +2165,9 @@
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label32.ForeColor = System.Drawing.Color.Red;
-            this.label32.Location = new System.Drawing.Point(206, 105);
+            this.label32.Location = new System.Drawing.Point(197, 105);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(33, 42);
+            this.label32.Size = new System.Drawing.Size(42, 42);
             this.label32.TabIndex = 38;
             this.label32.Text = "X";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2152,9 +2180,9 @@
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label33.ForeColor = System.Drawing.Color.Red;
-            this.label33.Location = new System.Drawing.Point(206, 148);
+            this.label33.Location = new System.Drawing.Point(197, 148);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(33, 43);
+            this.label33.Size = new System.Drawing.Size(42, 43);
             this.label33.TabIndex = 39;
             this.label33.Text = "X";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2167,9 +2195,9 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label34.ForeColor = System.Drawing.Color.Red;
-            this.label34.Location = new System.Drawing.Point(108, 276);
+            this.label34.Location = new System.Drawing.Point(94, 276);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(41, 44);
+            this.label34.Size = new System.Drawing.Size(44, 44);
             this.label34.TabIndex = 40;
             this.label34.Text = "X";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2182,9 +2210,9 @@
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label35.ForeColor = System.Drawing.Color.Red;
-            this.label35.Location = new System.Drawing.Point(156, 276);
+            this.label35.Location = new System.Drawing.Point(145, 276);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(43, 44);
+            this.label35.Size = new System.Drawing.Size(45, 44);
             this.label35.TabIndex = 41;
             this.label35.Text = "X";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2197,9 +2225,9 @@
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label36.ForeColor = System.Drawing.Color.Red;
-            this.label36.Location = new System.Drawing.Point(156, 321);
+            this.label36.Location = new System.Drawing.Point(145, 321);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(43, 39);
+            this.label36.Size = new System.Drawing.Size(45, 39);
             this.label36.TabIndex = 42;
             this.label36.Text = "X";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2212,9 +2240,9 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label37.ForeColor = System.Drawing.Color.Red;
-            this.label37.Location = new System.Drawing.Point(206, 321);
+            this.label37.Location = new System.Drawing.Point(197, 321);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(33, 39);
+            this.label37.Size = new System.Drawing.Size(42, 39);
             this.label37.TabIndex = 43;
             this.label37.Text = "X";
             this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2227,9 +2255,9 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label38.ForeColor = System.Drawing.Color.Red;
-            this.label38.Location = new System.Drawing.Point(156, 361);
+            this.label38.Location = new System.Drawing.Point(145, 361);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(43, 40);
+            this.label38.Size = new System.Drawing.Size(45, 40);
             this.label38.TabIndex = 44;
             this.label38.Text = "X";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2242,9 +2270,9 @@
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label39.ForeColor = System.Drawing.Color.Red;
-            this.label39.Location = new System.Drawing.Point(206, 361);
+            this.label39.Location = new System.Drawing.Point(197, 361);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(33, 40);
+            this.label39.Size = new System.Drawing.Size(42, 40);
             this.label39.TabIndex = 45;
             this.label39.Text = "X";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2442,15 +2470,6 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(7, 172);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(120, 15);
-            this.label46.TabIndex = 17;
-            this.label46.Text = "Generate Audio Array";
             // 
             // Form1
             // 
