@@ -14,7 +14,6 @@ namespace NekoEngine
 
     public partial class Form1 : Form
     {
-        private const byte PLAYER_POSITION_TYPE_INDEX = 99; 
         private const int GRID_SIZE = 64;
         private const int CELL_SIZE = 14;
         private const int AVAILABLE_ELEMENTS = Level.MAX_ELEMENT_SIZE;
@@ -44,9 +43,9 @@ namespace NekoEngine
 
 #if DEBUG
         const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
-  
+
 #else
-        const string GAME_FILE_LOCATION = @"..\";
+        const string GAME_FILE_LOCATION = @".\";
 #endif
 
         const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
@@ -85,7 +84,8 @@ namespace NekoEngine
         {
             if (Directory.Exists(path))
             {
-                var imageFileLocations = Directory.GetFiles(path, "*.png");
+                var imageFileLocations = Directory.GetFiles(path, "*.png").Where(x => !string.IsNullOrEmpty(x) && x.Split("\\").LastOrDefault().StartsWith("o")).ToArray();
+                
 
                 imageFileLocations = imageFileLocations.OrderBy(GetNumericPart).ToArray();
 
@@ -122,7 +122,7 @@ namespace NekoEngine
         {
             if (Directory.Exists(path))
             {
-                string[] imageFiles = Directory.GetFiles(path, "*.png");
+                string[] imageFiles = Directory.GetFiles(path, "*.png").Where(x => !string.IsNullOrEmpty(x) && x.Split("\\").LastOrDefault().StartsWith("o")).ToArray();
 
                 imageFiles = imageFiles.OrderBy(GetNumericPart).ToArray();
 
@@ -611,6 +611,26 @@ namespace NekoEngine
             }
         }
 
+        private Bitmap TransparancyReplace(Bitmap originalBitmap)
+        {
+            Color replacementColor = Color.FromArgb(248, 0, 0);
+            Bitmap modifiedBitmap = new Bitmap(originalBitmap);
+
+            for (int x = 0; x < modifiedBitmap.Width; x++)
+            {
+                for (int y = 0; y < modifiedBitmap.Height; y++)
+                {
+                    // Check if the pixel is transparent
+                    if (modifiedBitmap.GetPixel(x, y).A == 0)
+                    {
+                        // Replace transparent pixel with the specified color
+                        modifiedBitmap.SetPixel(x, y, replacementColor);
+                    }
+                }
+            }
+
+            return modifiedBitmap;
+        }
 
         private Bitmap? LoadInTextureFile(int index, string location)
         {
@@ -630,8 +650,11 @@ namespace NekoEngine
                         }
                         else
                         {
-                            var saveLocation = location + @"\" + index.ToString() + ".png";
+                            var saveLocation = location + @"\o_" + index.ToString() + ".png";
                             selectedImage.Save(saveLocation, System.Drawing.Imaging.ImageFormat.Png);
+
+                            saveLocation = location + @"\" + index.ToString() + ".png";
+                            TransparancyReplace(selectedImage).Save(saveLocation, System.Drawing.Imaging.ImageFormat.Png);
                             return selectedImage;
                         }
                     }
@@ -1226,7 +1249,7 @@ namespace NekoEngine
 
         private void Player_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(PLAYER_POSITION_TYPE_INDEX);            
+            HandleElementClicked(Level.PLAYER_POSITION_TYPE_INDEX);            
         }
 
         private void UpdateRemainingElements()
@@ -1361,7 +1384,6 @@ namespace NekoEngine
                 return;
             }
 
-
             var mapColour = GetColourFromTextureIndex(_currentLevel.MapArray[index]);
 
             if (position.Column >= 0 && position.Column < GRID_SIZE && position.Row >= 0 && position.Row < GRID_SIZE)
@@ -1403,7 +1425,7 @@ namespace NekoEngine
                     textColor = Color.FromArgb(255,0,200,0);
                 }
 
-                if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
+                if (_currentElementNumber == Level.PLAYER_POSITION_TYPE_INDEX)
                 {
                     if (_currentLevel?.PlayerStart != null)
                     {
@@ -1424,7 +1446,7 @@ namespace NekoEngine
                 {
                     g.DrawString("E" + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString(), DefaultFont, textBrush, textLocation);                    
                 }
-                else if (_currentElementNumber == PLAYER_POSITION_TYPE_INDEX)
+                else if (_currentElementNumber == Level.PLAYER_POSITION_TYPE_INDEX)
                 {
                     g.DrawString("P", DefaultFont, textBrush, textLocation);
                 }
@@ -1516,7 +1538,7 @@ namespace NekoEngine
                 RedrawAllElements(g);
 
                 // Draw player position
-                _currentElementNumber = PLAYER_POSITION_TYPE_INDEX;
+                _currentElementNumber = Level.PLAYER_POSITION_TYPE_INDEX;
                 RecoredElementClicked(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                 _currentElementNumber = originalType;
 
@@ -1537,6 +1559,7 @@ namespace NekoEngine
                 TextureAllocationUpDown4.Value = _currentLevel.TextureIndices[4] + 1;
                 TextureAllocationUpDown5.Value = _currentLevel.TextureIndices[5] + 1;
                 TextureAllocationUpDown6.Value = _currentLevel.TextureIndices[6] + 1;
+                DoorTextureUpDown.Value = _currentLevel.DoorTextureIndex;
             }
         }
 
@@ -1552,7 +1575,7 @@ namespace NekoEngine
 
                 switch (_currentElementNumber)
                 {
-                    case PLAYER_POSITION_TYPE_INDEX:
+                    case Level.PLAYER_POSITION_TYPE_INDEX:
                         return "Player";
                     case ACCESS_CARD_1:
                         return "Key 1";
@@ -1636,7 +1659,7 @@ namespace NekoEngine
 
             if (Directory.Exists(folderPath))
             {
-                string[] imageFiles = Directory.GetFiles(folderPath, "*.png");
+                string[] imageFiles = Directory.GetFiles(folderPath, "*.png").Where(x => !string.IsNullOrEmpty(x) && !x.Split("\\").LastOrDefault().StartsWith("o")).ToArray();
                 imageFiles = imageFiles.OrderBy(GetNumericPart).ToArray();
 
                 for (int i = 0; i < imageFiles.Length; i++)
@@ -2087,6 +2110,36 @@ namespace NekoEngine
             {
                 Console.WriteLine($"Error converting to WAV: {ex.Message}");
             }
+        }
+
+        private void Preview3D_Click(object sender, EventArgs e)
+        {
+            string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
+            using (FileStream fs = new(fileLocation, FileMode.Create))
+            {
+                _currentLevel.Serialise(new BinaryWriter(fs));
+            }
+
+            Environment.CurrentDirectory = GAME_FILE_LOCATION;
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Path.Join(GAME_FILE_LOCATION, "NekoNeo.exe"),
+                WorkingDirectory = GAME_FILE_LOCATION
+            });
+        }
+
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DoorTextureUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            int value = (int)numericUpDown.Value;
+            _currentLevel.DoorTextureIndex = (byte)value;
         }
     }
 

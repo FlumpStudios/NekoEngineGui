@@ -14,7 +14,8 @@ namespace NekoEngine
 
     [Serializable]
     public class Level
-    { 
+    {
+        public const byte PLAYER_POSITION_TYPE_INDEX = 99;
         public const int MAX_ELEMENT_SIZE = 128;
         public byte ceilHeight = 10;
         public byte floorHeight = 10;
@@ -22,7 +23,7 @@ namespace NekoEngine
 
         public Level()
         {
-            DoorTextureIndex = 13;
+            DoorTextureIndex = 1;
             FloorColor = 20;
             CeilingColor = 3;
 
@@ -134,6 +135,13 @@ namespace NekoEngine
 
             foreach (var element in this.elements)
             {
+
+                if (element.Type == PLAYER_POSITION_TYPE_INDEX)
+                {
+                    element.Type = 0;
+                    element.Coords[0] = 0;
+                    element.Coords[1] = 0;
+                }
                 bw.Write(element.Type);
                 foreach (var item2 in element.Coords)
                 {

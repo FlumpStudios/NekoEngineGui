@@ -58,6 +58,7 @@
             this.GenerateAudioArray = new System.Windows.Forms.Button();
             this.loadAudio = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.Preview3D = new System.Windows.Forms.Button();
             this.RunLevel = new System.Windows.Forms.Button();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.ElementButton_13 = new System.Windows.Forms.Button();
@@ -139,6 +140,8 @@
             this.MapColour_door5 = new System.Windows.Forms.Button();
             this.MapColour_door6 = new System.Windows.Forms.Button();
             this.MapColour_door7 = new System.Windows.Forms.Button();
+            this.label47 = new System.Windows.Forms.Label();
+            this.DoorTextureUpDown = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.CellHeight = new System.Windows.Forms.NumericUpDown();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -241,6 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoorTextureUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.Textures_Tab.SuspendLayout();
@@ -582,6 +586,7 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.Preview3D);
             this.tabPage1.Controls.Add(this.RunLevel);
             this.tabPage1.Controls.Add(this.flowLayoutPanel6);
             this.tabPage1.Controls.Add(this.RemainingElementsLabel);
@@ -611,13 +616,23 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form_MouseMove);
             // 
+            // Preview3D
+            // 
+            this.Preview3D.Location = new System.Drawing.Point(1203, 711);
+            this.Preview3D.Name = "Preview3D";
+            this.Preview3D.Size = new System.Drawing.Size(233, 60);
+            this.Preview3D.TabIndex = 42;
+            this.Preview3D.Text = "3D Preview";
+            this.Preview3D.UseVisualStyleBackColor = true;
+            this.Preview3D.Click += new System.EventHandler(this.Preview3D_Click);
+            // 
             // RunLevel
             // 
-            this.RunLevel.Location = new System.Drawing.Point(1209, 684);
+            this.RunLevel.Location = new System.Drawing.Point(1203, 769);
             this.RunLevel.Name = "RunLevel";
-            this.RunLevel.Size = new System.Drawing.Size(230, 119);
+            this.RunLevel.Size = new System.Drawing.Size(233, 61);
             this.RunLevel.TabIndex = 41;
-            this.RunLevel.Text = "Preview Level";
+            this.RunLevel.Text = "Play Level";
             this.RunLevel.UseVisualStyleBackColor = true;
             this.RunLevel.Click += new System.EventHandler(this.RunLevel_Click);
             // 
@@ -630,7 +645,7 @@
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_16);
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_17);
             this.flowLayoutPanel6.Controls.Add(this.ElementButton_18);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(970, 621);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(964, 648);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
             this.flowLayoutPanel6.Size = new System.Drawing.Size(233, 182);
             this.flowLayoutPanel6.TabIndex = 40;
@@ -773,7 +788,7 @@
             this.flowLayoutPanel5.Controls.Add(this.Player);
             this.flowLayoutPanel5.Controls.Add(this.label7);
             this.flowLayoutPanel5.Controls.Add(this.PlayerRotationUpDown);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(1209, 452);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(1203, 479);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(233, 68);
             this.flowLayoutPanel5.TabIndex = 31;
@@ -826,7 +841,7 @@
             this.flowLayoutPanel4.Controls.Add(this.FloorColourUpDown4);
             this.flowLayoutPanel4.Controls.Add(this.label17);
             this.flowLayoutPanel4.Controls.Add(this.BackgroundUpDown);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(1209, 526);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(1203, 553);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(233, 152);
             this.flowLayoutPanel4.TabIndex = 30;
@@ -996,7 +1011,7 @@
             // 
             // ClearMap
             // 
-            this.ClearMap.Location = new System.Drawing.Point(1265, 158);
+            this.ClearMap.Location = new System.Drawing.Point(1265, 218);
             this.ClearMap.Name = "ClearMap";
             this.ClearMap.Size = new System.Drawing.Size(183, 23);
             this.ClearMap.TabIndex = 10;
@@ -1014,7 +1029,7 @@
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_24);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_25);
             this.flowLayoutPanel3.Controls.Add(this.ElementButton_26);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(1209, 231);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(1203, 258);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(233, 215);
             this.flowLayoutPanel3.TabIndex = 13;
@@ -1105,7 +1120,7 @@
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_11);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_12);
             this.flowLayoutPanel2.Controls.Add(this.ElementButton_19);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(970, 231);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(964, 258);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(233, 384);
             this.flowLayoutPanel2.TabIndex = 12;
@@ -1267,11 +1282,13 @@
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door5);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door6);
             this.flowLayoutPanel1.Controls.Add(this.MapColour_door7);
+            this.flowLayoutPanel1.Controls.Add(this.label47);
+            this.flowLayoutPanel1.Controls.Add(this.DoorTextureUpDown);
             this.flowLayoutPanel1.Controls.Add(this.label3);
             this.flowLayoutPanel1.Controls.Add(this.CellHeight);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(970, 6);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(964, 6);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(289, 198);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(295, 235);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // label15
@@ -1600,13 +1617,48 @@
             this.MapColour_door7.UseVisualStyleBackColor = false;
             this.MapColour_door7.Click += new System.EventHandler(this.MapColour_door_Click);
             // 
+            // label47
+            // 
+            this.label47.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label47.Location = new System.Drawing.Point(3, 150);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(130, 29);
+            this.label47.TabIndex = 40;
+            this.label47.Text = "Door texture:";
+            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // DoorTextureUpDown
+            // 
+            this.DoorTextureUpDown.Location = new System.Drawing.Point(139, 153);
+            this.DoorTextureUpDown.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.DoorTextureUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.DoorTextureUpDown.Name = "DoorTextureUpDown";
+            this.DoorTextureUpDown.Size = new System.Drawing.Size(130, 23);
+            this.DoorTextureUpDown.TabIndex = 41;
+            this.DoorTextureUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.DoorTextureUpDown.ValueChanged += new System.EventHandler(this.DoorTextureUpDown_ValueChanged);
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 150);
+            this.label3.Location = new System.Drawing.Point(3, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 29);
             this.label3.TabIndex = 29;
@@ -1615,7 +1667,7 @@
             // 
             // CellHeight
             // 
-            this.CellHeight.Location = new System.Drawing.Point(139, 153);
+            this.CellHeight.Location = new System.Drawing.Point(139, 182);
             this.CellHeight.Maximum = new decimal(new int[] {
             7,
             0,
@@ -1635,6 +1687,7 @@
             this.pictureBox.Size = new System.Drawing.Size(900, 933);
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -2499,6 +2552,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextureAllocationUpDown6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DoorTextureUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CellHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.Textures_Tab.ResumeLayout(false);
@@ -2722,5 +2776,8 @@
         private Button PlaySfx;
         private Label SfxPreviewLabel;
         private Label label46;
+        private Button Preview3D;
+        private Label label47;
+        private NumericUpDown DoorTextureUpDown;
     }
 }
