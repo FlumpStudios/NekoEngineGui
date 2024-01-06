@@ -171,13 +171,13 @@ namespace NekoEngine
                 SFG_TD(0,ceilHeight,0,0), // 0
 
                 // doors 
-                SFG_TD(4,0,0,0), // 1
-                SFG_TD(4,0,1,1), // 2
-                SFG_TD(4,0,2,2), // 3 
-                SFG_TD(4,0,3,3), // 4
-                SFG_TD(4,0,4,4), // 5
-                SFG_TD(4,0,5,5), // 6
-                SFG_TD(4,0,6,6), // 7
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,0,0), // 1
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,1,1), // 2
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,2,2), // 3 
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,3,3), // 4
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,4,4), // 5
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,5,5), // 6
+                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,6,6), // 7
 
                 SFG_TD(floorHeight,ceilHeight,0,0), // 8
                 SFG_TD(floorHeight,ceilHeight,1,1), // 9

@@ -58,6 +58,7 @@
             this.GenerateAudioArray = new System.Windows.Forms.Button();
             this.loadAudio = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.RefreshMap = new System.Windows.Forms.Button();
             this.Preview3D = new System.Windows.Forms.Button();
             this.RunLevel = new System.Windows.Forms.Button();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
@@ -586,6 +587,7 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.RefreshMap);
             this.tabPage1.Controls.Add(this.Preview3D);
             this.tabPage1.Controls.Add(this.RunLevel);
             this.tabPage1.Controls.Add(this.flowLayoutPanel6);
@@ -616,13 +618,23 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form_MouseMove);
             // 
+            // RefreshMap
+            // 
+            this.RefreshMap.Location = new System.Drawing.Point(1265, 193);
+            this.RefreshMap.Name = "RefreshMap";
+            this.RefreshMap.Size = new System.Drawing.Size(183, 23);
+            this.RefreshMap.TabIndex = 43;
+            this.RefreshMap.Text = "Refresh";
+            this.RefreshMap.UseVisualStyleBackColor = true;
+            this.RefreshMap.Click += new System.EventHandler(this.RefreshMap_Click);
+            // 
             // Preview3D
             // 
             this.Preview3D.Location = new System.Drawing.Point(1203, 711);
             this.Preview3D.Name = "Preview3D";
             this.Preview3D.Size = new System.Drawing.Size(233, 60);
             this.Preview3D.TabIndex = 42;
-            this.Preview3D.Text = "3D Preview";
+            this.Preview3D.Text = "3D Editor";
             this.Preview3D.UseVisualStyleBackColor = true;
             this.Preview3D.Click += new System.EventHandler(this.Preview3D_Click);
             // 
@@ -885,7 +897,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 29);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Floor Height";
+            this.label4.Text = "Wall Height";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FloorHeightUpDown
@@ -2495,21 +2507,21 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save Level";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load Level";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
             // Form1
@@ -2779,5 +2791,6 @@
         private Button Preview3D;
         private Label label47;
         private NumericUpDown DoorTextureUpDown;
+        private Button RefreshMap;
     }
 }

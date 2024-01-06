@@ -75,8 +75,8 @@ namespace NekoEngine
             InitTexturesFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, WeaponsPictureBox_DoubleClick, weaponsTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
             InitTexturesFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER, TitlePictureBox_DoubleClick, titleTextureLayoutPanel);
-
             InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);
+            LoadPreviewLevel();
             _soundPlayer = new SoundPlayer();
         }
 
@@ -250,6 +250,12 @@ namespace NekoEngine
         {
             // Extract the numeric part from the file name
             string numericPart = Path.GetFileNameWithoutExtension(fileName);
+
+            if (numericPart.StartsWith("o",StringComparison.OrdinalIgnoreCase))
+            {
+                numericPart = numericPart.Split("_").Last();
+            }
+
 
             // Try to parse the numeric part as an integer
             if (int.TryParse(numericPart, out int numericValue))
@@ -1513,6 +1519,23 @@ namespace NekoEngine
             }
         }
 
+        private void SavePreviewLevel()
+        {
+            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Create))
+            {
+                _currentLevel.Serialise(new BinaryWriter(fs));
+            }
+        }
+
+        private void LoadPreviewLevel()
+        {
+            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD") , FileMode.Open))
+            {
+                _currentLevel.Deserialise(new BinaryReader(fs));
+            }
+            LoadLevelIntoUi();
+        }
+
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -1529,6 +1552,12 @@ namespace NekoEngine
                 }
             }
 
+            LoadLevelIntoUi();
+            SavePreviewLevel();
+        }
+
+        private void LoadLevelIntoUi()
+        {
             using (Graphics g = Graphics.FromImage(_gridImage))
             {
                 RedrawWholeMapArray(g);
@@ -2140,6 +2169,11 @@ namespace NekoEngine
 
             int value = (int)numericUpDown.Value;
             _currentLevel.DoorTextureIndex = (byte)value;
+        }
+
+        private void RefreshMap_Click(object sender, EventArgs e)
+        {
+            LoadPreviewLevel();
         }
     }
 
