@@ -221,6 +221,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GodMode = new System.Windows.Forms.CheckBox();
             this.Tabs.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
@@ -587,6 +588,7 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.GodMode);
             this.tabPage1.Controls.Add(this.RefreshMap);
             this.tabPage1.Controls.Add(this.Preview3D);
             this.tabPage1.Controls.Add(this.RunLevel);
@@ -630,9 +632,9 @@
             // 
             // Preview3D
             // 
-            this.Preview3D.Location = new System.Drawing.Point(1203, 711);
+            this.Preview3D.Location = new System.Drawing.Point(1203, 761);
             this.Preview3D.Name = "Preview3D";
-            this.Preview3D.Size = new System.Drawing.Size(233, 60);
+            this.Preview3D.Size = new System.Drawing.Size(233, 31);
             this.Preview3D.TabIndex = 42;
             this.Preview3D.Text = "3D Editor";
             this.Preview3D.UseVisualStyleBackColor = true;
@@ -640,9 +642,9 @@
             // 
             // RunLevel
             // 
-            this.RunLevel.Location = new System.Drawing.Point(1203, 769);
+            this.RunLevel.Location = new System.Drawing.Point(1203, 798);
             this.RunLevel.Name = "RunLevel";
-            this.RunLevel.Size = new System.Drawing.Size(233, 61);
+            this.RunLevel.Size = new System.Drawing.Size(233, 32);
             this.RunLevel.TabIndex = 41;
             this.RunLevel.Text = "Play Level";
             this.RunLevel.UseVisualStyleBackColor = true;
@@ -904,7 +906,7 @@
             // 
             this.FloorHeightUpDown.Location = new System.Drawing.Point(159, 32);
             this.FloorHeightUpDown.Maximum = new decimal(new int[] {
-            31,
+            30,
             0,
             0,
             0});
@@ -2507,22 +2509,32 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.saveToolStripMenuItem.Text = "Save Level";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.loadToolStripMenuItem.Text = "Load Level";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            // 
+            // GodMode
+            // 
+            this.GodMode.AutoSize = true;
+            this.GodMode.Location = new System.Drawing.Point(1210, 736);
+            this.GodMode.Name = "GodMode";
+            this.GodMode.Size = new System.Drawing.Size(82, 19);
+            this.GodMode.TabIndex = 44;
+            this.GodMode.Text = "God mode";
+            this.GodMode.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -2792,5 +2804,6 @@
         private Label label47;
         private NumericUpDown DoorTextureUpDown;
         private Button RefreshMap;
+        private CheckBox GodMode;
     }
 }

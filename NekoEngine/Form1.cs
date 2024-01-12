@@ -1564,12 +1564,12 @@ namespace NekoEngine
 
                 // Draw Elements
                 var originalType = _currentElementNumber;
-                RedrawAllElements(g);
 
                 // Draw player position
                 _currentElementNumber = Level.PLAYER_POSITION_TYPE_INDEX;
                 RecoredElementClicked(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                 _currentElementNumber = originalType;
+                RedrawAllElements(g);
 
                 // Update GUI values
                 PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
@@ -1798,6 +1798,7 @@ namespace NekoEngine
 
         private void RunLevel_Click(object sender, EventArgs e)
         {
+            bool godMode = GodMode.Checked;
             string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
             using (FileStream fs = new(fileLocation, FileMode.Create))
             {
@@ -1811,7 +1812,7 @@ namespace NekoEngine
                 FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
                 WorkingDirectory = GAME_FILE_LOCATION,
                 // w = windowed, d = debug
-                Arguments = " -w -d"
+                Arguments = godMode ? " -w -d -g" : " -w -d"
             });
         }
 
