@@ -58,6 +58,8 @@
             this.GenerateAudioArray = new System.Windows.Forms.Button();
             this.loadAudio = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.FullScreenTextBox = new System.Windows.Forms.CheckBox();
+            this.GodMode = new System.Windows.Forms.CheckBox();
             this.RefreshMap = new System.Windows.Forms.Button();
             this.Preview3D = new System.Windows.Forms.Button();
             this.RunLevel = new System.Windows.Forms.Button();
@@ -221,7 +223,6 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.GodMode = new System.Windows.Forms.CheckBox();
             this.Tabs.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.Audio.SuspendLayout();
@@ -588,6 +589,7 @@
             // 
             this.tabPage1.AutoScroll = true;
             this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.FullScreenTextBox);
             this.tabPage1.Controls.Add(this.GodMode);
             this.tabPage1.Controls.Add(this.RefreshMap);
             this.tabPage1.Controls.Add(this.Preview3D);
@@ -619,6 +621,26 @@
             this.tabPage1.Text = "Level Editor";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form_MouseMove);
+            // 
+            // FullScreenTextBox
+            // 
+            this.FullScreenTextBox.AutoSize = true;
+            this.FullScreenTextBox.Location = new System.Drawing.Point(1210, 715);
+            this.FullScreenTextBox.Name = "FullScreenTextBox";
+            this.FullScreenTextBox.Size = new System.Drawing.Size(82, 19);
+            this.FullScreenTextBox.TabIndex = 45;
+            this.FullScreenTextBox.Text = "Full screen";
+            this.FullScreenTextBox.UseVisualStyleBackColor = true;
+            // 
+            // GodMode
+            // 
+            this.GodMode.AutoSize = true;
+            this.GodMode.Location = new System.Drawing.Point(1210, 736);
+            this.GodMode.Name = "GodMode";
+            this.GodMode.Size = new System.Drawing.Size(82, 19);
+            this.GodMode.TabIndex = 44;
+            this.GodMode.Text = "God mode";
+            this.GodMode.UseVisualStyleBackColor = true;
             // 
             // RefreshMap
             // 
@@ -2526,16 +2548,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // GodMode
-            // 
-            this.GodMode.AutoSize = true;
-            this.GodMode.Location = new System.Drawing.Point(1210, 736);
-            this.GodMode.Name = "GodMode";
-            this.GodMode.Size = new System.Drawing.Size(82, 19);
-            this.GodMode.TabIndex = 44;
-            this.GodMode.Text = "God mode";
-            this.GodMode.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2805,5 +2817,6 @@
         private NumericUpDown DoorTextureUpDown;
         private Button RefreshMap;
         private CheckBox GodMode;
+        private CheckBox FullScreenTextBox;
     }
 }

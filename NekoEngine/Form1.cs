@@ -1799,20 +1799,31 @@ namespace NekoEngine
         private void RunLevel_Click(object sender, EventArgs e)
         {
             bool godMode = GodMode.Checked;
+            bool fullsceen = FullScreenTextBox.Checked;
             string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
             using (FileStream fs = new(fileLocation, FileMode.Create))
             {
                 _currentLevel.Serialise(new BinaryWriter(fs));
             }
 
-            Environment.CurrentDirectory = GAME_FILE_LOCATION;            
-            
+            Environment.CurrentDirectory = GAME_FILE_LOCATION;
+            string args = "-d";
+
+            if (godMode)
+            {
+                args += " -g";
+            }
+            if (!fullsceen)
+            {
+                args += " -w";
+            }
+
             Process.Start(new ProcessStartInfo
             {
                 FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
                 WorkingDirectory = GAME_FILE_LOCATION,
                 // w = windowed, d = debug
-                Arguments = godMode ? " -w -d -g" : " -w -d"
+                Arguments = args
             });
         }
 
