@@ -15,6 +15,7 @@ namespace NekoEngine
     [Serializable]
     public class Level
     {
+        public const int MAP_DIMENSION = 64;
         public const byte PLAYER_POSITION_TYPE_INDEX = 99;
         public const int MAX_ELEMENT_SIZE = 128;
         public byte ceilHeight = 10;
@@ -61,12 +62,35 @@ namespace NekoEngine
         public byte BackgroundImage;
         public Elements[] elements;
 
+        public static byte[] InvertArrayWidth(byte[] inputArray)
+        {
+            byte[] outputArray = new byte[inputArray.Length];
+
+            for (int i = 0; i < inputArray.Length; i++)
+            {
+                int x = i % MAP_DIMENSION;
+                int y = i / MAP_DIMENSION;
+
+                // Reverse the order of columns
+                int adjustedX = MAP_DIMENSION - 1 - x;
+
+                // Calculate the new index in the output array
+                int newIndex = adjustedX + y * MAP_DIMENSION;
+
+                // Copy the value from the input array to the corresponding position in the output array
+                outputArray[newIndex] = inputArray[i];
+            }
+
+            return outputArray;
+        }
+
         public void Deserialise(BinaryReader br)
         {   
             for (int i = 0; i < 4096; i++)
             {
                 this.MapArray[i] = br.ReadByte();
             }
+            this.MapArray = InvertArrayWidth(this.MapArray);
 
             for (int i = 0; i < 64; i++)
             {
@@ -82,20 +106,20 @@ namespace NekoEngine
             this.FloorColor = br.ReadByte();
             this.CeilingColor = br.ReadByte();
 
-            for (int i = 0; i < 3; i++)
-            {
-                this.PlayerStart[i] = br.ReadByte();    
-            }
+            
+
+            this.PlayerStart[0] = (byte)(MAP_DIMENSION - 1 - br.ReadByte());
+            this.PlayerStart[1] = br.ReadByte();
+            this.PlayerStart[2] = br.ReadByte();
+
 
             this.BackgroundImage = br.ReadByte();
 
             for (int i = 0; i < MAX_ELEMENT_SIZE; i++)
             {
-                this.elements[i].Type = br.ReadByte();
-                for (int j = 0; j < 2; j++)
-                {
-                    this.elements[i].Coords[j] = br.ReadByte();
-                }
+                this.elements[i].Type = br.ReadByte();                
+                this.elements[i].Coords[0] = (byte)(MAP_DIMENSION - 1 - br.ReadByte());
+                this.elements[i].Coords[1] = br.ReadByte();
             }
 
             this.ceilHeight = br.ReadByte();
@@ -106,7 +130,22 @@ namespace NekoEngine
         {
             GenerateTileDictionary();
 
-            foreach (var maptItem in this.MapArray)
+            // Ensure player position isn't saved as an element
+            foreach (var element in this.elements)
+            {
+                if (element.Type == PLAYER_POSITION_TYPE_INDEX)
+                {
+                    element.Type = 0;
+                    element.Coords[0] = 0;
+                    element.Coords[1] = 0;
+                }
+            }
+
+            // Ensure that all elements with a type are at the beginning of the array so can be ignore game/engine side.
+            this.elements = this.elements.OrderByDescending(x => x.Type).ToArray();
+
+            var toWrite = InvertArrayWidth(this.MapArray);
+            foreach (var maptItem in toWrite)
             {
                 bw.Write(maptItem);
             }
@@ -125,28 +164,18 @@ namespace NekoEngine
             bw.Write(this.FloorColor);
             bw.Write(this.CeilingColor);
 
-            foreach (var playerStart in this.PlayerStart)
-            {
-                bw.Write(playerStart);
-            }
 
+            bw.Write((byte)(MAP_DIMENSION - 1 - this.PlayerStart[0]));
+            bw.Write(this.PlayerStart[1]);
+            bw.Write(this.PlayerStart[2]); 
             bw.Write(this.BackgroundImage);
 
 
             foreach (var element in this.elements)
             {
-
-                if (element.Type == PLAYER_POSITION_TYPE_INDEX)
-                {
-                    element.Type = 0;
-                    element.Coords[0] = 0;
-                    element.Coords[1] = 0;
-                }
                 bw.Write(element.Type);
-                foreach (var item2 in element.Coords)
-                {
-                    bw.Write(item2);
-                }
+                bw.Write((byte)(MAP_DIMENSION - 1 - element.Coords[0]));
+                bw.Write(element.Coords[1]);
             }
 
             bw.Write(ceilHeight);

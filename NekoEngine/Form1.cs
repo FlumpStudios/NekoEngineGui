@@ -1363,6 +1363,7 @@ namespace NekoEngine
         }
 
 
+
         private void RedrawWholeMapArray(Graphics g)
         {
             int row = 0;
@@ -1531,7 +1532,17 @@ namespace NekoEngine
         {
             using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD") , FileMode.Open))
             {
-                _currentLevel.Deserialise(new BinaryReader(fs));
+                if (fs != null)
+                {
+                    try
+                    {
+                        _currentLevel.Deserialise(new BinaryReader(fs));
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowErrorMessage(ex.Message);
+                    }
+                }
             }
             LoadLevelIntoUi();
         }
