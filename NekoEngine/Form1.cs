@@ -1,8 +1,6 @@
 using System.Diagnostics;
 using System.Media;
-using System.Text;
 using System.Text.RegularExpressions;
-using ScintillaNET;
 
 namespace NekoEngine
 {
@@ -14,6 +12,7 @@ namespace NekoEngine
 
     public partial class Form1 : Form
     {
+        const decimal DEGRESS_TO_BYTE_CONVERSION = 1.4117M;
         private const int GRID_SIZE = 64;
         private const int CELL_SIZE = 14;
         private const int AVAILABLE_ELEMENTS = Level.MAX_ELEMENT_SIZE;
@@ -1357,9 +1356,15 @@ namespace NekoEngine
         private void PlayerRotationUpDown_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
+            
+            decimal value = numericUpDown.Value / DEGRESS_TO_BYTE_CONVERSION;
 
-            decimal value = numericUpDown.Value;
-            _currentLevel.PlayerStart[2] = (byte)value;
+            if (value > byte.MaxValue)
+            {
+                    value = byte.MaxValue;
+            }
+
+            _currentLevel.PlayerStart[2] = (byte)(value);
         }
 
 
@@ -1583,7 +1588,7 @@ namespace NekoEngine
                 RedrawAllElements(g);
 
                 // Update GUI values
-                PlayerRotationUpDown.Value = _currentLevel.PlayerStart[2];
+                PlayerRotationUpDown.Value = decimal.Ceiling(_currentLevel.PlayerStart[2] * DEGRESS_TO_BYTE_CONVERSION);
                 FloorHeightUpDown.Value = _currentLevel.floorHeight;
                 CeilingHeightUpDown.Value = _currentLevel.ceilHeight;
                 CeilingColourUpDown.Value = _currentLevel.CeilingColor;
