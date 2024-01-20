@@ -818,8 +818,9 @@ namespace NekoEngine
             }
             else if (_currentLevel.MapArray[index] > 0 && _currentLevel.MapArray[index] < STEP_ELEMENT_INDEX_START)
             {
-                ShowErrorMessage("ELements can't be placed on walls");
-                return;
+                // Still trying to work out if we should allow items to be put on walls, for now I think so
+                // ShowErrorMessage("ELements can't be placed on walls");
+                // return;
             }
             else if (_currentLevel.MapArray[index] > DOOR_MASK)
             {
