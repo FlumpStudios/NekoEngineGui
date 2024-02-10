@@ -15,16 +15,18 @@ namespace NekoEngine
     [Serializable]
     public class Level
     {
+        public const int DOOR_TEXTURE_INDEX = 15;
         public const int MAP_DIMENSION = 64;
         public const byte PLAYER_POSITION_TYPE_INDEX = 99;
         public const int MAX_ELEMENT_SIZE = 128;
         public byte ceilHeight = 10;
+        public byte doorLevitaion = 0;
         public byte floorHeight = 10;
         public byte[] HeightArray;
 
         public Level()
         {
-            DoorTextureIndex = 1;
+            DoorTextureIndex = DOOR_TEXTURE_INDEX;
             FloorColor = 20;
             CeilingColor = 3;
 
@@ -54,7 +56,7 @@ namespace NekoEngine
         public byte[] MapArray;
         public UInt16[] TileDictionary;
         public byte[] TextureIndices;
-        public byte DoorTextureIndex;
+        public byte DoorTextureIndex = DOOR_TEXTURE_INDEX;
         public byte FloorColor { get; set; }
         public byte CeilingColor { get; set; }
 
@@ -102,10 +104,11 @@ namespace NekoEngine
                 this.TextureIndices[i] = br.ReadByte();
             }
 
-            this.DoorTextureIndex = br.ReadByte();
+            // Read door texture index even though not used
+            br.ReadByte();
+
             this.FloorColor = br.ReadByte();
             this.CeilingColor = br.ReadByte();
-
             
 
             this.PlayerStart[0] = (byte)(MAP_DIMENSION - 1 - br.ReadByte());
@@ -200,13 +203,13 @@ namespace NekoEngine
                 SFG_TD(0,ceilHeight,0,0), // 0
 
                 // doors 
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,0,0), // 1
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,1,1), // 2
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,2,2), // 3 
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,3,3), // 4
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,4,4), // 5
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,5,5), // 6
-                SFG_TD(4,ceilHeight > 30 ? (ushort)31 : (ushort)0,6,6), // 7
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,0,0), // 1
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,1,1), // 2
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,2,2), // 3 
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,3,3), // 4
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,4,4), // 5
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,5,5), // 6
+                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,6,6), // 7
 
                 SFG_TD(floorHeight,ceilHeight,0,0), // 8
                 SFG_TD(floorHeight,ceilHeight,1,1), // 9

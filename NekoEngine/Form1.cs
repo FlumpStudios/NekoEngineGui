@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 namespace NekoEngine
 {
     public enum EditState
-    { 
+    {
         Walls = 0,
         Elements = 1
     }
@@ -17,7 +17,7 @@ namespace NekoEngine
         private const int CELL_SIZE = 14;
         private const int AVAILABLE_ELEMENTS = Level.MAX_ELEMENT_SIZE;
         private const int ENEMIES_INDEX_OFFSET = 31;
-        
+
         private const int ACCESS_CARD_1 = 0x0d;
         private const int ACCESS_CARD_2 = 0x0e;
         private const int ACCESS_CARD_3 = 0x0f;
@@ -63,7 +63,7 @@ namespace NekoEngine
         const byte DEBUG_LEVEL_ID = 99;
 
         public Form1()
-        {   
+        {
             _gridImage = new Bitmap(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
             InitializeComponent();
             InitializeCodeEditor();
@@ -84,11 +84,11 @@ namespace NekoEngine
             if (Directory.Exists(path))
             {
                 var imageFileLocations = Directory.GetFiles(path, "*.png").Where(x => !string.IsNullOrEmpty(x) && x.Split("\\").LastOrDefault().StartsWith("o")).ToArray();
-                
+
 
                 imageFileLocations = imageFileLocations.OrderBy(GetNumericPart).ToArray();
 
-               List<Image> imageFiles = new();
+                List<Image> imageFiles = new();
 
                 for (int i = 0; i < imageFileLocations.Length; i++)
                 {
@@ -101,13 +101,13 @@ namespace NekoEngine
                 }
 
                 foreach (Control control in EnemiesTableLayoutPanel.Controls)
-                {                    
+                {
                     if (control is PictureBox)
                     {
                         PictureBox pictureBox = (PictureBox)control;
 
                         int boxNum = int.Parse(pictureBox.Name.Split('_').Last());
-                                
+
                         pictureBox.Image = imageFiles[boxNum];
                         pictureBox.Tag = boxNum;
                         pictureBox.DoubleClick += action;
@@ -117,7 +117,7 @@ namespace NekoEngine
         }
 
 
-        private void InitTexturesFile(string path,EventHandler action, FlowLayoutPanel panel)
+        private void InitTexturesFile(string path, EventHandler action, FlowLayoutPanel panel)
         {
             if (Directory.Exists(path))
             {
@@ -146,11 +146,19 @@ namespace NekoEngine
                             Text = (i + 1).ToString() + "."
                         };
 
+                        if (panel.Name.Equals("wallTextureLayoutPanel", StringComparison.OrdinalIgnoreCase) && i == 15)
+                        {
+                            label.Width = 33;
+                            label.Text = "Door";
+                        }
+
+
+
                         if (string.Equals(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER, path))
                         {
-                            
+
                             label.Text = GetItemNameFromIndex(i);
-                            label.Width = 50;                            
+                            label.Width = 50;
                         }
                         else if (string.Equals(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, path))
                         {
@@ -187,7 +195,7 @@ namespace NekoEngine
                 case 4:
                     return "Plasma Gun";
                 case 5:
-                    return "Solution";              
+                    return "Solution";
                 default:
                     return "";
             }
@@ -247,10 +255,9 @@ namespace NekoEngine
 
         static int GetNumericPart(string fileName)
         {
-            // Extract the numeric part from the file name
             string numericPart = Path.GetFileNameWithoutExtension(fileName);
 
-            if (numericPart.StartsWith("o",StringComparison.OrdinalIgnoreCase))
+            if (numericPart.StartsWith("o", StringComparison.OrdinalIgnoreCase))
             {
                 numericPart = numericPart.Split("_").Last();
             }
@@ -263,7 +270,6 @@ namespace NekoEngine
             }
             else
             {
-                // If parsing fails, return a default value (you can adjust this based on your requirements)
                 return 0;
             }
         }
@@ -430,7 +436,7 @@ namespace NekoEngine
             }
         }
 
-  
+
 
         private void loadAudio_Click_1(object sender, EventArgs e)
         {
@@ -479,7 +485,7 @@ namespace NekoEngine
                     process.StandardInput.Flush();
                     process.StandardInput.Close();
 
-                
+
                     string output = process.StandardOutput.ReadToEnd();
 
                     string pattern = @"\{([^}]*)\}";
@@ -495,7 +501,7 @@ namespace NekoEngine
             }
             catch (Exception ex)
             {
-                ShowErrorMessage($"Error running the Python script: {ex.Message}");                
+                ShowErrorMessage($"Error running the Python script: {ex.Message}");
             }
         }
 
@@ -509,7 +515,7 @@ namespace NekoEngine
 
 
         private void SaveCode_Click(object sender, EventArgs e)
-        {   
+        {
             try
             {
                 System.IO.File.WriteAllText(GAME_SETTINGS_FILE_LOCATION, codeEditor.Text);
@@ -540,7 +546,7 @@ namespace NekoEngine
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
 
-            
+
 
             using (Graphics g = Graphics.FromImage(_gridImage))
             {
@@ -604,7 +610,7 @@ namespace NekoEngine
         {
             if (sender is PictureBox pictureBox && pictureBox.Tag is int index)
             {
-                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER) ?? pictureBox.Image; 
+                pictureBox.Image = LoadInTextureFile(index, GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER) ?? pictureBox.Image;
             }
         }
 
@@ -721,7 +727,7 @@ namespace NekoEngine
             }
             Xpos.Text = gridPos.Column.ToString();
             Ypos.Text = gridPos.Row.ToString();
-            
+
         }
 
         private void DrawOnGrid(GridPosition position)
@@ -742,7 +748,7 @@ namespace NekoEngine
                 {
                     ClearGrid(g, position);
                     DrawMapArrayBlock(g, position);
-                    DrawElementBLock(g, _currentLevel.GetElementAtPosition(position));                    
+                    DrawElementBLock(g, _currentLevel.GetElementAtPosition(position));
                     DrawGrid(g);
                     pictureBox.Invalidate();
                 }
@@ -768,8 +774,8 @@ namespace NekoEngine
                 var index = position.MapArrayIndex();
 
                 _currentLevel.HeightArray[index] = _selectedHeight;
-                    
-                if (_currentLevel != null) 
+
+                if (_currentLevel != null)
                 {
                     _currentLevel.MapArray[index] = GetMapArrayTextureIdFromPosition(position);
                 }
@@ -777,7 +783,7 @@ namespace NekoEngine
         }
 
         private byte GetMapArrayTextureIdFromPosition(in GridPosition pos)
-        {   
+        {
             if (_currentLevel != null)
             {
                 return (byte)(GetTextureIndexFromColour(_selectedMapColour) + (7 * _currentLevel.HeightArray[pos.MapArrayIndex()]));
@@ -801,7 +807,7 @@ namespace NekoEngine
             return CELL_SIZE;
         }
 
-        private bool IsLockElement(byte element) => element >= 0x10 && element <= 0x12;       
+        private bool IsLockElement(byte element) => element >= 0x10 && element <= 0x12;
 
         private void RecoredElementClicked(GridPosition position)
         {
@@ -879,7 +885,7 @@ namespace NekoEngine
         {
             _selectedMapColour = col;
             SelectedElement.Text = GetSelectedElementName();
-            _currentEditState = EditState.Walls;            
+            _currentEditState = EditState.Walls;
         }
 
         private void MapColour_MouseDown(object sender, MouseEventArgs e)
@@ -897,7 +903,7 @@ namespace NekoEngine
             {
                 HandlWallSelectionClicked(button.BackColor);
             }
-             _currentEditState = EditState.Walls;
+            _currentEditState = EditState.Walls;
             CellHeight.Enabled = true;
         }
 
@@ -973,7 +979,7 @@ namespace NekoEngine
             }
 
             if (color.RgbEquels(Color.FromArgb(255, 255, 20, 147)))
-            { 
+            {
                 return color.GetIndexFromColour(8);
             }
 
@@ -1025,7 +1031,7 @@ namespace NekoEngine
                     newColour = Color.FromArgb(255, 128, 128, 128);
                     break;
                 case 4 | DOOR_MASK:
-                    newColour =  Color.FromArgb(255, 153, 153, 153);
+                    newColour = Color.FromArgb(255, 153, 153, 153);
                     break;
                 case 5 | DOOR_MASK:
                     newColour = Color.FromArgb(255, 179, 179, 179);
@@ -1033,7 +1039,7 @@ namespace NekoEngine
                 case 6 | DOOR_MASK:
                     newColour = Color.FromArgb(255, 204, 204, 204);
                     break;
-                 case 7 | DOOR_MASK:
+                case 7 | DOOR_MASK:
                     newColour = Color.FromArgb(255, 230, 230, 230);
                     break;
                 case 8:
@@ -1044,7 +1050,7 @@ namespace NekoEngine
                 case 8 + 35:
                 case 8 + 42:
                 case 8 + 49:
-                    newColour =  Color.FromArgb(255, 255, 20, 147);
+                    newColour = Color.FromArgb(255, 255, 20, 147);
                     break;
                 case 9:
                 case 9 + 7:
@@ -1084,7 +1090,7 @@ namespace NekoEngine
                 case 12 + 35:
                 case 12 + 42:
                 case 12 + 49:
-                    newColour =Color.FromArgb(255, 128, 0, 0);
+                    newColour = Color.FromArgb(255, 128, 0, 0);
                     break;
                 case 13:
                 case 13 + 7:
@@ -1119,8 +1125,8 @@ namespace NekoEngine
         private void HandleElementClicked(byte elementNumber)
         {
             _currentElementNumber = elementNumber;
-            _currentEditState = EditState.Elements;            
-             SelectedElement.Text =  GetSelectedElementName();
+            _currentEditState = EditState.Elements;
+            SelectedElement.Text = GetSelectedElementName();
         }
 
         private void ElementButton_1_Click(object sender, EventArgs e)
@@ -1135,7 +1141,7 @@ namespace NekoEngine
 
         private void ElementButton_3_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x03);            
+            HandleElementClicked(0x03);
         }
 
         private void ElementButton_4_Click(object sender, EventArgs e)
@@ -1145,32 +1151,32 @@ namespace NekoEngine
 
         private void ElementButton_5_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x05);            
+            HandleElementClicked(0x05);
         }
 
         private void ElementButton_6_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x06);            
+            HandleElementClicked(0x06);
         }
 
         private void ElementButton_7_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x07);            
+            HandleElementClicked(0x07);
         }
 
         private void ElementButton_8_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x08);            
+            HandleElementClicked(0x08);
         }
 
         private void ElementButton_9_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x09);            
+            HandleElementClicked(0x09);
         }
 
         private void ElementButton_10_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(0x0a);            
+            HandleElementClicked(0x0a);
         }
 
         private void ElementButton_11_Click(object sender, EventArgs e)
@@ -1190,17 +1196,17 @@ namespace NekoEngine
 
         private void ElementButton_14_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(ACCESS_CARD_2);            
+            HandleElementClicked(ACCESS_CARD_2);
         }
 
         private void ElementButton_15_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(ACCESS_CARD_3);            
+            HandleElementClicked(ACCESS_CARD_3);
         }
 
         private void ElementButton_16_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(LOCK_1);            
+            HandleElementClicked(LOCK_1);
         }
 
         private void ElementButton_17_Click(object sender, EventArgs e)
@@ -1255,7 +1261,7 @@ namespace NekoEngine
 
         private void Player_Click(object sender, EventArgs e)
         {
-            HandleElementClicked(Level.PLAYER_POSITION_TYPE_INDEX);            
+            HandleElementClicked(Level.PLAYER_POSITION_TYPE_INDEX);
         }
 
         private void UpdateRemainingElements()
@@ -1265,7 +1271,7 @@ namespace NekoEngine
         }
 
         private bool RecordELementClickedCell(GridPosition position)
-        {            
+        {
             int col = position.Column;
             int row = position.Row;
 
@@ -1279,7 +1285,7 @@ namespace NekoEngine
 
                     if (index == -1)
                     {
-                        ShowErrorMessage($"You have exceeded the maximum amount of { AVAILABLE_ELEMENTS } available elements.");
+                        ShowErrorMessage($"You have exceeded the maximum amount of {AVAILABLE_ELEMENTS} available elements.");
                         return false;
                     }
 
@@ -1296,22 +1302,22 @@ namespace NekoEngine
             UpdateRemainingElements();
             return true;
         }
-        
+
 
         private void RemoveELementClickedCell(GridPosition position)
-        {            
+        {
             int col = position.Column;
             int row = position.Row;
 
             if (col >= 0 && col < GRID_SIZE && row >= 0 && row < GRID_SIZE)
             {
                 if (_currentLevel?.elements != null)
-                { 
+                {
                     int index = Array.FindIndex(_currentLevel.elements, element =>
                      (element.Coords != null && element.Coords.Length >= 2 && element.Coords[0] == col && element.Coords[1] == row));
-                    if (index == -1) { return;  }
+                    if (index == -1) { return; }
 
-                                        
+
                     _currentLevel.elements[index] = new Elements
                     {
                         Coords = new byte[2] { 32, 32 },
@@ -1323,7 +1329,7 @@ namespace NekoEngine
         }
 
         private void FloorHeightUpDown_ValueChanged(object sender, EventArgs e)
-        {   
+        {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
             decimal value = numericUpDown.Value;
@@ -1357,12 +1363,12 @@ namespace NekoEngine
         private void PlayerRotationUpDown_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
-            
+
             decimal value = numericUpDown.Value / DEGRESS_TO_BYTE_CONVERSION;
 
             if (value > byte.MaxValue)
             {
-                    value = byte.MaxValue;
+                value = byte.MaxValue;
             }
 
             _currentLevel.PlayerStart[2] = (byte)(value);
@@ -1374,7 +1380,7 @@ namespace NekoEngine
         {
             int row = 0;
             int col = 0;
- 
+
             for (int i = 0; i < _currentLevel.MapArray.Length; i++)
             {
                 if (i > 0 && i % GRID_SIZE == 0)
@@ -1435,7 +1441,7 @@ namespace NekoEngine
 
                 else if (IsLockElement(_currentElementNumber))
                 {
-                    textColor = Color.FromArgb(255,0,200,0);
+                    textColor = Color.FromArgb(255, 0, 200, 0);
                 }
 
                 if (_currentElementNumber == Level.PLAYER_POSITION_TYPE_INDEX)
@@ -1457,7 +1463,7 @@ namespace NekoEngine
                 PointF textLocation = new PointF((element.Coords[0] * CELL_SIZE) + CELL_SIZE / 30, (element.Coords[1] * CELL_SIZE) + CELL_SIZE / 30);
                 if (_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
                 {
-                    g.DrawString("E" + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString(), DefaultFont, textBrush, textLocation);                    
+                    g.DrawString("E" + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString(), DefaultFont, textBrush, textLocation);
                 }
                 else if (_currentElementNumber == Level.PLAYER_POSITION_TYPE_INDEX)
                 {
@@ -1536,7 +1542,7 @@ namespace NekoEngine
 
         private void LoadPreviewLevel()
         {
-            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD") , FileMode.Open))
+            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Open))
             {
                 if (fs != null)
                 {
@@ -1605,7 +1611,6 @@ namespace NekoEngine
                 TextureAllocationUpDown4.Value = _currentLevel.TextureIndices[4] + 1;
                 TextureAllocationUpDown5.Value = _currentLevel.TextureIndices[5] + 1;
                 TextureAllocationUpDown6.Value = _currentLevel.TextureIndices[6] + 1;
-                DoorTextureUpDown.Value = _currentLevel.DoorTextureIndex;
             }
         }
 
@@ -1614,7 +1619,7 @@ namespace NekoEngine
             if (_currentEditState == EditState.Elements)
             {
 
-                if(_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
+                if (_currentElementNumber >= 0x20 && _currentElementNumber <= 0x26)
                 {
                     return "Enemy " + (_currentElementNumber - ENEMIES_INDEX_OFFSET).ToString();
                 }
@@ -1642,7 +1647,7 @@ namespace NekoEngine
                 return "Item " + _currentElementNumber.ToString();
             }
             else
-            {                
+            {
                 var mask = GetTextureIndexFromColour(_selectedMapColour) & DOOR_MASK;
                 if (mask >= DOOR_MASK)
                 {
@@ -1760,7 +1765,7 @@ namespace NekoEngine
         {
             var x = sender as Button;
             if (x is not null)
-            { 
+            {
                 await RunTadFileGenAsync(WALL_TEXTURE_FOLDER, x);
             }
         }
@@ -1799,7 +1804,7 @@ namespace NekoEngine
             if (x is not null)
             {
                 await RunTadFileGenAsync(EFFECTS_TEXTURE_FOLDER, x);
-            }  
+            }
         }
 
 
@@ -1913,7 +1918,7 @@ namespace NekoEngine
         {
             var x = sender as Button;
             if (x is not null)
-            { 
+            {
                 var originalText = x.Text;
                 x.Text = "Processing...";
                 x.Enabled = false;
@@ -1929,14 +1934,14 @@ namespace NekoEngine
             if (x is not null)
             {
                 await RunTadFileGenAsync(TITLE_TEXTURE_FOLDER, x);
-            }           
+            }
         }
 
         private void BulletShotLabel_DoubleClick(object sender, EventArgs e)
         {
             var fileName = LoadInSfxFile(0, GAME_FILE_LOCATION + SFX_FOLDER);
             if (!string.IsNullOrEmpty(fileName))
-            { 
+            {
                 BulletShotLabel.Text = BulletShotLabel.Text + " (" + fileName + ")";
             }
         }
@@ -2064,7 +2069,7 @@ namespace NekoEngine
         private void CopyToClipboardTex_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(GenTextureArrayTextBox.Text))
-            { 
+            {
                 Clipboard.SetText(GenTextureArrayTextBox.Text);
                 MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -2109,7 +2114,7 @@ namespace NekoEngine
         private void PlaySfx_Click(object sender, EventArgs e)
         {
             // Specify the path to your .raw file
-            string rawFilePath = GAME_FILE_LOCATION + SFX_FOLDER + @"\" +_selectedSfxForPreview.ToString()  + ".raw";
+            string rawFilePath = GAME_FILE_LOCATION + SFX_FOLDER + @"\" + _selectedSfxForPreview.ToString() + ".raw";
             string wavFilePath = GAME_FILE_LOCATION + SFX_FOLDER + @"\preview.wav";
 
             try
@@ -2118,7 +2123,7 @@ namespace NekoEngine
 
                 // Load the .raw file and play it
                 _soundPlayer.SoundLocation = wavFilePath;
-                _soundPlayer.Play();                
+                _soundPlayer.Play();
             }
             catch (Exception ex)
             {
@@ -2197,7 +2202,7 @@ namespace NekoEngine
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
             int value = (int)numericUpDown.Value;
-            _currentLevel.DoorTextureIndex = (byte)value;
+            _currentLevel.doorLevitaion = (byte)(value);
         }
 
         private void RefreshMap_Click(object sender, EventArgs e)
@@ -2207,7 +2212,7 @@ namespace NekoEngine
     }
 
     internal record GridPosition(int Column, int Row)
-    { 
+    {
         internal int MapArrayIndex()
         {
             var index = (Row * 64) + Column;
