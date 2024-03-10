@@ -15,6 +15,9 @@ namespace NekoEngine
     [Serializable]
     public class Level
     {
+        public const int MAX_WALL_SIZE = 31;
+        public const int TEXTURE_COUNT = 7;
+        public const int SFG_TILE_DICTIONARY_SIZE = 128;
         public const int DOOR_TEXTURE_INDEX = 15;
         public const int MAP_DIMENSION = 64;
         public const byte PLAYER_POSITION_TYPE_INDEX = 99;
@@ -49,7 +52,7 @@ namespace NekoEngine
                 };
             }
 
-            this.TileDictionary = new ushort[64];
+            this.TileDictionary = new ushort[SFG_TILE_DICTIONARY_SIZE];
             GenerateTileDictionary();
         }
         
@@ -94,7 +97,7 @@ namespace NekoEngine
             }
             this.MapArray = InvertArrayWidth(this.MapArray);
 
-            for (int i = 0; i < 64; i++)
+            for (int i = 0; i < SFG_TILE_DICTIONARY_SIZE; i++)
             {
                 this.TileDictionary[i] = br.ReadUInt16();
             }
@@ -196,85 +199,46 @@ namespace NekoEngine
         }
 
         private void GenerateTileDictionary()
-        { 
-            this.TileDictionary = new ushort[64]
-            {   
+        {
+            this.TileDictionary = new ushort[SFG_TILE_DICTIONARY_SIZE];
+
+            {
                 // Open space
-                SFG_TD(0,ceilHeight,0,0), // 0
+                this.TileDictionary[0] = SFG_TD(0, ceilHeight, 0, 0); // 0
 
-                // doors 
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,0,0), // 1
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,1,1), // 2
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,2,2), // 3 
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,3,3), // 4
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,4,4), // 5
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,5,5), // 6
-                SFG_TD((byte)(doorLevitaion + 4),ceilHeight > 30 ? (ushort)31 : (ushort)0,6,6), // 7
+                // Doors 
+                this.TileDictionary[1] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 0, 0); // 1
+                this.TileDictionary[2] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 1, 1); // 2
+                this.TileDictionary[3] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 2, 2); // 3 
+                this.TileDictionary[4] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 3, 3); // 4
+                this.TileDictionary[5] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 4, 4); // 5
+                this.TileDictionary[6] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 5, 5); // 6
+                this.TileDictionary[7] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 6, 6); // 7
 
-                SFG_TD(floorHeight,ceilHeight,0,0), // 8
-                SFG_TD(floorHeight,ceilHeight,1,1), // 9
-                SFG_TD(floorHeight,ceilHeight,2,2), // 10
-                SFG_TD(floorHeight,ceilHeight,3,3), // 11
-                SFG_TD(floorHeight,ceilHeight,4,4), // 12
-                SFG_TD(floorHeight,ceilHeight,5,5), // 13
-                SFG_TD(floorHeight,ceilHeight,6,6), // 14
-                
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,0,0), // 15
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,1,1), // 16
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,2,2), // 17
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,3,3), // 18
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,4,4), // 19
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,5,5), // 20
-                SFG_TD(1,ceilHeight <  31 ? (ushort)(ceilHeight - 1) :  (ushort)31 ,6,6), // 21
-                
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,0,0), // 22
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,1,1), // 23
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,2,2), // 24
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,3,3), // 25
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,4,4), // 26
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,5,5), // 27
-                SFG_TD(2,ceilHeight <  31 ? (ushort)(ceilHeight - 2) :  (ushort)31 ,6,6), // 28
-
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,0,0), // 29
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,1,1), // 30
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,2,2), // 31
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,3,3), // 32
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,4,4), // 33
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,5,5), // 34
-                SFG_TD(3,ceilHeight <  31 ? (ushort)(ceilHeight - 3) :  (ushort)31 ,6,6), // 35
-
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,0,0), // 36
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,1,1), // 37
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,2,2), // 38
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,3,3), // 39
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,4,4), // 40
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,5,5), // 41
-                SFG_TD(4,ceilHeight <  31 ? (ushort)(ceilHeight - 4) :  (ushort)31 ,6,6), // 42
-
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,0,0), // 43
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,1,1), // 44
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,2,2), // 45
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,3,3), // 46
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,4,4), // 47
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,5,5), // 48
-                SFG_TD(5,ceilHeight <  31 ? (ushort)(ceilHeight - 5) :  (ushort)31 ,6,6), // 49
-
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,0,0), // 50
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,1,1), // 51
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,2,2), // 52 
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,3,3), // 53
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,4,4), // 54
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,5,5), // 55
-                SFG_TD(6,ceilHeight <  31 ? (ushort)(ceilHeight - 6) :  (ushort)31 ,6,6), // 56
-
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,0,0), // 57
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,1,1), // 58
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,2,2), // 59
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,3,3), // 60
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,4,4), // 61
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,5,5), // 62
-                SFG_TD(7,ceilHeight <  31 ? (ushort)(ceilHeight - 7) :  (ushort)31 ,6,6), // 63
+                // Walls
+                this.TileDictionary[8] = SFG_TD(floorHeight, ceilHeight, 0, 0); // 8
+                this.TileDictionary[9] = SFG_TD(floorHeight, ceilHeight, 1, 1); // 9
+                this.TileDictionary[10] = SFG_TD(floorHeight, ceilHeight, 2, 2); // 10
+                this.TileDictionary[11] = SFG_TD(floorHeight, ceilHeight, 3, 3); // 11
+                this.TileDictionary[12] = SFG_TD(floorHeight, ceilHeight, 4, 4); // 12
+                this.TileDictionary[13] = SFG_TD(floorHeight, ceilHeight, 5, 5); // 13
+                this.TileDictionary[14] = SFG_TD(floorHeight, ceilHeight, 6, 6); // 14              
             };
+
+            ushort textureIndex = 0;
+            ushort heightIndex = 1;
+            // Platforms
+            for (int i = 15; i < SFG_TILE_DICTIONARY_SIZE; i++)
+            {
+                this.TileDictionary[i] = SFG_TD(heightIndex, ceilHeight < MAX_WALL_SIZE ? (ushort)(ceilHeight - heightIndex) : (ushort)MAX_WALL_SIZE, (ushort)(textureIndex), (ushort)(textureIndex)); // 15
+
+                textureIndex++;
+                if (textureIndex >= TEXTURE_COUNT)
+                {
+                    textureIndex = 0;
+                    heightIndex++;
+                }
+            }
         }
     }
 }

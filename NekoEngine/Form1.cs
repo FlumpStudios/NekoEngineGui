@@ -1542,6 +1542,9 @@ namespace NekoEngine
 
         private void LoadPreviewLevel()
         {
+            string filePath = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD");
+            if (!File.Exists(filePath)) { return; }
+
             using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Open))
             {
                 if (fs != null)
