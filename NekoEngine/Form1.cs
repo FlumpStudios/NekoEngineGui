@@ -794,17 +794,12 @@ namespace NekoEngine
 
         private int GetMapArrayDrawHeightFromIndex(int index)
         {
-            if (index < 15 || index > 63) { return CELL_SIZE; }
+            if (index < 15 || index >= Level.SFG_TILE_DICTIONARY_SIZE)
+            {
+                return CELL_SIZE;
+            }
 
-            if (index >= 15 && index < 22) { return 3; }
-            if (index >= 22 && index < 29) { return 4; }
-            if (index >= 29 && index < 36) { return 5; }
-            if (index >= 36 && index < 43) { return 6; }
-            if (index >= 43 && index < 50) { return 7; }
-            if (index >= 50 && index < 57) { return 8; }
-            if (index >= 57 && index < 64) { return 9; }
-
-            return CELL_SIZE;
+            return ((index - 15) / 14) + 3;
         }
 
         private bool IsLockElement(byte element) => element >= 0x10 && element <= 0x12;
@@ -1050,6 +1045,14 @@ namespace NekoEngine
                 case 8 + 35:
                 case 8 + 42:
                 case 8 + 49:
+                case 8 + 56:
+                case 8 + 63:
+                case 8 + 70:
+                case 8 + 77:
+                case 8 + 84:
+                case 8 + 91:
+                case 8 + 98:
+                case 8 + 105:
                     newColour = Color.FromArgb(255, 255, 20, 147);
                     break;
                 case 9:
@@ -1060,6 +1063,14 @@ namespace NekoEngine
                 case 9 + 35:
                 case 9 + 42:
                 case 9 + 49:
+                case 9 + 56:
+                case 9 + 63:
+                case 9 + 70:
+                case 9 + 77:
+                case 9 + 84:
+                case 9 + 91:
+                case 9 + 98:
+                case 9 + 105:
                     newColour = Color.FromArgb(255, 255, 0, 0);
                     break;
                 case 10:
@@ -1070,6 +1081,14 @@ namespace NekoEngine
                 case 10 + 35:
                 case 10 + 42:
                 case 10 + 49:
+                case 10 + 56:
+                case 10 + 63:
+                case 10 + 70:
+                case 10 + 77:
+                case 10 + 84:
+                case 10 + 91:
+                case 10 + 98:
+                case 10 + 105:
                     newColour = Color.FromArgb(255, 192, 192, 0);
                     break;
                 case 11:
@@ -1080,6 +1099,14 @@ namespace NekoEngine
                 case 11 + 35:
                 case 11 + 42:
                 case 11 + 49:
+                case 11 + 56:
+                case 11 + 63:
+                case 11 + 70:
+                case 11 + 77:
+                case 11 + 84:
+                case 11 + 91:
+                case 11 + 98:
+                case 11 + 105:
                     newColour = Color.FromArgb(255, 0, 0, 255);
                     break;
                 case 12:
@@ -1090,6 +1117,14 @@ namespace NekoEngine
                 case 12 + 35:
                 case 12 + 42:
                 case 12 + 49:
+                case 12 + 56:
+                case 12 + 63:
+                case 12 + 70:
+                case 12 + 77:
+                case 12 + 84:
+                case 12 + 91:
+                case 12 + 98:
+                case 12 + 105:
                     newColour = Color.FromArgb(255, 128, 0, 0);
                     break;
                 case 13:
@@ -1100,6 +1135,14 @@ namespace NekoEngine
                 case 13 + 35:
                 case 13 + 42:
                 case 13 + 49:
+                case 13 + 56:
+                case 13 + 63:
+                case 13 + 70:
+                case 13 + 77:
+                case 13 + 84:
+                case 13 + 91:
+                case 13 + 98:
+                case 13 + 105:
                     newColour = Color.FromArgb(255, 255, 255, 0);
                     break;
                 case 14:
@@ -1110,6 +1153,14 @@ namespace NekoEngine
                 case 14 + 35:
                 case 14 + 42:
                 case 14 + 49:
+                case 14 + 56:
+                case 14 + 63:
+                case 14 + 70:
+                case 14 + 77:
+                case 14 + 84:
+                case 14 + 91:
+                case 14 + 98:
+                case 14 + 105:
                     newColour = Color.FromArgb(255, 0, 128, 0);
                     break;
             }

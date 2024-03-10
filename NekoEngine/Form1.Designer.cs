@@ -1529,7 +1529,7 @@
             // DoorHeightUpDown
             // 
             DoorHeightUpDown.Location = new Point(139, 153);
-            DoorHeightUpDown.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            DoorHeightUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
             DoorHeightUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             DoorHeightUpDown.Name = "DoorHeightUpDown";
             DoorHeightUpDown.Size = new Size(130, 23);
@@ -1552,7 +1552,7 @@
             // CellHeight
             // 
             CellHeight.Location = new Point(139, 182);
-            CellHeight.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            CellHeight.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
             CellHeight.Name = "CellHeight";
             CellHeight.Size = new Size(130, 23);
             CellHeight.TabIndex = 30;
