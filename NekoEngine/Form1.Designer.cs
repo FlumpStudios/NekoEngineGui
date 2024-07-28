@@ -93,6 +93,8 @@
             FloorColourUpDown4 = new NumericUpDown();
             label17 = new Label();
             BackgroundUpDown = new NumericUpDown();
+            stepHeightLabel = new Label();
+            stepHeightUpDown = new NumericUpDown();
             label5 = new Label();
             button4 = new Button();
             ClearMap = new Button();
@@ -237,6 +239,7 @@
             ((System.ComponentModel.ISupportInitialize)CeilingColourUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FloorColourUpDown4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BackgroundUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)stepHeightUpDown).BeginInit();
             flowLayoutPanel3.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
@@ -623,7 +626,7 @@
             // FullScreenTextBox
             // 
             FullScreenTextBox.AutoSize = true;
-            FullScreenTextBox.Location = new Point(1210, 715);
+            FullScreenTextBox.Location = new Point(1203, 744);
             FullScreenTextBox.Name = "FullScreenTextBox";
             FullScreenTextBox.Size = new Size(82, 19);
             FullScreenTextBox.TabIndex = 45;
@@ -633,7 +636,7 @@
             // GodMode
             // 
             GodMode.AutoSize = true;
-            GodMode.Location = new Point(1210, 736);
+            GodMode.Location = new Point(1345, 744);
             GodMode.Name = "GodMode";
             GodMode.Size = new Size(82, 19);
             GodMode.TabIndex = 44;
@@ -652,7 +655,7 @@
             // 
             // Preview3D
             // 
-            Preview3D.Location = new Point(1203, 761);
+            Preview3D.Location = new Point(1203, 765);
             Preview3D.Name = "Preview3D";
             Preview3D.Size = new Size(233, 31);
             Preview3D.TabIndex = 42;
@@ -869,9 +872,11 @@
             flowLayoutPanel4.Controls.Add(FloorColourUpDown4);
             flowLayoutPanel4.Controls.Add(label17);
             flowLayoutPanel4.Controls.Add(BackgroundUpDown);
+            flowLayoutPanel4.Controls.Add(stepHeightLabel);
+            flowLayoutPanel4.Controls.Add(stepHeightUpDown);
             flowLayoutPanel4.Location = new Point(1203, 553);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(233, 152);
+            flowLayoutPanel4.Size = new Size(233, 181);
             flowLayoutPanel4.TabIndex = 30;
             // 
             // label6
@@ -972,6 +977,27 @@
             BackgroundUpDown.TabIndex = 31;
             BackgroundUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             BackgroundUpDown.ValueChanged += BackgroundUpDown_ValueChanged;
+            // 
+            // stepHeightLabel
+            // 
+            stepHeightLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            stepHeightLabel.Location = new Point(3, 145);
+            stepHeightLabel.Name = "stepHeightLabel";
+            stepHeightLabel.Size = new Size(150, 29);
+            stepHeightLabel.TabIndex = 34;
+            stepHeightLabel.Text = "Step Height";
+            stepHeightLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // stepHeightUpDown
+            // 
+            stepHeightUpDown.Location = new Point(159, 148);
+            stepHeightUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
+            stepHeightUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            stepHeightUpDown.Name = "stepHeightUpDown";
+            stepHeightUpDown.Size = new Size(61, 23);
+            stepHeightUpDown.TabIndex = 33;
+            stepHeightUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            stepHeightUpDown.ValueChanged += stepHeightUpDown_ValueChanged;
             // 
             // label5
             // 
@@ -1524,7 +1550,6 @@
             DoorHeightLabel.TabIndex = 40;
             DoorHeightLabel.Text = "Door height:";
             DoorHeightLabel.TextAlign = ContentAlignment.MiddleLeft;
-            DoorHeightLabel.Visible = false;
             // 
             // DoorHeightUpDown
             // 
@@ -1535,7 +1560,6 @@
             DoorHeightUpDown.Size = new Size(130, 23);
             DoorHeightUpDown.TabIndex = 41;
             DoorHeightUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            DoorHeightUpDown.Visible = false;
             DoorHeightUpDown.ValueChanged += DoorTextureUpDown_ValueChanged;
             // 
             // label3
@@ -1552,7 +1576,7 @@
             // CellHeight
             // 
             CellHeight.Location = new Point(139, 182);
-            CellHeight.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
+            CellHeight.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
             CellHeight.Name = "CellHeight";
             CellHeight.Size = new Size(130, 23);
             CellHeight.TabIndex = 30;
@@ -2401,6 +2425,7 @@
             ((System.ComponentModel.ISupportInitialize)CeilingColourUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FloorColourUpDown4).EndInit();
             ((System.ComponentModel.ISupportInitialize)BackgroundUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)stepHeightUpDown).EndInit();
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
@@ -2473,7 +2498,6 @@
         private Button MapColour_6;
         private Button MapColour_7;
         private Button ClearMap;
-        private Label label1;
         private Button MapColour_door;
         private Label label2;
         private FlowLayoutPanel flowLayoutPanel2;
@@ -2641,5 +2665,8 @@
         private Button RefreshMap;
         private CheckBox GodMode;
         private CheckBox FullScreenTextBox;
+        private Label stepHeightLabel;
+        private NumericUpDown stepHeightUpDown;
+        private Label label1;
     }
 }

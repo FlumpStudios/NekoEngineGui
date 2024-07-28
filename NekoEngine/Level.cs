@@ -17,13 +17,15 @@ namespace NekoEngine
     {
         public const int MAX_WALL_SIZE = 31;
         public const int TEXTURE_COUNT = 7;
-        public const int SFG_TILE_DICTIONARY_SIZE = 128;
+        public const int SFG_TILE_DICTIONARY_SIZE = 64;
         public const int DOOR_TEXTURE_INDEX = 15;
         public const int MAP_DIMENSION = 64;
         public const byte PLAYER_POSITION_TYPE_INDEX = 99;
         public const int MAX_ELEMENT_SIZE = 128;
+        public static ushort stepSize = 1;
+
         public byte ceilHeight = 10;
-        public byte doorLevitaion = 0;
+        public byte doorLevitation = 0;
         public byte floorHeight = 10;
         public byte[] HeightArray;
 
@@ -207,13 +209,13 @@ namespace NekoEngine
                 this.TileDictionary[0] = SFG_TD(0, ceilHeight, 0, 0); // 0
 
                 // Doors 
-                this.TileDictionary[1] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 0, 0); // 1
-                this.TileDictionary[2] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 1, 1); // 2
-                this.TileDictionary[3] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 2, 2); // 3 
-                this.TileDictionary[4] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 3, 3); // 4
-                this.TileDictionary[5] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 4, 4); // 5
-                this.TileDictionary[6] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 5, 5); // 6
-                this.TileDictionary[7] = SFG_TD((byte)(doorLevitaion + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 6, 6); // 7
+                this.TileDictionary[1] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 0, 0); // 1
+                this.TileDictionary[2] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 1, 1); // 2
+                this.TileDictionary[3] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 2, 2); // 3 
+                this.TileDictionary[4] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 3, 3); // 4
+                this.TileDictionary[5] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 4, 4); // 5
+                this.TileDictionary[6] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 5, 5); // 6
+                this.TileDictionary[7] = SFG_TD((byte)(doorLevitation + 4), ceilHeight > 30 ? (ushort)31 : (ushort)0, 6, 6); // 7
 
                 // Walls
                 this.TileDictionary[8] = SFG_TD(floorHeight, ceilHeight, 0, 0); // 8
@@ -226,7 +228,8 @@ namespace NekoEngine
             };
 
             ushort textureIndex = 0;
-            ushort heightIndex = 1;
+            ushort heightIndex = 2;
+            
             // Platforms
             for (int i = 15; i < SFG_TILE_DICTIONARY_SIZE; i++)
             {
@@ -236,7 +239,7 @@ namespace NekoEngine
                 if (textureIndex >= TEXTURE_COUNT)
                 {
                     textureIndex = 0;
-                    heightIndex++;
+                    heightIndex += Level.stepSize;
                 }
             }
         }

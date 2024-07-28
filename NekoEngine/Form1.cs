@@ -546,8 +546,6 @@ namespace NekoEngine
             pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox.Size = new Size(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
 
-
-
             using (Graphics g = Graphics.FromImage(_gridImage))
             {
                 for (int i = 0; i < GRID_SIZE; i++)
@@ -799,7 +797,7 @@ namespace NekoEngine
                 return CELL_SIZE;
             }
 
-            return ((index - 15) / 14) + 3;
+            return ((index - 15) / (int)CellHeight.Maximum) + 3;
         }
 
         private bool IsLockElement(byte element) => element >= 0x10 && element <= 0x12;
@@ -1354,7 +1352,6 @@ namespace NekoEngine
             return true;
         }
 
-
         private void RemoveELementClickedCell(GridPosition position)
         {
             int col = position.Column;
@@ -1425,8 +1422,6 @@ namespace NekoEngine
             _currentLevel.PlayerStart[2] = (byte)(value);
         }
 
-
-
         private void RedrawWholeMapArray(Graphics g)
         {
             int row = 0;
@@ -1466,7 +1461,6 @@ namespace NekoEngine
                 g.FillRectangle(brush, position.Column * CELL_SIZE, startY, CELL_SIZE, brushHeight);
             }
         }
-
 
         private void RedrawAllElements(Graphics g)
         {
@@ -2256,12 +2250,20 @@ namespace NekoEngine
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
             int value = (int)numericUpDown.Value;
-            _currentLevel.doorLevitaion = (byte)(value);
+            _currentLevel.doorLevitation = (byte)(value);
         }
 
         private void RefreshMap_Click(object sender, EventArgs e)
         {
             LoadPreviewLevel();
+        }
+
+        private void stepHeightUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown numericUpDown = (NumericUpDown)sender;
+
+            ushort value = (ushort)numericUpDown.Value;
+            Level.stepSize = value;
         }
     }
 
