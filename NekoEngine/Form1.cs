@@ -1659,6 +1659,8 @@ namespace NekoEngine
                 TextureAllocationUpDown4.Value = _currentLevel.TextureIndices[4] + 1;
                 TextureAllocationUpDown5.Value = _currentLevel.TextureIndices[5] + 1;
                 TextureAllocationUpDown6.Value = _currentLevel.TextureIndices[6] + 1;
+                stepHeightUpDown.Value = _currentLevel.stepSize;
+                DoorHeightUpDown.Value = _currentLevel.doorLevitation;
             }
         }
 
@@ -2262,8 +2264,8 @@ namespace NekoEngine
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
-            ushort value = (ushort)numericUpDown.Value;
-            Level.stepSize = value;
+            byte value = (byte)numericUpDown.Value;
+            _currentLevel.stepSize = value;
         }
     }
 

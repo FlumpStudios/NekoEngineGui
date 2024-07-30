@@ -1554,12 +1554,10 @@
             // DoorHeightUpDown
             // 
             DoorHeightUpDown.Location = new Point(139, 153);
-            DoorHeightUpDown.Maximum = new decimal(new int[] { 14, 0, 0, 0 });
-            DoorHeightUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            DoorHeightUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             DoorHeightUpDown.Name = "DoorHeightUpDown";
             DoorHeightUpDown.Size = new Size(130, 23);
             DoorHeightUpDown.TabIndex = 41;
-            DoorHeightUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             DoorHeightUpDown.ValueChanged += DoorTextureUpDown_ValueChanged;
             // 
             // label3
