@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             Tabs = new TabControl();
             tabPage2 = new TabPage();
+            compile = new Button();
             SaveConstantsAs = new Button();
             SaveConstants = new Button();
             CosntantsCodeEditor = new ScintillaNET.Scintilla();
@@ -225,6 +226,7 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            CompileAndRun = new Button();
             Tabs.SuspendLayout();
             tabPage2.SuspendLayout();
             Audio.SuspendLayout();
@@ -293,6 +295,8 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(CompileAndRun);
+            tabPage2.Controls.Add(compile);
             tabPage2.Controls.Add(SaveConstantsAs);
             tabPage2.Controls.Add(SaveConstants);
             tabPage2.Controls.Add(CosntantsCodeEditor);
@@ -308,6 +312,16 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Code";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // compile
+            // 
+            compile.Location = new Point(7, 64);
+            compile.Name = "compile";
+            compile.Size = new Size(106, 23);
+            compile.TabIndex = 9;
+            compile.Text = "Compile";
+            compile.UseVisualStyleBackColor = true;
+            compile.Click += compile_Click;
             // 
             // SaveConstantsAs
             // 
@@ -2394,6 +2408,16 @@
             exitToolStripMenuItem.Size = new Size(130, 22);
             exitToolStripMenuItem.Text = "Exit";
             // 
+            // CompileAndRun
+            // 
+            CompileAndRun.Location = new Point(6, 93);
+            CompileAndRun.Name = "CompileAndRun";
+            CompileAndRun.Size = new Size(107, 23);
+            CompileAndRun.TabIndex = 10;
+            CompileAndRun.Text = "Compile and Run";
+            CompileAndRun.UseVisualStyleBackColor = true;
+            CompileAndRun.Click += CompileAndRun_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2666,5 +2690,7 @@
         private Label stepHeightLabel;
         private NumericUpDown stepHeightUpDown;
         private Label label1;
+        private Button compile;
+        private Button CompileAndRun;
     }
 }

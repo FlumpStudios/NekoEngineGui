@@ -399,8 +399,7 @@ namespace NekoEngine
             return response;
         }
 
-
-        private void button3_Click(object sender, EventArgs e)
+        private void RunGame()
         {
             Environment.CurrentDirectory = GAME_FILE_LOCATION;
 
@@ -411,6 +410,11 @@ namespace NekoEngine
                 FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
                 WorkingDirectory = GAME_FILE_LOCATION
             });
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RunGame();
         }
 
         private void VsCode_Click(object sender, EventArgs e)
@@ -2266,6 +2270,79 @@ namespace NekoEngine
 
             byte value = (byte)numericUpDown.Value;
             _currentLevel.stepSize = value;
+        }
+
+        private void Compile(bool run)
+        {
+            try
+            {
+                // Define the path to msbuild.exe if needed, otherwise rely on system PATH
+                string msbuildPath = "msbuild";
+                string solutionPath = $"{GAME_FILE_LOCATION}\\Neko.sln";
+                string args = $"/p:Configuration=Release;Platform=x64";
+
+                // Create a new process start info
+                ProcessStartInfo processStartInfo = new();
+                processStartInfo.FileName = msbuildPath;
+                processStartInfo.Arguments = $"\"{solutionPath}\" {args}";
+                processStartInfo.RedirectStandardOutput = true;
+                processStartInfo.RedirectStandardError = true;
+                processStartInfo.UseShellExecute = false;
+                processStartInfo.CreateNoWindow = true;
+                processStartInfo.WorkingDirectory = System.IO.Path.GetDirectoryName(solutionPath); // Set the working directory to the solution path
+
+                // Copy current environment variables
+                foreach (System.Collections.DictionaryEntry env in Environment.GetEnvironmentVariables())
+                {
+                    processStartInfo.EnvironmentVariables[env.Key.ToString()] = env.Value.ToString();
+                }
+
+                // Ensure the PATH environment variable is properly set
+                string currentPath = Environment.GetEnvironmentVariable("Path");
+                processStartInfo.EnvironmentVariables["Path"] = currentPath;
+
+                // Start the process
+                using (Process process = new Process())
+                {
+                    process.StartInfo = processStartInfo;
+                    process.Start();
+
+                    // Read the output (or error)
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    // Wait for the process to finish
+                    process.WaitForExit();
+
+                    // Display the output (for example, in a message box)
+                    if (run)
+                    {
+                        RunGame();
+                    }
+                    else
+                    { 
+                        MessageBox.Show(output, "MSBuild Output");
+                        if (!string.IsNullOrWhiteSpace(error))
+                        {
+                            MessageBox.Show(error, "MSBuild Error");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message} \n\nPlease ensure the path to your MSBuild.exe file is set in your environment variables", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void compile_Click(object sender, EventArgs e)
+        {
+            Compile(false);
+        }
+
+        private void CompileAndRun_Click(object sender, EventArgs e)
+        {
+            Compile(true);
         }
     }
 
