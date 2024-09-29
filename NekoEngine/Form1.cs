@@ -12,6 +12,7 @@ namespace NekoEngine
 
     public partial class Form1 : Form
     {
+        const string EXE_NAME = "Ruyn";
         const decimal DEGRESS_TO_BYTE_CONVERSION = 1.4117M;
         private const int GRID_SIZE = 64;
         private const int CELL_SIZE = 14;
@@ -407,7 +408,7 @@ namespace NekoEngine
             Process.Start(new ProcessStartInfo
             {
 
-                FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
+                FileName = $"{GAME_FILE_LOCATION}\\{EXE_NAME}.exe",
                 WorkingDirectory = GAME_FILE_LOCATION
             });
         }
@@ -1896,7 +1897,7 @@ namespace NekoEngine
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = $"{GAME_FILE_LOCATION}\\anarch.exe",
+                FileName = $"{GAME_FILE_LOCATION}\\{EXE_NAME}.exe",
                 WorkingDirectory = GAME_FILE_LOCATION,
                 // w = windowed, d = debug
                 Arguments = args
