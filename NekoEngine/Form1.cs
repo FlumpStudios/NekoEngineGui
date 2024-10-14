@@ -190,13 +190,13 @@ namespace NekoEngine
                 case 1:
                     return "Shotgun";
                 case 2:
-                    return "SMG";
+                    return "Auto_Shotgun";
                 case 3:
                     return "Bazooka";
                 case 4:
-                    return "Plasma Gun";
+                    return "Plasma";
                 case 5:
-                    return "Solution";
+                    return "Spread";
                 default:
                     return "";
             }
@@ -217,19 +217,19 @@ namespace NekoEngine
                 case 4:
                     return "Plasma";
                 case 5:
-                    return "Tree";
+                    return "Deco 1";
                 case 6:
                     return "Finish";
                 case 7:
                     return "Teleport";
                 case 8:
-                    return "Terminal";
+                    return "Deco 2";
                 case 9:
-                    return "column";
+                    return "Deco 3";
                 case 10:
-                    return "Ruin";
+                    return "Gem";
                 case 11:
-                    return "Lamp";
+                    return "Deco 4";
                 case 12:
                     return "Key Card";
                 default:
@@ -459,7 +459,7 @@ namespace NekoEngine
                     }
                     catch (Exception ex)
                     {
-                        ShowErrorMessage($"Error loading the image: {ex.Message}");
+                        ShowErrorMessage($"Error loading the audio: {ex.Message}");
                     }
                 }
             }

@@ -1062,7 +1062,7 @@
             ElementButton_20.Name = "ElementButton_20";
             ElementButton_20.Size = new Size(217, 23);
             ElementButton_20.TabIndex = 1;
-            ElementButton_20.Text = "1. Spider";
+            ElementButton_20.Text = "Enemy 1";
             ElementButton_20.UseVisualStyleBackColor = true;
             ElementButton_20.Click += ElementButton_20_Click;
             // 
@@ -1072,7 +1072,7 @@
             ElementButton_21.Name = "ElementButton_21";
             ElementButton_21.Size = new Size(217, 23);
             ElementButton_21.TabIndex = 2;
-            ElementButton_21.Text = "2. Destroyer";
+            ElementButton_21.Text = "Enemy 2";
             ElementButton_21.UseVisualStyleBackColor = true;
             ElementButton_21.Click += ElementButton_21_Click;
             // 
@@ -1082,7 +1082,7 @@
             ElementButton_22.Name = "ElementButton_22";
             ElementButton_22.Size = new Size(217, 23);
             ElementButton_22.TabIndex = 3;
-            ElementButton_22.Text = "3. Warrior";
+            ElementButton_22.Text = "Enemy 3";
             ElementButton_22.UseVisualStyleBackColor = true;
             ElementButton_22.Click += ElementButton_22_Click;
             // 
@@ -1092,7 +1092,7 @@
             ElementButton_23.Name = "ElementButton_23";
             ElementButton_23.Size = new Size(217, 23);
             ElementButton_23.TabIndex = 4;
-            ElementButton_23.Text = "4. Plasmabot";
+            ElementButton_23.Text = "Enemy 4";
             ElementButton_23.UseVisualStyleBackColor = true;
             ElementButton_23.Click += ElementButton_23_Click;
             // 
@@ -1102,7 +1102,7 @@
             ElementButton_24.Name = "ElementButton_24";
             ElementButton_24.Size = new Size(217, 23);
             ElementButton_24.TabIndex = 5;
-            ElementButton_24.Text = "5. Ender";
+            ElementButton_24.Text = "Enemy 5";
             ElementButton_24.UseVisualStyleBackColor = true;
             ElementButton_24.Click += ElementButton_24_Click;
             // 
@@ -1112,7 +1112,7 @@
             ElementButton_25.Name = "ElementButton_25";
             ElementButton_25.Size = new Size(217, 23);
             ElementButton_25.TabIndex = 6;
-            ElementButton_25.Text = "6. Turret";
+            ElementButton_25.Text = "Enemy 6";
             ElementButton_25.UseVisualStyleBackColor = true;
             ElementButton_25.Click += ElementButton_25_Click;
             // 
@@ -1122,7 +1122,7 @@
             ElementButton_26.Name = "ElementButton_26";
             ElementButton_26.Size = new Size(217, 23);
             ElementButton_26.TabIndex = 7;
-            ElementButton_26.Text = "7. Explorer";
+            ElementButton_26.Text = "Enemy 7";
             ElementButton_26.UseVisualStyleBackColor = true;
             ElementButton_26.Click += ElementButton_26_Click;
             // 
@@ -1203,7 +1203,7 @@
             ElementButton_6.Name = "ElementButton_6";
             ElementButton_6.Size = new Size(221, 23);
             ElementButton_6.TabIndex = 5;
-            ElementButton_6.Text = "6. Tree";
+            ElementButton_6.Text = "6. Decoration 1";
             ElementButton_6.UseVisualStyleBackColor = true;
             ElementButton_6.Click += ElementButton_6_Click;
             // 
@@ -1233,7 +1233,7 @@
             ElementButton_9.Name = "ElementButton_9";
             ElementButton_9.Size = new Size(221, 23);
             ElementButton_9.TabIndex = 8;
-            ElementButton_9.Text = "9. Terminal";
+            ElementButton_9.Text = "9. Decoration 2";
             ElementButton_9.UseVisualStyleBackColor = true;
             ElementButton_9.Click += ElementButton_9_Click;
             // 
@@ -1243,7 +1243,7 @@
             ElementButton_10.Name = "ElementButton_10";
             ElementButton_10.Size = new Size(221, 23);
             ElementButton_10.TabIndex = 9;
-            ElementButton_10.Text = "10. Column";
+            ElementButton_10.Text = "10. Decoration 3";
             ElementButton_10.UseVisualStyleBackColor = true;
             ElementButton_10.Click += ElementButton_10_Click;
             // 
@@ -1253,7 +1253,7 @@
             ElementButton_11.Name = "ElementButton_11";
             ElementButton_11.Size = new Size(221, 23);
             ElementButton_11.TabIndex = 10;
-            ElementButton_11.Text = "11. Ruin";
+            ElementButton_11.Text = "11. Gem";
             ElementButton_11.UseVisualStyleBackColor = true;
             ElementButton_11.Click += ElementButton_11_Click;
             // 
@@ -1263,7 +1263,7 @@
             ElementButton_12.Name = "ElementButton_12";
             ElementButton_12.Size = new Size(221, 23);
             ElementButton_12.TabIndex = 11;
-            ElementButton_12.Text = "12. Lamp";
+            ElementButton_12.Text = "12. Decoration 4";
             ElementButton_12.UseVisualStyleBackColor = true;
             ElementButton_12.Click += ElementButton_12_Click;
             // 
@@ -1832,7 +1832,7 @@
             label26.Name = "label26";
             label26.Size = new Size(53, 15);
             label26.TabIndex = 33;
-            label26.Text = "Exploder";
+            label26.Text = "Enemy 7";
             // 
             // EnemyTexturePreview_2
             // 
@@ -2018,7 +2018,7 @@
             label20.Name = "label20";
             label20.Size = new Size(40, 15);
             label20.TabIndex = 27;
-            label20.Text = "Spider";
+            label20.Text = "Enemy 1";
             // 
             // label21
             // 
@@ -2027,7 +2027,7 @@
             label21.Name = "label21";
             label21.Size = new Size(57, 15);
             label21.TabIndex = 28;
-            label21.Text = "Destroyer";
+            label21.Text = "Enemy 2";
             // 
             // label22
             // 
@@ -2036,7 +2036,7 @@
             label22.Name = "label22";
             label22.Size = new Size(46, 15);
             label22.TabIndex = 29;
-            label22.Text = "Warrior";
+            label22.Text = "Enemy 3";
             // 
             // label23
             // 
@@ -2045,7 +2045,7 @@
             label23.Name = "label23";
             label23.Size = new Size(63, 15);
             label23.TabIndex = 30;
-            label23.Text = "Plasmabot";
+            label23.Text = "Enemy 4";
             // 
             // label24
             // 
@@ -2054,7 +2054,7 @@
             label24.Name = "label24";
             label24.Size = new Size(37, 15);
             label24.TabIndex = 31;
-            label24.Text = "Ender";
+            label24.Text = "Enemy 5";
             // 
             // label25
             // 
@@ -2063,7 +2063,7 @@
             label25.Name = "label25";
             label25.Size = new Size(38, 15);
             label25.TabIndex = 32;
-            label25.Text = "Turret";
+            label25.Text = "Enemy 6";
             // 
             // label27
             // 
