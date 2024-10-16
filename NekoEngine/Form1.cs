@@ -108,10 +108,12 @@ namespace NekoEngine
                         PictureBox pictureBox = (PictureBox)control;
 
                         int boxNum = int.Parse(pictureBox.Name.Split('_').Last());
-
-                        pictureBox.Image = imageFiles[boxNum];
-                        pictureBox.Tag = boxNum;
-                        pictureBox.DoubleClick += action;
+                        if (boxNum < imageFileLocations.Length)
+                        { 
+                            pictureBox.Image = imageFiles[boxNum];
+                            pictureBox.Tag = boxNum;
+                            pictureBox.DoubleClick += action;
+                        }
                     }
                 }
             }
