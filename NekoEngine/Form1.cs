@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Media;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace NekoEngine
 {
@@ -40,6 +41,7 @@ namespace NekoEngine
         private SoundPlayer _soundPlayer;
 
         private int _selectedSfxForPreview = 0;
+        private string _levelPack = "Original";
 
 #if DEBUG
         const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
@@ -47,7 +49,6 @@ namespace NekoEngine
 #else
         const string GAME_FILE_LOCATION = @".\";
 #endif
-
         const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
         const string GAME_CONSTNTS_FILE_LOCATION = GAME_FILE_LOCATION + @"\constants.h";
         const string WALL_TEXTURE_FOLDER = @"\WallTextures";
@@ -57,28 +58,45 @@ namespace NekoEngine
         const string EFFECTS_TEXTURE_FOLDER = @"\Effects";
         const string ENEMIES_TEXTURE_FOLDER = @"\Enemies";
         const string TITLE_TEXTURE_FOLDER = @"\Title";
-        const string LEVELS_FOLDER = @"\Levels";
+        const string LEVELS_FOLDER = @"Levels";
         const string SFX_FOLDER = @"\Sfx";
-
-
         const byte DEBUG_LEVEL_ID = 99;
 
-        public Form1()
+        public Form1(string levelPack)
         {
+            if (levelPack is not null)
+            {
+                _levelPack = levelPack;
+            }
+
+            string filePath = Path.Combine(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack);
+            if (!Directory.Exists(Path.Combine(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack)))
+            {
+                ShowErrorMessage($"Could not find level pack {_levelPack}");
+            }
+
             _gridImage = new Bitmap(GRID_SIZE * CELL_SIZE, GRID_SIZE * CELL_SIZE);
             InitializeComponent();
             InitializeCodeEditor();
             InitializeGrid();
-            InitTexturesFile(GAME_FILE_LOCATION + WALL_TEXTURE_FOLDER, WallPictureBox_DoubleClick, wallTextureLayoutPanel);
-            InitTexturesFile(GAME_FILE_LOCATION + ITEMS_TEXTURE_FOLDER, ItemPictureBox_DoubleClick, itemTextureLayoutPanel);
-            InitTexturesFile(GAME_FILE_LOCATION + BACKGROUND_TEXTURE_FOLDER, BackgroundPictureBox_DoubleClick, backgroundTextureLayoutPanel);
-            InitTexturesFile(GAME_FILE_LOCATION + WEAPONS_TEXTURE_FOLDER, WeaponsPictureBox_DoubleClick, weaponsTextureLayoutPanel);
-            InitTexturesFile(GAME_FILE_LOCATION + EFFECTS_TEXTURE_FOLDER, EFfectsPictureBox_DoubleClick, effectTextureLayoutPanel);
-            InitTexturesFile(GAME_FILE_LOCATION + TITLE_TEXTURE_FOLDER, TitlePictureBox_DoubleClick, titleTextureLayoutPanel);
             InitEnemiesTexturesFile(GAME_FILE_LOCATION + ENEMIES_TEXTURE_FOLDER, EnemiesPictureBox_DoubleClick);
             LoadPreviewLevel();
             _soundPlayer = new SoundPlayer();
+            UpdateButtonTextures();
+
         }
+
+        private void UpdateButtonTextures()
+        {
+            MapColour_door.Image = MapColour_1.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown0.Value - 1) + ".png"));
+            MapColour_door2.Image = MapColour_2.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown1.Value - 1) + ".png"));
+            MapColour_door3.Image = MapColour_3.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown2.Value - 1) + ".png"));
+            MapColour_door4.Image = MapColour_4.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown3.Value - 1) + ".png"));
+            MapColour_door5.Image = MapColour_5.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown4.Value - 1) + ".png"));
+            MapColour_door6.Image = MapColour_6.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown5.Value - 1) + ".png"));
+            MapColour_door7.Image = MapColour_7.Image = Image.FromFile(Path.Combine(GAME_FILE_LOCATION, "WallTextures", (TextureAllocationUpDown6.Value - 1) + ".png"));
+        }
+
 
         private void InitEnemiesTexturesFile(string path, EventHandler action)
         {
@@ -98,22 +116,6 @@ namespace NekoEngine
                         Image originalImage = Image.FromStream(stream);
                         Image resizedImage = new Bitmap(originalImage, new Size(32, 32));
                         imageFiles.Add(originalImage);
-                    }
-                }
-
-                foreach (Control control in EnemiesTableLayoutPanel.Controls)
-                {
-                    if (control is PictureBox)
-                    {
-                        PictureBox pictureBox = (PictureBox)control;
-
-                        int boxNum = int.Parse(pictureBox.Name.Split('_').Last());
-                        if (boxNum < imageFileLocations.Length)
-                        { 
-                            pictureBox.Image = imageFiles[boxNum];
-                            pictureBox.Tag = boxNum;
-                            pictureBox.DoubleClick += action;
-                        }
                     }
                 }
             }
@@ -279,18 +281,6 @@ namespace NekoEngine
 
         private void InitializeCodeEditor()
         {
-            const int CODE_EDITOR_FONT_SIZE = 10;
-            const int CODE_EDITOR_MARGIN_WIDTH = 20;
-            const string CODE_EDITOR_FONT = "Consolas";
-            codeEditor.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
-            codeEditor.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
-            codeEditor.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
-            codeEditor.Text = System.IO.File.ReadAllText(GAME_SETTINGS_FILE_LOCATION);
-
-            CosntantsCodeEditor.Margins[0].Width = CODE_EDITOR_MARGIN_WIDTH;
-            CosntantsCodeEditor.Styles[ScintillaNET.Style.Default].Font = CODE_EDITOR_FONT;
-            CosntantsCodeEditor.Styles[ScintillaNET.Style.Default].Size = CODE_EDITOR_FONT_SIZE;
-            CosntantsCodeEditor.Text = System.IO.File.ReadAllText(GAME_CONSTNTS_FILE_LOCATION);
         }
 
         private string _imagePath = string.Empty;
@@ -411,7 +401,8 @@ namespace NekoEngine
             {
 
                 FileName = $"{GAME_FILE_LOCATION}\\{EXE_NAME}.exe",
-                WorkingDirectory = GAME_FILE_LOCATION
+                WorkingDirectory = GAME_FILE_LOCATION,
+                Arguments = $"-p {_levelPack}"               
             });
         }
 
@@ -443,29 +434,6 @@ namespace NekoEngine
             }
         }
 
-
-
-        private void loadAudio_Click_1(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Audio Files|*.raw";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        _audioPath = openFileDialog.FileName;
-                        AudioFileLocation.Text = _audioPath;
-                        GenerateAudioArray.Enabled = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowErrorMessage($"Error loading the audio: {ex.Message}");
-                    }
-                }
-            }
-        }
 
         private void GenerateAudioArray_Click(object sender, EventArgs e)
         {
@@ -501,50 +469,12 @@ namespace NekoEngine
                     if (match.Success)
                     {
                         string numbers = match.Groups[1].Value;
-                        audioArrayOutput.Text = numbers;
-                        copyAudioToClipboard.Enabled = true;
                     }
                 }
             }
             catch (Exception ex)
             {
                 ShowErrorMessage($"Error running the Python script: {ex.Message}");
-            }
-        }
-
-        private void copyAudioToClipboard_Click(object sender, EventArgs e)
-        {
-            Clipboard.SetText(copyAudioToClipboard.Text);
-
-            MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        }
-
-
-        private void SaveCode_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                System.IO.File.WriteAllText(GAME_SETTINGS_FILE_LOCATION, codeEditor.Text);
-                MessageBox.Show("Settings file saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                ShowErrorMessage(ex.Message);
-            }
-        }
-
-        private void CodeSaveAs_Click(object sender, EventArgs e)
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    System.IO.File.WriteAllText(saveFileDialog.FileName, codeEditor.Text);
-                }
             }
         }
 
@@ -1568,15 +1498,16 @@ namespace NekoEngine
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SaveFileDialog openFileDialog = new SaveFileDialog())
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
+                saveFileDialog.InitialDirectory = Path.Combine(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack);
 
-                openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
+                saveFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Serialize the class to a binary file
-                    using (FileStream fs = new(openFileDialog.FileName, FileMode.Create))
+                    using (FileStream fs = new(saveFileDialog.FileName, FileMode.Create))
                     {
                         _currentLevel.Serialise(new BinaryWriter(fs));
                     }
@@ -1586,7 +1517,7 @@ namespace NekoEngine
 
         private void SavePreviewLevel()
         {
-            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Create))
+            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Create))
             {
                 _currentLevel.Serialise(new BinaryWriter(fs));
             }
@@ -1594,10 +1525,10 @@ namespace NekoEngine
 
         private void LoadPreviewLevel()
         {
-            string filePath = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD");
+            string filePath = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, "Level" + DEBUG_LEVEL_ID + ".HAD");
             if (!File.Exists(filePath)) { return; }
 
-            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Open))
+            using (FileStream fs = new(Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, "Level" + DEBUG_LEVEL_ID + ".HAD"), FileMode.Open))
             {
                 if (fs != null)
                 {
@@ -1618,6 +1549,7 @@ namespace NekoEngine
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
+                openFileDialog.InitialDirectory = Path.Combine(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack);
                 openFileDialog.Filter = "HAD Files|*.HAD|All Files|*.*";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -1731,33 +1663,7 @@ namespace NekoEngine
             _isMousePressed = false;
         }
 
-        private void SaveConstants_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                System.IO.File.WriteAllText(GAME_CONSTNTS_FILE_LOCATION, CosntantsCodeEditor.Text);
-                MessageBox.Show("Constants file saved successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                ShowErrorMessage(ex.Message);
-            }
 
-        }
-
-        private void SaveConstantsAs_Click(object sender, EventArgs e)
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    System.IO.File.WriteAllText(saveFileDialog.FileName, CosntantsCodeEditor.Text);
-                }
-            }
-        }
 
         private void GenerateTadFile(string location)
         {
@@ -1879,7 +1785,7 @@ namespace NekoEngine
         {
             bool godMode = GodMode.Checked;
             bool fullsceen = FullScreenTextBox.Checked;
-            string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
+            string fileLocation = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, @"\level" + DEBUG_LEVEL_ID + ".HAD");
             using (FileStream fs = new(fileLocation, FileMode.Create))
             {
                 _currentLevel.Serialise(new BinaryWriter(fs));
@@ -1896,6 +1802,8 @@ namespace NekoEngine
             {
                 args += " -w";
             }
+
+            args += " -p " + _levelPack;
 
             Process.Start(new ProcessStartInfo
             {
@@ -1921,6 +1829,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[0] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown1_ValueChanged(object sender, EventArgs e)
@@ -1929,6 +1838,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[1] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown2_ValueChanged(object sender, EventArgs e)
@@ -1937,6 +1847,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[2] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown3_ValueChanged(object sender, EventArgs e)
@@ -1945,6 +1856,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[3] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown4_ValueChanged(object sender, EventArgs e)
@@ -1953,6 +1865,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[4] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown5_ValueChanged(object sender, EventArgs e)
@@ -1961,6 +1874,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[5] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private void TextureAllocationUpDown6_ValueChanged(object sender, EventArgs e)
@@ -1969,6 +1883,7 @@ namespace NekoEngine
 
             decimal value = numericUpDown.Value;
             _currentLevel.TextureIndices[6] = (byte)(value - 1);
+            UpdateButtonTextures();
         }
 
         private async void SyncSfxWithGame_Click(object sender, EventArgs e)
@@ -1994,90 +1909,7 @@ namespace NekoEngine
             }
         }
 
-        private void BulletShotLabel_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(0, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                BulletShotLabel.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
 
-        private void label41_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(1, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                label41.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
-
-        private void label42_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(2, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                label42.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
-
-        private void label43_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(3, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                label43.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
-
-        private void label44_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(4, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                label44.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
-
-        private void label45_DoubleClick(object sender, EventArgs e)
-        {
-            var fileName = LoadInSfxFile(5, GAME_FILE_LOCATION + SFX_FOLDER);
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                label45.Text = BulletShotLabel.Text + " (" + fileName + ")";
-            }
-        }
-
-        private void LoadImageForArrayGen_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        Bitmap selectedImage = new Bitmap(openFileDialog.FileName);
-
-                        if (selectedImage.Width != 32 || selectedImage.Height != 32)
-                        {
-                            ShowErrorMessage("The selected image must be 32x32 pixels.");
-                            return;
-                        }
-
-
-                        PreviewTextureBox.Image = selectedImage;
-                        _imagePath = openFileDialog.FileName;
-                        GenerateTextureArray.Enabled = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowErrorMessage($"Error loading the image: {ex.Message}");
-                    }
-                }
-            }
-        }
 
         private void GenerateTextureArray_Click(object sender, EventArgs e)
         {
@@ -2112,8 +1944,6 @@ namespace NekoEngine
                     if (match.Success)
                     {
                         string numbers = match.Groups[1].Value;
-                        GenTextureArrayTextBox.Text = numbers;
-                        CopyToClipboardTex.Enabled = true;
                     }
                 }
             }
@@ -2123,50 +1953,6 @@ namespace NekoEngine
             }
         }
 
-        private void CopyToClipboardTex_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(GenTextureArrayTextBox.Text))
-            {
-                Clipboard.SetText(GenTextureArrayTextBox.Text);
-                MessageBox.Show("Text copied to clipboard!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void BulletShotLabel_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 0;
-            SfxPreviewLabel.Text = "Bullet Shot";
-        }
-
-        private void label41_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 1;
-            SfxPreviewLabel.Text = "Door Opening";
-        }
-
-        private void label42_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 2;
-            SfxPreviewLabel.Text = "Explosion";
-        }
-
-        private void label43_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 3;
-            SfxPreviewLabel.Text = "Click";
-        }
-
-        private void label44_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 4;
-            SfxPreviewLabel.Text = "Plasma Shot";
-        }
-
-        private void label45_Click(object sender, EventArgs e)
-        {
-            _selectedSfxForPreview = 5;
-            SfxPreviewLabel.Text = "Monster";
-        }
 
         private void PlaySfx_Click(object sender, EventArgs e)
         {
@@ -2234,7 +2020,7 @@ namespace NekoEngine
 
         private void Preview3D_Click(object sender, EventArgs e)
         {
-            string fileLocation = GAME_FILE_LOCATION + LEVELS_FOLDER + @"\level" + DEBUG_LEVEL_ID + ".HAD";
+            string fileLocation = Path.Combine(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, @"\level" + DEBUG_LEVEL_ID + ".HAD");
             using (FileStream fs = new(fileLocation, FileMode.Create))
             {
                 _currentLevel.Serialise(new BinaryWriter(fs));
@@ -2323,7 +2109,7 @@ namespace NekoEngine
                         RunGame();
                     }
                     else
-                    { 
+                    {
                         MessageBox.Show(output, "MSBuild Output");
                         if (!string.IsNullOrWhiteSpace(error))
                         {
@@ -2346,6 +2132,11 @@ namespace NekoEngine
         private void CompileAndRun_Click(object sender, EventArgs e)
         {
             Compile(true);
+        }
+
+        private void SelectedElement_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
