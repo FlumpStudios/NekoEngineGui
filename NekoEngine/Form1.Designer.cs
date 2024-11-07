@@ -768,7 +768,7 @@
             ElementButton_6.Name = "ElementButton_6";
             ElementButton_6.Size = new Size(198, 23);
             ElementButton_6.TabIndex = 5;
-            ElementButton_6.Text = "6. Decoration 1";
+            ElementButton_6.Text = "6. Tree";
             ElementButton_6.UseVisualStyleBackColor = true;
             ElementButton_6.Click += ElementButton_6_Click;
             // 
@@ -798,7 +798,7 @@
             ElementButton_9.Name = "ElementButton_9";
             ElementButton_9.Size = new Size(198, 23);
             ElementButton_9.TabIndex = 8;
-            ElementButton_9.Text = "9. Decoration 2";
+            ElementButton_9.Text = "9. Man on Spike";
             ElementButton_9.UseVisualStyleBackColor = true;
             ElementButton_9.Click += ElementButton_9_Click;
             // 
@@ -808,7 +808,7 @@
             ElementButton_10.Name = "ElementButton_10";
             ElementButton_10.Size = new Size(198, 23);
             ElementButton_10.TabIndex = 9;
-            ElementButton_10.Text = "10. Decoration 3";
+            ElementButton_10.Text = "10. Column";
             ElementButton_10.UseVisualStyleBackColor = true;
             ElementButton_10.Click += ElementButton_10_Click;
             // 
@@ -828,7 +828,7 @@
             ElementButton_12.Name = "ElementButton_12";
             ElementButton_12.Size = new Size(198, 23);
             ElementButton_12.TabIndex = 11;
-            ElementButton_12.Text = "12. Decoration 4";
+            ElementButton_12.Text = "12. Candelabra";
             ElementButton_12.UseVisualStyleBackColor = true;
             ElementButton_12.Click += ElementButton_12_Click;
             // 

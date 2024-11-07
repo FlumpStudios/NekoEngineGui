@@ -44,7 +44,7 @@ namespace NekoEngine
         private string _levelPack = "Original";
 
 #if DEBUG
-        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
+        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine\GameData";
 
 #else
         const string GAME_FILE_LOCATION = @".\";
