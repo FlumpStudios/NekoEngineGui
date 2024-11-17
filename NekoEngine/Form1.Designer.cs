@@ -180,11 +180,10 @@
             EnemyTexturePreview_7 = new PictureBox();
             EnemyTexturePreview_9 = new PictureBox();
             EnemyTexturePreview_10 = new PictureBox();
-            EnemyTexturePreview_11 = new PictureBox();
-            EnemyTexturePreview_14 = new PictureBox();
-            EnemyTexturePreview_16 = new PictureBox();
+            EnemyTexturePreview_12 = new PictureBox();
             EnemyTexturePreview_15 = new PictureBox();
             EnemyTexturePreview_17 = new PictureBox();
+            EnemyTexturePreview_16 = new PictureBox();
             label20 = new Label();
             label21 = new Label();
             label22 = new Label();
@@ -192,18 +191,18 @@
             label24 = new Label();
             label25 = new Label();
             label27 = new Label();
-            EnemyTexturePreview_18 = new PictureBox();
-            EnemyTexturePreview_19 = new PictureBox();
+            EnemyTexturePreview_21 = new PictureBox();
+            EnemyTexturePreview_22 = new PictureBox();
+            EnemyTexturePreview_14 = new PictureBox();
             EnemyTexturePreview_13 = new PictureBox();
-            EnemyTexturePreview_12 = new PictureBox();
-            label33 = new Label();
-            label34 = new Label();
-            label35 = new Label();
             label36 = new Label();
             label37 = new Label();
             label38 = new Label();
             label39 = new Label();
             EnemyTexturePreview_8 = new PictureBox();
+            EnemyTexturePreview_18 = new PictureBox();
+            EnemyTexturePreview_19 = new PictureBox();
+            EnemyTexturePreview_20 = new PictureBox();
             label14 = new Label();
             GenerateEnemeisTextureFile = new Button();
             GenerateEffectsTextureFile = new Button();
@@ -227,6 +226,7 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            EnemyTexturePreview_11 = new PictureBox();
             Tabs.SuspendLayout();
             tabPage2.SuspendLayout();
             Audio.SuspendLayout();
@@ -268,17 +268,20 @@
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_11).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_14).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_15).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_21).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_13).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_18).BeginInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_19).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_20).BeginInit();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_11).BeginInit();
             SuspendLayout();
             // 
             // Tabs
@@ -915,7 +918,7 @@
             // CeilingHeightUpDown
             // 
             CeilingHeightUpDown.Location = new Point(159, 3);
-            CeilingHeightUpDown.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            CeilingHeightUpDown.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             CeilingHeightUpDown.Name = "CeilingHeightUpDown";
             CeilingHeightUpDown.Size = new Size(60, 23);
             CeilingHeightUpDown.TabIndex = 23;
@@ -934,7 +937,7 @@
             // FloorHeightUpDown
             // 
             FloorHeightUpDown.Location = new Point(159, 32);
-            FloorHeightUpDown.Maximum = new decimal(new int[] { 29, 0, 0, 0 });
+            FloorHeightUpDown.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             FloorHeightUpDown.Name = "FloorHeightUpDown";
             FloorHeightUpDown.Size = new Size(61, 23);
             FloorHeightUpDown.TabIndex = 19;
@@ -1772,11 +1775,10 @@
             EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_7, 2, 3);
             EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_9, 1, 4);
             EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_10, 2, 4);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_11, 1, 5);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_14, 1, 6);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_16, 2, 6);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_15, 3, 6);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_17, 3, 7);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_12, 1, 5);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_15, 1, 6);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_17, 2, 6);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_16, 3, 6);
             EnemiesTableLayoutPanel.Controls.Add(label20, 0, 1);
             EnemiesTableLayoutPanel.Controls.Add(label21, 0, 2);
             EnemiesTableLayoutPanel.Controls.Add(label22, 0, 3);
@@ -1784,18 +1786,19 @@
             EnemiesTableLayoutPanel.Controls.Add(label24, 0, 5);
             EnemiesTableLayoutPanel.Controls.Add(label25, 0, 6);
             EnemiesTableLayoutPanel.Controls.Add(label27, 0, 8);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_18, 1, 8);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_19, 1, 9);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_13, 2, 5);
-            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_12, 3, 5);
-            EnemiesTableLayoutPanel.Controls.Add(label33, 3, 4);
-            EnemiesTableLayoutPanel.Controls.Add(label34, 1, 7);
-            EnemiesTableLayoutPanel.Controls.Add(label35, 2, 7);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_21, 1, 8);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_22, 1, 9);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_14, 2, 5);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_13, 3, 5);
             EnemiesTableLayoutPanel.Controls.Add(label36, 2, 8);
             EnemiesTableLayoutPanel.Controls.Add(label37, 3, 8);
             EnemiesTableLayoutPanel.Controls.Add(label38, 2, 9);
             EnemiesTableLayoutPanel.Controls.Add(label39, 3, 9);
             EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_8, 3, 3);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_18, 1, 7);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_19, 2, 7);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_20, 3, 7);
+            EnemiesTableLayoutPanel.Controls.Add(EnemyTexturePreview_11, 3, 4);
             EnemiesTableLayoutPanel.Location = new Point(702, 27);
             EnemiesTableLayoutPanel.Name = "EnemiesTableLayoutPanel";
             EnemiesTableLayoutPanel.RowCount = 10;
@@ -1957,55 +1960,45 @@
             EnemyTexturePreview_10.TabIndex = 16;
             EnemyTexturePreview_10.TabStop = false;
             // 
-            // EnemyTexturePreview_11
+            // EnemyTexturePreview_12
             // 
-            EnemyTexturePreview_11.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_11.Location = new Point(94, 195);
-            EnemyTexturePreview_11.Name = "EnemyTexturePreview_11";
-            EnemyTexturePreview_11.Size = new Size(44, 32);
-            EnemyTexturePreview_11.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_11.TabIndex = 18;
-            EnemyTexturePreview_11.TabStop = false;
-            // 
-            // EnemyTexturePreview_14
-            // 
-            EnemyTexturePreview_14.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_14.Location = new Point(94, 237);
-            EnemyTexturePreview_14.Name = "EnemyTexturePreview_14";
-            EnemyTexturePreview_14.Size = new Size(44, 32);
-            EnemyTexturePreview_14.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_14.TabIndex = 21;
-            EnemyTexturePreview_14.TabStop = false;
-            // 
-            // EnemyTexturePreview_16
-            // 
-            EnemyTexturePreview_16.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_16.Location = new Point(145, 237);
-            EnemyTexturePreview_16.Name = "EnemyTexturePreview_16";
-            EnemyTexturePreview_16.Size = new Size(41, 32);
-            EnemyTexturePreview_16.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_16.TabIndex = 22;
-            EnemyTexturePreview_16.TabStop = false;
+            EnemyTexturePreview_12.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_12.Location = new Point(94, 195);
+            EnemyTexturePreview_12.Name = "EnemyTexturePreview_12";
+            EnemyTexturePreview_12.Size = new Size(44, 32);
+            EnemyTexturePreview_12.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_12.TabIndex = 18;
+            EnemyTexturePreview_12.TabStop = false;
             // 
             // EnemyTexturePreview_15
             // 
             EnemyTexturePreview_15.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_15.Location = new Point(197, 237);
+            EnemyTexturePreview_15.Location = new Point(94, 237);
             EnemyTexturePreview_15.Name = "EnemyTexturePreview_15";
-            EnemyTexturePreview_15.Size = new Size(42, 32);
+            EnemyTexturePreview_15.Size = new Size(44, 32);
             EnemyTexturePreview_15.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_15.TabIndex = 23;
+            EnemyTexturePreview_15.TabIndex = 21;
             EnemyTexturePreview_15.TabStop = false;
             // 
             // EnemyTexturePreview_17
             // 
             EnemyTexturePreview_17.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_17.Location = new Point(197, 279);
+            EnemyTexturePreview_17.Location = new Point(145, 237);
             EnemyTexturePreview_17.Name = "EnemyTexturePreview_17";
-            EnemyTexturePreview_17.Size = new Size(42, 32);
+            EnemyTexturePreview_17.Size = new Size(41, 32);
             EnemyTexturePreview_17.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_17.TabIndex = 26;
+            EnemyTexturePreview_17.TabIndex = 22;
             EnemyTexturePreview_17.TabStop = false;
+            // 
+            // EnemyTexturePreview_16
+            // 
+            EnemyTexturePreview_16.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_16.Location = new Point(197, 237);
+            EnemyTexturePreview_16.Name = "EnemyTexturePreview_16";
+            EnemyTexturePreview_16.Size = new Size(42, 32);
+            EnemyTexturePreview_16.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_16.TabIndex = 23;
+            EnemyTexturePreview_16.TabStop = false;
             // 
             // label20
             // 
@@ -2070,84 +2063,45 @@
             label27.TabIndex = 34;
             label27.Text = "Dying";
             // 
-            // EnemyTexturePreview_18
+            // EnemyTexturePreview_21
             // 
-            EnemyTexturePreview_18.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_18.Location = new Point(94, 324);
-            EnemyTexturePreview_18.Name = "EnemyTexturePreview_18";
-            EnemyTexturePreview_18.Size = new Size(44, 32);
-            EnemyTexturePreview_18.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_18.TabIndex = 36;
-            EnemyTexturePreview_18.TabStop = false;
+            EnemyTexturePreview_21.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_21.Location = new Point(94, 324);
+            EnemyTexturePreview_21.Name = "EnemyTexturePreview_21";
+            EnemyTexturePreview_21.Size = new Size(44, 32);
+            EnemyTexturePreview_21.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_21.TabIndex = 36;
+            EnemyTexturePreview_21.TabStop = false;
             // 
-            // EnemyTexturePreview_19
+            // EnemyTexturePreview_22
             // 
-            EnemyTexturePreview_19.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_19.Location = new Point(94, 364);
-            EnemyTexturePreview_19.Name = "EnemyTexturePreview_19";
-            EnemyTexturePreview_19.Size = new Size(44, 32);
-            EnemyTexturePreview_19.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_19.TabIndex = 37;
-            EnemyTexturePreview_19.TabStop = false;
+            EnemyTexturePreview_22.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_22.Location = new Point(94, 364);
+            EnemyTexturePreview_22.Name = "EnemyTexturePreview_22";
+            EnemyTexturePreview_22.Size = new Size(44, 32);
+            EnemyTexturePreview_22.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_22.TabIndex = 37;
+            EnemyTexturePreview_22.TabStop = false;
+            // 
+            // EnemyTexturePreview_14
+            // 
+            EnemyTexturePreview_14.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_14.Location = new Point(145, 195);
+            EnemyTexturePreview_14.Name = "EnemyTexturePreview_14";
+            EnemyTexturePreview_14.Size = new Size(41, 32);
+            EnemyTexturePreview_14.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_14.TabIndex = 20;
+            EnemyTexturePreview_14.TabStop = false;
             // 
             // EnemyTexturePreview_13
             // 
             EnemyTexturePreview_13.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_13.Location = new Point(145, 195);
+            EnemyTexturePreview_13.Location = new Point(197, 195);
             EnemyTexturePreview_13.Name = "EnemyTexturePreview_13";
-            EnemyTexturePreview_13.Size = new Size(41, 32);
+            EnemyTexturePreview_13.Size = new Size(42, 32);
             EnemyTexturePreview_13.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_13.TabIndex = 20;
+            EnemyTexturePreview_13.TabIndex = 19;
             EnemyTexturePreview_13.TabStop = false;
-            // 
-            // EnemyTexturePreview_12
-            // 
-            EnemyTexturePreview_12.BorderStyle = BorderStyle.Fixed3D;
-            EnemyTexturePreview_12.Location = new Point(197, 195);
-            EnemyTexturePreview_12.Name = "EnemyTexturePreview_12";
-            EnemyTexturePreview_12.Size = new Size(42, 32);
-            EnemyTexturePreview_12.SizeMode = PictureBoxSizeMode.AutoSize;
-            EnemyTexturePreview_12.TabIndex = 19;
-            EnemyTexturePreview_12.TabStop = false;
-            // 
-            // label33
-            // 
-            label33.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label33.AutoSize = true;
-            label33.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label33.ForeColor = Color.Red;
-            label33.Location = new Point(197, 148);
-            label33.Name = "label33";
-            label33.Size = new Size(42, 43);
-            label33.TabIndex = 39;
-            label33.Text = "X";
-            label33.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label34
-            // 
-            label34.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label34.AutoSize = true;
-            label34.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label34.ForeColor = Color.Red;
-            label34.Location = new Point(94, 276);
-            label34.Name = "label34";
-            label34.Size = new Size(44, 44);
-            label34.TabIndex = 40;
-            label34.Text = "X";
-            label34.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // label35
-            // 
-            label35.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label35.AutoSize = true;
-            label35.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label35.ForeColor = Color.Red;
-            label35.Location = new Point(145, 276);
-            label35.Name = "label35";
-            label35.Size = new Size(45, 44);
-            label35.TabIndex = 41;
-            label35.Text = "X";
-            label35.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label36
             // 
@@ -2210,6 +2164,36 @@
             EnemyTexturePreview_8.SizeMode = PictureBoxSizeMode.AutoSize;
             EnemyTexturePreview_8.TabIndex = 46;
             EnemyTexturePreview_8.TabStop = false;
+            // 
+            // EnemyTexturePreview_18
+            // 
+            EnemyTexturePreview_18.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_18.Location = new Point(94, 279);
+            EnemyTexturePreview_18.Name = "EnemyTexturePreview_18";
+            EnemyTexturePreview_18.Size = new Size(42, 32);
+            EnemyTexturePreview_18.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_18.TabIndex = 26;
+            EnemyTexturePreview_18.TabStop = false;
+            // 
+            // EnemyTexturePreview_19
+            // 
+            EnemyTexturePreview_19.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_19.Location = new Point(145, 279);
+            EnemyTexturePreview_19.Name = "EnemyTexturePreview_19";
+            EnemyTexturePreview_19.Size = new Size(42, 32);
+            EnemyTexturePreview_19.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_19.TabIndex = 47;
+            EnemyTexturePreview_19.TabStop = false;
+            // 
+            // EnemyTexturePreview_20
+            // 
+            EnemyTexturePreview_20.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_20.Location = new Point(197, 279);
+            EnemyTexturePreview_20.Name = "EnemyTexturePreview_20";
+            EnemyTexturePreview_20.Size = new Size(42, 32);
+            EnemyTexturePreview_20.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_20.TabIndex = 48;
+            EnemyTexturePreview_20.TabStop = false;
             // 
             // label14
             // 
@@ -2401,6 +2385,16 @@
             exitToolStripMenuItem.Size = new Size(130, 22);
             exitToolStripMenuItem.Text = "Exit";
             // 
+            // EnemyTexturePreview_11
+            // 
+            EnemyTexturePreview_11.BorderStyle = BorderStyle.Fixed3D;
+            EnemyTexturePreview_11.Location = new Point(197, 151);
+            EnemyTexturePreview_11.Name = "EnemyTexturePreview_11";
+            EnemyTexturePreview_11.Size = new Size(41, 32);
+            EnemyTexturePreview_11.SizeMode = PictureBoxSizeMode.AutoSize;
+            EnemyTexturePreview_11.TabIndex = 49;
+            EnemyTexturePreview_11.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -2459,18 +2453,21 @@
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_7).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_9).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_11).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_14).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_12).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_15).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_13).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_8).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_18).EndInit();
             ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_19).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_20).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)EnemyTexturePreview_11).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2611,21 +2608,21 @@
         private PictureBox EnemyTexturePreview_7;
         private PictureBox EnemyTexturePreview_9;
         private PictureBox EnemyTexturePreview_10;
-        private PictureBox EnemyTexturePreview_11;
         private PictureBox EnemyTexturePreview_12;
         private PictureBox EnemyTexturePreview_13;
         private PictureBox EnemyTexturePreview_14;
-        private PictureBox EnemyTexturePreview_16;
         private PictureBox EnemyTexturePreview_15;
         private PictureBox EnemyTexturePreview_17;
+        private PictureBox EnemyTexturePreview_16;
+        private PictureBox EnemyTexturePreview_18;
         private Label label21;
         private Label label22;
         private Label label23;
         private Label label24;
         private Label label25;
         private Label label27;
-        private PictureBox EnemyTexturePreview_18;
-        private PictureBox EnemyTexturePreview_19;
+        private PictureBox EnemyTexturePreview_21;
+        private PictureBox EnemyTexturePreview_22;
         private Label label29;
         private Label label15;
         private NumericUpDown TextureAllocationUpDown0;
@@ -2639,9 +2636,6 @@
         private FlowLayoutPanel titleTextureLayoutPanel;
         private Button GenerateTitleTextureFile;
         private Label label31;
-        private Label label33;
-        private Label label34;
-        private Label label35;
         private Label label36;
         private Label label37;
         private Label label38;
@@ -2675,5 +2669,8 @@
         private Button compile;
         private Button CompileAndRun;
         private PictureBox EnemyTexturePreview_8;
+        private PictureBox EnemyTexturePreview_19;
+        private PictureBox EnemyTexturePreview_20;
+        private PictureBox EnemyTexturePreview_11;
     }
 }
