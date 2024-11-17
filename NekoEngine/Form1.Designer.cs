@@ -487,7 +487,7 @@
             // CeilingHeightUpDown
             // 
             CeilingHeightUpDown.Location = new Point(138, 3);
-            CeilingHeightUpDown.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            CeilingHeightUpDown.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
             CeilingHeightUpDown.Name = "CeilingHeightUpDown";
             CeilingHeightUpDown.Size = new Size(63, 23);
             CeilingHeightUpDown.TabIndex = 23;
@@ -506,7 +506,7 @@
             // FloorHeightUpDown
             // 
             FloorHeightUpDown.Location = new Point(138, 32);
-            FloorHeightUpDown.Maximum = new decimal(new int[] { 30, 0, 0, 0 });
+            FloorHeightUpDown.Maximum = new decimal(new int[] { 29, 0, 0, 0 });
             FloorHeightUpDown.Name = "FloorHeightUpDown";
             FloorHeightUpDown.Size = new Size(63, 23);
             FloorHeightUpDown.TabIndex = 19;
