@@ -42,10 +42,10 @@ namespace NekoEngine
         private int _selectedSfxForPreview = 0;
 
 #if DEBUG
-        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
+        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine\GameData";
 
 #else
-        const string GAME_FILE_LOCATION = @".\";
+        const string GAME_FILE_LOCATION = @".\GameData";
 #endif
 
         const string GAME_SETTINGS_FILE_LOCATION = GAME_FILE_LOCATION + @"\settings.h";
@@ -109,7 +109,7 @@ namespace NekoEngine
 
                         int boxNum = int.Parse(pictureBox.Name.Split('_').Last());
                         if (boxNum < imageFileLocations.Length)
-                        { 
+                        {
                             pictureBox.Image = imageFiles[boxNum];
                             pictureBox.Tag = boxNum;
                             pictureBox.DoubleClick += action;
@@ -2323,7 +2323,7 @@ namespace NekoEngine
                         RunGame();
                     }
                     else
-                    { 
+                    {
                         MessageBox.Show(output, "MSBuild Output");
                         if (!string.IsNullOrWhiteSpace(error))
                         {
