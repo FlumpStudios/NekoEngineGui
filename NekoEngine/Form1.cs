@@ -42,7 +42,7 @@ namespace NekoEngine
         private int _selectedSfxForPreview = 0;
 
 #if DEBUG
-        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine";
+        const string GAME_FILE_LOCATION = @"c:\projects\NekoEngine\gamedata";
 
 #else
         const string GAME_FILE_LOCATION = @".\";
