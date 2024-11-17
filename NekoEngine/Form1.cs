@@ -402,7 +402,7 @@ namespace NekoEngine
 
                 FileName = $"{GAME_FILE_LOCATION}\\{EXE_NAME}.exe",
                 WorkingDirectory = GAME_FILE_LOCATION,
-                Arguments = $"-p {_levelPack}"               
+                Arguments = $"-p {_levelPack}"
             });
         }
 
@@ -1783,6 +1783,7 @@ namespace NekoEngine
 
         private void RunLevel_Click(object sender, EventArgs e)
         {
+            bool preview = PreviewLevel.Checked;
             bool godMode = GodMode.Checked;
             bool fullsceen = FullScreenTextBox.Checked;
             string fileLocation = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, @"\level" + DEBUG_LEVEL_ID + ".HAD");
@@ -1801,6 +1802,10 @@ namespace NekoEngine
             if (!fullsceen)
             {
                 args += " -w";
+            }
+            if (preview)
+            {
+                args += " -t";
             }
 
             args += " -p " + _levelPack;
@@ -2135,6 +2140,11 @@ namespace NekoEngine
         }
 
         private void SelectedElement_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
         {
 
         }

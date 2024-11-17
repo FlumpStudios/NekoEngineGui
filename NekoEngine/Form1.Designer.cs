@@ -129,6 +129,7 @@
             pictureBox = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             Tabs = new TabControl();
+            PreviewLevel = new CheckBox();
             menuStrip1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel6.SuspendLayout();
@@ -197,6 +198,7 @@
             // 
             tabPage1.AutoScroll = true;
             tabPage1.BorderStyle = BorderStyle.Fixed3D;
+            tabPage1.Controls.Add(PreviewLevel);
             tabPage1.Controls.Add(FullScreenTextBox);
             tabPage1.Controls.Add(GodMode);
             tabPage1.Controls.Add(Preview3D);
@@ -226,6 +228,7 @@
             tabPage1.TabIndex = 3;
             tabPage1.Text = "Level Editor";
             tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Click += tabPage1_Click;
             tabPage1.MouseMove += Form_MouseMove;
             // 
             // FullScreenTextBox
@@ -233,15 +236,15 @@
             FullScreenTextBox.AutoSize = true;
             FullScreenTextBox.Location = new Point(1116, 757);
             FullScreenTextBox.Name = "FullScreenTextBox";
-            FullScreenTextBox.Size = new Size(82, 19);
+            FullScreenTextBox.Size = new Size(38, 19);
             FullScreenTextBox.TabIndex = 45;
-            FullScreenTextBox.Text = "Full screen";
+            FullScreenTextBox.Text = "FS";
             FullScreenTextBox.UseVisualStyleBackColor = true;
             // 
             // GodMode
             // 
             GodMode.AutoSize = true;
-            GodMode.Location = new Point(1240, 757);
+            GodMode.Location = new Point(1160, 756);
             GodMode.Name = "GodMode";
             GodMode.Size = new Size(82, 19);
             GodMode.TabIndex = 44;
@@ -1195,6 +1198,16 @@
             Tabs.Size = new Size(2046, 2175);
             Tabs.TabIndex = 5;
             // 
+            // PreviewLevel
+            // 
+            PreviewLevel.AutoSize = true;
+            PreviewLevel.Location = new Point(1253, 756);
+            PreviewLevel.Name = "PreviewLevel";
+            PreviewLevel.Size = new Size(67, 19);
+            PreviewLevel.TabIndex = 46;
+            PreviewLevel.Text = "Preview";
+            PreviewLevel.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1340,5 +1353,6 @@
         private PictureBox pictureBox;
         private TableLayoutPanel tableLayoutPanel1;
         private TabControl Tabs;
+        private CheckBox PreviewLevel;
     }
 }
