@@ -1425,15 +1425,14 @@ namespace NekoEngine
                     if (_currentLevel?.PlayerStart != null)
                     {
                         ClearGrid(g, new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
-
-                        RemoveELementClickedCell(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                        DrawMapArrayBlock(g, new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                     }
                     if (_currentLevel != null)
                     {
                         _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
                     }
 
-                    RedrawWholeMapArray(g);
+                   
                     textColor = Color.Blue;
                 }
 
