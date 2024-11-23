@@ -752,12 +752,6 @@ namespace NekoEngine
                     return;
                 }
             }
-            else if (_currentLevel.MapArray[index] > 0 && _currentLevel.MapArray[index] < STEP_ELEMENT_INDEX_START)
-            {
-                // Still trying to work out if we should allow items to be put on walls, for now I think so
-                // ShowErrorMessage("ELements can't be placed on walls");
-                // return;
-            }
             else if (_currentLevel.MapArray[index] > DOOR_MASK)
             {
                 ShowErrorMessage("Only locks can't be placed on doors");
@@ -1430,13 +1424,16 @@ namespace NekoEngine
                 {
                     if (_currentLevel?.PlayerStart != null)
                     {
-                        RemoveColorFromGrid(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+                        ClearGrid(g, new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
+
+                        RemoveELementClickedCell(new GridPosition(_currentLevel.PlayerStart[0], _currentLevel.PlayerStart[1]));
                     }
                     if (_currentLevel != null)
                     {
                         _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
                     }
 
+                    RedrawWholeMapArray(g);
                     textColor = Color.Blue;
                 }
 
