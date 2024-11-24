@@ -1246,7 +1246,7 @@ namespace NekoEngine
 
         private void UpdateRemainingElements()
         {
-            var c = _currentLevel.elements.Where(x => x.Type > 0).Count();
+            var c = _currentLevel.elements.Where(x => x.Type > 0 && x.Type != Level.PLAYER_POSITION_TYPE_INDEX).Count();
             RemainingElementsLabel.Text = (AVAILABLE_ELEMENTS - c).ToString();
         }
 
