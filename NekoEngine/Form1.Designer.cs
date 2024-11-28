@@ -37,6 +37,7 @@
             loadToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             tabPage1 = new TabPage();
+            PreviewLevel = new CheckBox();
             FullScreenTextBox = new CheckBox();
             GodMode = new CheckBox();
             Preview3D = new Button();
@@ -63,8 +64,6 @@
             flowLayoutPanel4 = new FlowLayoutPanel();
             label6 = new Label();
             CeilingHeightUpDown = new NumericUpDown();
-            label4 = new Label();
-            FloorHeightUpDown = new NumericUpDown();
             label9 = new Label();
             CeilingColourUpDown = new NumericUpDown();
             label8 = new Label();
@@ -129,7 +128,6 @@
             pictureBox = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             Tabs = new TabControl();
-            PreviewLevel = new CheckBox();
             menuStrip1.SuspendLayout();
             tabPage1.SuspendLayout();
             flowLayoutPanel6.SuspendLayout();
@@ -137,7 +135,6 @@
             ((System.ComponentModel.ISupportInitialize)PlayerRotationUpDown).BeginInit();
             flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CeilingHeightUpDown).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)FloorHeightUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CeilingColourUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)FloorColourUpDown4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)BackgroundUpDown).BeginInit();
@@ -231,10 +228,20 @@
             tabPage1.Click += tabPage1_Click;
             tabPage1.MouseMove += Form_MouseMove;
             // 
+            // PreviewLevel
+            // 
+            PreviewLevel.AutoSize = true;
+            PreviewLevel.Location = new Point(1253, 752);
+            PreviewLevel.Name = "PreviewLevel";
+            PreviewLevel.Size = new Size(67, 19);
+            PreviewLevel.TabIndex = 46;
+            PreviewLevel.Text = "Preview";
+            PreviewLevel.UseVisualStyleBackColor = true;
+            // 
             // FullScreenTextBox
             // 
             FullScreenTextBox.AutoSize = true;
-            FullScreenTextBox.Location = new Point(1116, 757);
+            FullScreenTextBox.Location = new Point(1116, 752);
             FullScreenTextBox.Name = "FullScreenTextBox";
             FullScreenTextBox.Size = new Size(38, 19);
             FullScreenTextBox.TabIndex = 45;
@@ -244,7 +251,7 @@
             // GodMode
             // 
             GodMode.AutoSize = true;
-            GodMode.Location = new Point(1160, 756);
+            GodMode.Location = new Point(1160, 752);
             GodMode.Name = "GodMode";
             GodMode.Size = new Size(82, 19);
             GodMode.TabIndex = 44;
@@ -456,14 +463,13 @@
             PlayerRotationUpDown.Name = "PlayerRotationUpDown";
             PlayerRotationUpDown.Size = new Size(63, 23);
             PlayerRotationUpDown.TabIndex = 25;
+            PlayerRotationUpDown.ValueChanged += PlayerRotationUpDown_ValueChanged;
             // 
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.BorderStyle = BorderStyle.Fixed3D;
             flowLayoutPanel4.Controls.Add(label6);
             flowLayoutPanel4.Controls.Add(CeilingHeightUpDown);
-            flowLayoutPanel4.Controls.Add(label4);
-            flowLayoutPanel4.Controls.Add(FloorHeightUpDown);
             flowLayoutPanel4.Controls.Add(label9);
             flowLayoutPanel4.Controls.Add(CeilingColourUpDown);
             flowLayoutPanel4.Controls.Add(label8);
@@ -474,7 +480,7 @@
             flowLayoutPanel4.Controls.Add(stepHeightUpDown);
             flowLayoutPanel4.Location = new Point(1117, 566);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(208, 181);
+            flowLayoutPanel4.Size = new Size(208, 152);
             flowLayoutPanel4.TabIndex = 30;
             // 
             // label6
@@ -495,30 +501,12 @@
             CeilingHeightUpDown.Size = new Size(63, 23);
             CeilingHeightUpDown.TabIndex = 23;
             CeilingHeightUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
-            // 
-            // label4
-            // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label4.Location = new Point(3, 29);
-            label4.Name = "label4";
-            label4.Size = new Size(129, 29);
-            label4.TabIndex = 20;
-            label4.Text = "Wall Height";
-            label4.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // FloorHeightUpDown
-            // 
-            FloorHeightUpDown.Location = new Point(138, 32);
-            FloorHeightUpDown.Maximum = new decimal(new int[] { 29, 0, 0, 0 });
-            FloorHeightUpDown.Name = "FloorHeightUpDown";
-            FloorHeightUpDown.Size = new Size(63, 23);
-            FloorHeightUpDown.TabIndex = 19;
-            FloorHeightUpDown.Value = new decimal(new int[] { 10, 0, 0, 0 });
+            CeilingHeightUpDown.ValueChanged += CeilingHeightUpDown_ValueChanged;
             // 
             // label9
             // 
             label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label9.Location = new Point(3, 58);
+            label9.Location = new Point(3, 29);
             label9.Name = "label9";
             label9.Size = new Size(129, 29);
             label9.TabIndex = 28;
@@ -527,16 +515,17 @@
             // 
             // CeilingColourUpDown
             // 
-            CeilingColourUpDown.Location = new Point(138, 61);
+            CeilingColourUpDown.Location = new Point(138, 32);
             CeilingColourUpDown.Name = "CeilingColourUpDown";
             CeilingColourUpDown.Size = new Size(63, 23);
             CeilingColourUpDown.TabIndex = 29;
             CeilingColourUpDown.Value = new decimal(new int[] { 3, 0, 0, 0 });
+            CeilingColourUpDown.ValueChanged += CeilingColourUpDown_ValueChanged;
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label8.Location = new Point(3, 87);
+            label8.Location = new Point(3, 58);
             label8.Name = "label8";
             label8.Size = new Size(129, 29);
             label8.TabIndex = 26;
@@ -545,16 +534,17 @@
             // 
             // FloorColourUpDown4
             // 
-            FloorColourUpDown4.Location = new Point(138, 90);
+            FloorColourUpDown4.Location = new Point(138, 61);
             FloorColourUpDown4.Name = "FloorColourUpDown4";
             FloorColourUpDown4.Size = new Size(63, 23);
             FloorColourUpDown4.TabIndex = 27;
             FloorColourUpDown4.Value = new decimal(new int[] { 20, 0, 0, 0 });
+            FloorColourUpDown4.ValueChanged += FloorColourUpDown4_ValueChanged;
             // 
             // label17
             // 
             label17.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            label17.Location = new Point(3, 116);
+            label17.Location = new Point(3, 87);
             label17.Name = "label17";
             label17.Size = new Size(129, 29);
             label17.TabIndex = 32;
@@ -563,18 +553,19 @@
             // 
             // BackgroundUpDown
             // 
-            BackgroundUpDown.Location = new Point(138, 119);
+            BackgroundUpDown.Location = new Point(138, 90);
             BackgroundUpDown.Maximum = new decimal(new int[] { 3, 0, 0, 0 });
             BackgroundUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             BackgroundUpDown.Name = "BackgroundUpDown";
             BackgroundUpDown.Size = new Size(63, 23);
             BackgroundUpDown.TabIndex = 31;
             BackgroundUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            BackgroundUpDown.ValueChanged += BackgroundUpDown_ValueChanged;
             // 
             // stepHeightLabel
             // 
             stepHeightLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            stepHeightLabel.Location = new Point(3, 145);
+            stepHeightLabel.Location = new Point(3, 116);
             stepHeightLabel.Name = "stepHeightLabel";
             stepHeightLabel.Size = new Size(129, 29);
             stepHeightLabel.TabIndex = 34;
@@ -583,13 +574,14 @@
             // 
             // stepHeightUpDown
             // 
-            stepHeightUpDown.Location = new Point(138, 148);
+            stepHeightUpDown.Location = new Point(138, 119);
             stepHeightUpDown.Maximum = new decimal(new int[] { 10, 0, 0, 0 });
             stepHeightUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             stepHeightUpDown.Name = "stepHeightUpDown";
             stepHeightUpDown.Size = new Size(63, 23);
             stepHeightUpDown.TabIndex = 33;
             stepHeightUpDown.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            stepHeightUpDown.ValueChanged += stepHeightUpDown_ValueChanged;
             // 
             // label5
             // 
@@ -1198,16 +1190,6 @@
             Tabs.Size = new Size(2046, 2175);
             Tabs.TabIndex = 5;
             // 
-            // PreviewLevel
-            // 
-            PreviewLevel.AutoSize = true;
-            PreviewLevel.Location = new Point(1253, 756);
-            PreviewLevel.Name = "PreviewLevel";
-            PreviewLevel.Size = new Size(67, 19);
-            PreviewLevel.TabIndex = 46;
-            PreviewLevel.Text = "Preview";
-            PreviewLevel.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1229,7 +1211,6 @@
             ((System.ComponentModel.ISupportInitialize)PlayerRotationUpDown).EndInit();
             flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)CeilingHeightUpDown).EndInit();
-            ((System.ComponentModel.ISupportInitialize)FloorHeightUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)CeilingColourUpDown).EndInit();
             ((System.ComponentModel.ISupportInitialize)FloorColourUpDown4).EndInit();
             ((System.ComponentModel.ISupportInitialize)BackgroundUpDown).EndInit();
@@ -1287,8 +1268,6 @@
         private FlowLayoutPanel flowLayoutPanel4;
         private Label label6;
         private NumericUpDown CeilingHeightUpDown;
-        private Label label4;
-        private NumericUpDown FloorHeightUpDown;
         private Label label9;
         private NumericUpDown CeilingColourUpDown;
         private Label label8;

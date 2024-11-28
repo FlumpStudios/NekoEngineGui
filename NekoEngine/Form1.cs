@@ -1307,21 +1307,15 @@ namespace NekoEngine
             }
         }
 
-        private void FloorHeightUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            NumericUpDown numericUpDown = (NumericUpDown)sender;
-
-            decimal value = numericUpDown.Value;
-            _currentLevel.floorHeight = (byte)value;
-        }
-
         private void CeilingHeightUpDown_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numericUpDown = (NumericUpDown)sender;
 
             decimal value = numericUpDown.Value;
+            _currentLevel.floorHeight = (byte)value;
             _currentLevel.ceilHeight = (byte)value;
         }
+
 
         private void FloorColourUpDown4_ValueChanged(object sender, EventArgs e)
         {
@@ -1579,7 +1573,6 @@ namespace NekoEngine
 
                 // Update GUI values
                 PlayerRotationUpDown.Value = decimal.Ceiling(_currentLevel.PlayerStart[2] * DEGRESS_TO_BYTE_CONVERSION);
-                FloorHeightUpDown.Value = _currentLevel.floorHeight;
                 CeilingHeightUpDown.Value = _currentLevel.ceilHeight;
                 CeilingColourUpDown.Value = _currentLevel.CeilingColor;
                 FloorColourUpDown4.Value = _currentLevel.FloorColor;
