@@ -22,11 +22,11 @@ namespace NekoEngine
         public const int MAP_DIMENSION = 64;
         public const byte PLAYER_POSITION_TYPE_INDEX = 99;
         public const int MAX_ELEMENT_SIZE = 128;
-        public byte stepSize = 1;
+        public byte stepSize = 2;
 
-        public byte ceilHeight = 10;
+        public byte ceilHeight = 16;
         public byte doorLevitation = 0;
-        public byte floorHeight = 10;
+        public byte floorHeight = 16;
         public byte[] HeightArray;
 
         public Level()
@@ -36,7 +36,7 @@ namespace NekoEngine
             CeilingColor = 3;
 
             // 7 is transparent
-            TextureIndices = new byte[7] { 5, 2, 3, 4, 5, 6, 8 };
+            TextureIndices = new byte[7] { 0, 1, 2, 3, 4, 5, 6 };
 
             HeightArray = new byte[4096];
             MapArray = new byte[4096];
