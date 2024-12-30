@@ -500,7 +500,7 @@
             CeilingHeightUpDown.Name = "CeilingHeightUpDown";
             CeilingHeightUpDown.Size = new Size(63, 23);
             CeilingHeightUpDown.TabIndex = 23;
-            CeilingHeightUpDown.Value = new decimal(new int[] { 12, 0, 0, 0 });
+            CeilingHeightUpDown.Value = new decimal(new int[] { 16, 0, 0, 0 });
             CeilingHeightUpDown.ValueChanged += CeilingHeightUpDown_ValueChanged;
             // 
             // label9
