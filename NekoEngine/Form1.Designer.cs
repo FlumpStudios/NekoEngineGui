@@ -37,6 +37,7 @@
             loadToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             tabPage1 = new TabPage();
+            LaunchHd = new CheckBox();
             PreviewLevel = new CheckBox();
             FullScreenTextBox = new CheckBox();
             GodMode = new CheckBox();
@@ -195,6 +196,7 @@
             // 
             tabPage1.AutoScroll = true;
             tabPage1.BorderStyle = BorderStyle.Fixed3D;
+            tabPage1.Controls.Add(LaunchHd);
             tabPage1.Controls.Add(PreviewLevel);
             tabPage1.Controls.Add(FullScreenTextBox);
             tabPage1.Controls.Add(GodMode);
@@ -228,30 +230,42 @@
             tabPage1.Click += tabPage1_Click;
             tabPage1.MouseMove += Form_MouseMove;
             // 
+            // LaunchHd
+            // 
+            LaunchHd.AutoSize = true;
+            LaunchHd.Location = new Point(1242, 728);
+            LaunchHd.Name = "LaunchHd";
+            LaunchHd.Size = new Size(43, 19);
+            LaunchHd.TabIndex = 47;
+            LaunchHd.Text = "HD";
+            LaunchHd.UseVisualStyleBackColor = true;
+            LaunchHd.CheckedChanged += LaunchHd_CheckedChanged;
+            // 
             // PreviewLevel
             // 
             PreviewLevel.AutoSize = true;
-            PreviewLevel.Location = new Point(1253, 752);
+            PreviewLevel.Location = new Point(1242, 752);
             PreviewLevel.Name = "PreviewLevel";
             PreviewLevel.Size = new Size(67, 19);
             PreviewLevel.TabIndex = 46;
             PreviewLevel.Text = "Preview";
             PreviewLevel.UseVisualStyleBackColor = true;
+            PreviewLevel.CheckedChanged += PreviewLevel_CheckedChanged;
             // 
             // FullScreenTextBox
             // 
             FullScreenTextBox.AutoSize = true;
-            FullScreenTextBox.Location = new Point(1116, 752);
+            FullScreenTextBox.Location = new Point(1116, 728);
             FullScreenTextBox.Name = "FullScreenTextBox";
-            FullScreenTextBox.Size = new Size(38, 19);
+            FullScreenTextBox.Size = new Size(82, 19);
             FullScreenTextBox.TabIndex = 45;
-            FullScreenTextBox.Text = "FS";
+            FullScreenTextBox.Text = "Full screen";
             FullScreenTextBox.UseVisualStyleBackColor = true;
             // 
             // GodMode
             // 
             GodMode.AutoSize = true;
-            GodMode.Location = new Point(1160, 752);
+            GodMode.Location = new Point(1117, 752);
             GodMode.Name = "GodMode";
             GodMode.Size = new Size(82, 19);
             GodMode.TabIndex = 44;
@@ -1333,5 +1347,6 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TabControl Tabs;
         private CheckBox PreviewLevel;
+        private CheckBox LaunchHd;
     }
 }

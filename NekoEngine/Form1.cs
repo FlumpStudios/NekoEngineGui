@@ -14,6 +14,7 @@ namespace NekoEngine
     public partial class Form1 : Form
     {
         const string EXE_NAME = "Ruyn";
+        const string HD_EXE_NAME = "RuynHd";
         const decimal DEGRESS_TO_BYTE_CONVERSION = 1.4117M;
         private const int GRID_SIZE = 64;
         private const int CELL_SIZE = 14;
@@ -762,7 +763,8 @@ namespace NekoEngine
             {
                 _isMousePressed = false;
                 return;
-            };
+            }
+            ;
         }
 
         private void RemoveColorFromGrid(GridPosition position)
@@ -1426,7 +1428,7 @@ namespace NekoEngine
                         _currentLevel.PlayerStart = new byte[3] { element.Coords[0], element.Coords[1], _currentLevel.PlayerStart[2] };
                     }
 
-                   
+
                     textColor = Color.Blue;
                 }
 
@@ -1769,17 +1771,47 @@ namespace NekoEngine
             }
         }
 
-
-        private void RunLevel_Click(object sender, EventArgs e)
+        private void LaunchHdGame()
         {
             bool preview = PreviewLevel.Checked;
             bool godMode = GodMode.Checked;
             bool fullsceen = FullScreenTextBox.Checked;
-            string fileLocation = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, @"\level" + DEBUG_LEVEL_ID + ".HAD");
-            using (FileStream fs = new(fileLocation, FileMode.Create))
+
+            Environment.CurrentDirectory = GAME_FILE_LOCATION;
+            string args = "-d";
+
+            if (godMode)
             {
-                _currentLevel.Serialise(new BinaryWriter(fs));
+                args += " godMode=true";
             }
+            if (!fullsceen)
+            {
+                args += " -windowed";
+                args += " -resx=1280";
+                args += " -resy=720";
+            }
+            if (preview)
+            {
+
+            }
+
+            args += " LevelPack=" + _levelPack;
+            args += " debugLevel=level99";            
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = $"{GAME_FILE_LOCATION}\\{HD_EXE_NAME}.exe",
+                WorkingDirectory = GAME_FILE_LOCATION,
+                // w = windowed, d = debug
+                Arguments = args
+            });
+        }
+
+        private void LaunchClassicGame()
+        {
+            bool preview = PreviewLevel.Checked;
+            bool godMode = GodMode.Checked;
+            bool fullsceen = FullScreenTextBox.Checked;
 
             Environment.CurrentDirectory = GAME_FILE_LOCATION;
             string args = "-d";
@@ -1806,6 +1838,26 @@ namespace NekoEngine
                 // w = windowed, d = debug
                 Arguments = args
             });
+        }
+
+        private void RunLevel_Click(object sender, EventArgs e)
+        {
+
+            bool hd = LaunchHd.Checked;
+            string fileLocation = Path.Join(GAME_FILE_LOCATION, LEVELS_FOLDER, _levelPack, @"\level" + DEBUG_LEVEL_ID + ".HAD");
+            using (FileStream fs = new(fileLocation, FileMode.Create))
+            {
+                _currentLevel.Serialise(new BinaryWriter(fs));
+            }
+
+            if (hd)
+            {
+                LaunchHdGame();
+            }
+            else
+            {
+                LaunchClassicGame();
+            }
         }
 
         private void BackgroundUpDown_ValueChanged(object sender, EventArgs e)
@@ -2134,6 +2186,20 @@ namespace NekoEngine
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LaunchHd_CheckedChanged(object sender, EventArgs e)
+        {
+            PreviewLevel.Enabled = !LaunchHd.Checked;
+            if (LaunchHd.Enabled)
+            {
+                PreviewLevel.Checked = false;
+            }
+        }
+
+        private void PreviewLevel_CheckedChanged(object sender, EventArgs e)
         {
 
         }
