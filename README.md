@@ -1,3 +1,4 @@
+
 # Neko 2D Editor
 
 ## What is it?  
@@ -45,6 +46,31 @@ Another concession made to accommodate the file size is that each level can only
 
 ### Placing Items  
 Placing items is just like placing a wall: click on the item you want to place and then click the cell where you would like to place it. To remove it, right-click on it.  
+### Floor and ceilings
+
+In **Ruyn Classic**, you can set the ceiling and floor colour vaslues to set the ceiling and floor colours, respectively...seems obvious...but...
+
+In **Ruyn HD**, things work a little differently:
+
+- There's only **one ceiling style**, but you can make a level appear **outdoors** by setting ceiling colour to `2`.
+
+#### Floor Styles
+
+Ruyn HD offers **6 floor styles**, each linked to the floor colour value:
+
+- `0` = Diamond pattern  
+- `1` = Concrete  
+- `2` = Grass  
+- `3` = Dark brick  
+- `4` = Rust  
+- `5` = Rubble
+
+These floor styles **loop in sequence**. For example:
+
+- Setting the floor colour to `6` gives you the Diamond pattern again  
+- `7` = Concrete  
+- `8` = Grass  
+- …and so on
 
 ### Testing the Level  
 To test the level, just click the **Play Level** button in the bottom right.  

@@ -1265,9 +1265,9 @@ namespace NekoEngine
                         element.Type == 0 ||
                         (element.Coords != null && element.Coords.Length >= 2 && element.Coords[0] == col && element.Coords[1] == row));
 
-                    if (index == -1)
+                    if (index <= -1)
                     {
-                        ShowErrorMessage($"You have exceeded the maximum amount of {AVAILABLE_ELEMENTS} available elements.");
+                        UpdateRemainingElements();
                         return false;
                     }
 
